@@ -16,3 +16,5 @@ B3: Mở Terminal chạy lần lượt lệnh
 + npm install
 B4: Chạy tiếp lệnh php artisan serve để run trang web
 B5: Vào admin/dashboard để xem
+
+![Clone](image.png)
