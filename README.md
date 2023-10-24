@@ -17,9 +17,13 @@ B3: Mở Terminal chạy lần lượt lệnh
 + php artisan migrate:refresh
   
 + php artisan db:seed --class=CategoriesSeeder
+  
   php artisan db:seed --class=SubCategoriesSeeder
+  
   php artisan db:seed --class=BrandsSeeder
+  
   php artisan db:seed --class=ProductsSeeder
+  
   php artisan db:seed --class=UsersSeeder
   
 + npm install
@@ -31,3 +35,5 @@ B5: Vào admin/dashboard để xem
 ![Clone](image.png)
 
 //Chưa làm edit ,delete,show 
+
+// Chưa làm Create User,Gian Hàng
