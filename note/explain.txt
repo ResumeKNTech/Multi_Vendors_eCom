@@ -1,0 +1,84 @@
+Chắc chắn, dưới đây là giải thích về mỗi trường trong bảng `orders`:
+
+1. `$table->id();`:
+    - Ý nghĩa: Khóa chính tự động tăng cho bảng. Mỗi đơn hàng sẽ có một ID duy nhất.
+    - Lý do thêm: Để có thể xác định một cách duy nhất mỗi đơn hàng trong cơ sở dữ liệu.
+
+2. `$table->unsignedBigInteger('customer_id');`:
+    - Ý nghĩa: Mã khách hàng đặt đơn hàng.
+    - Lý do thêm: Để biết đơn hàng này thuộc về khách hàng nào.
+
+3. `$table->decimal('total_price', 15, 2)->default(0);`:
+    - Ý nghĩa: Tổng giá trị của đơn hàng.
+    - Lý do thêm: Để theo dõi tổng giá trị mà khách hàng cần thanh toán.
+
+4. `$table->enum('status', ['pending', 'shipped', 'cancelled'])->default('pending');`:
+    - Ý nghĩa: Trạng thái của đơn hàng.
+    - Lý do thêm: Để biết tình trạng hiện tại của đơn hàng (đang chờ, đã giao, đã hủy...).
+
+5. `$table->text('shipping_address');`:
+    - Ý nghĩa: Địa chỉ giao hàng.
+    - Lý do thêm: Để biết nơi cần giao hàng cho khách hàng.
+
+6. `$table->enum('payment_method', ['cash', 'credit_card'])->default('cash');`:
+    - Ý nghĩa: Phương thức thanh toán.
+    - Lý do thêm: Để biết khách hàng thanh toán bằng cách nào.
+
+7. `$table->integer('distance')->nullable();`:
+    - Ý nghĩa: Khoảng cách từ địa điểm giao hàng đến kho.
+    - Lý do thêm: Để tính phí giao hàng dựa trên khoảng cách.
+
+8. `$table->decimal('shipping_fee', 15, 2)->default(0);`:
+    - Ý nghĩa: Phí giao hàng.
+    - Lý do thêm: Để biết số tiền phải thu thêm từ khách hàng cho việc giao hàng.
+
+9. `$table->text('note')->nullable();`:
+    - Ý nghĩa: Ghi chú hoặc yêu cầu đặc biệt từ khách hàng.
+    - Lý do thêm: Đôi khi khách hàng có những yêu cầu hoặc ghi chú đặc biệt cho đơn hàng của mình.
+
+10. `$table->timestamps();`:
+    - Ý nghĩa: Thời gian tạo và cập nhật đơn hàng.
+    - Lý do thêm: Để theo dõi thời gian mà đơn hàng được tạo và cập nhật lần cuối.
+
+11. `$table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');`:
+    - Ý nghĩa: Ràng buộc khóa ngoại với bảng `users`.
+    - Lý do thêm: Đảm bảo tính nhất quán và liên kết đúng giữa đơn hàng và khách hàng.
+
+Dưới đây là giải thích về mỗi trường trong bảng order_details:
+
+$table->id();:
+
+Ý nghĩa: Khóa chính tự động tăng cho bảng. Mỗi chi tiết đơn hàng sẽ có một ID duy nhất.
+Lý do thêm: Để có thể xác định một cách duy nhất mỗi chi tiết đơn hàng trong cơ sở dữ liệu.
+$table->unsignedBigInteger('order_id');:
+
+Ý nghĩa: Mã đơn hàng liên quan.
+Lý do thêm: Để biết chi tiết này thuộc về đơn hàng nào.
+$table->unsignedBigInteger('product_id');:
+
+Ý nghĩa: Mã sản phẩm.
+Lý do thêm: Để biết sản phẩm nào được khách hàng đặt trong đơn hàng.
+$table->integer('quantity')->default(1);:
+
+Ý nghĩa: Số lượng sản phẩm trong đơn hàng.
+Lý do thêm: Để biết khách hàng đã đặt mua bao nhiêu sản phẩm.
+$table->decimal('unit_price', 15, 2);:
+
+Ý nghĩa: Giá của mỗi sản phẩm.
+Lý do thêm: Để biết giá mỗi sản phẩm tại thời điểm đặt hàng.
+$table->decimal('subtotal', 15, 2);:
+
+Ý nghĩa: Tổng tiền cho từng sản phẩm (thường là quantity nhân với unit_price).
+Lý do thêm: Để nhanh chóng biết tổng giá trị của mỗi sản phẩm trong đơn hàng.
+$table->string('product_name');:
+
+Ý nghĩa: Tên sản phẩm tại thời điểm đặt hàng.
+Lý do thêm: Ngay cả khi tên của một sản phẩm thay đổi trong tương lai (hoặc sản phẩm bị xóa khỏi cơ sở dữ liệu), thông tin về sản phẩm tại thời điểm đặt hàng vẫn được giữ lại không thay đổi trong chi tiết đơn hàng.
+$table->timestamps();:
+
+Ý nghĩa: Thời gian tạo và cập nhật chi tiết đơn hàng.
+Lý do thêm: Để theo dõi thời gian mà chi tiết đơn hàng được tạo và cập nhật lần cuối.
+$table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade'); và $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');:
+
+Ý nghĩa: Ràng buộc khóa ngoại với bảng orders và products.
+Lý do thêm: Đảm bảo tính nhất quán và liên kết đúng giữa chi tiết đơn hàng, đơn hàng và sản phẩm.
