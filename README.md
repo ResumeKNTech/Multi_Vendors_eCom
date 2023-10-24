@@ -1,7 +1,7 @@
 <!-- ? Quản Lý Sàn Thương Mại Điện Tử  -->
 
 Vào Thư Mục Note Để Xem Tài Liệu
-
+Nên Clone trong SourceTree để xem cho rõ
 B1: Clone Project về , tạo file .env (Trong Note có config.txt , lấy nội dung trong đó rồi paste vào .env)
 B2: Vào .env sửa thành tên database mình, vào xampp tạo database , nhớ chỉnh bảng mã thành utf8mb4_unicode_ci
 B3: Mở Terminal chạy lần lượt lệnh 
