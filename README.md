@@ -18,3 +18,5 @@ B4: Chạy tiếp lệnh php artisan serve để run trang web
 B5: Vào admin/dashboard để xem
 
 ![Clone](image.png)
+
+//Chưa làm edit ,delete,show 
