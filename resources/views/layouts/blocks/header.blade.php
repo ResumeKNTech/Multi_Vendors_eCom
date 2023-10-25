@@ -400,7 +400,7 @@
                     <div class="d-flex align-items-center">
                         <div class="me-sm-2 me-0">
                             @if(Auth::user()->user_image)
-                            <img src="{{ asset('' . Auth::user()->user_image) }}" alt="Ảnh người dùng" width="32" height="32" class="rounded-circle">
+                            <img src="{{ asset(Auth::user()->user_image) }}" alt="Ảnh người dùng" width="32" height="32" class="rounded-circle">
 
                             @else
                                 <img src="{{ asset('admin/assets/images/faces/9.jpg') }}" alt="Ảnh mặc định" width="32" height="32" class="rounded-circle">
