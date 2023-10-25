@@ -66,12 +66,16 @@ class ProductController extends Controller
     {
         $data = $request->except('_token');
         $data['updated_at'] = new \DateTime();
+
         // Upload main image
         if ($request->hasFile('images')) {
             $image = $request->file('images');
             $filename = time() . '-' . $image->getClientOriginalName();
             $image->move(public_path('upload'), $filename);
             $data['images'] = 'upload/' . $filename;
+        } else {
+            // If no main image is provided, unset it from the data
+            unset($data['images']);
         }
 
         // Upload gallery images
@@ -86,11 +90,15 @@ class ProductController extends Controller
             }
 
             $data['images_gallery'] = implode(',', $imageNames);
+        } else {
+            // If no gallery images are provided, unset it from the data
+            unset($data['images_gallery']);
         }
 
         DB::table('products')->where('id', $id)->update($data);
         return redirect()->route('admin.product.index');
     }
+
 
     public function edit($id)
     {

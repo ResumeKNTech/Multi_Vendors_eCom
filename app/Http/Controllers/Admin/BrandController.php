@@ -41,22 +41,19 @@ class BrandController extends Controller
     {
         $data = $request->except('_token');
         $data['updated_at'] = new \DateTime();
+
+        // Handling the logo image upload
         if ($request->hasFile('logo_images')) {
-            $images = $request->file('logo_images');
-            $imageNames = [];
-
-            foreach ($images as $image) {
-                $filename = time() . '-' . $image->getClientOriginalName();
-                $image->move(public_path('upload'), $filename);
-                $imageNames[] = 'upload/' . $filename;
-            }
-
-            $data['logo_images'] = implode(',', $imageNames);
+            $image = $request->file('logo_images');
+            $filename = time() . '-' . $image->getClientOriginalName();
+            $image->move(public_path('upload'), $filename);
+            $data['logo_images'] = 'upload/' . $filename;
         }
 
         DB::table('brands')->where('id', $id)->update($data);
         return redirect()->route('admin.brand.index');
     }
+
 
 
     public function edit($id)
@@ -71,7 +68,7 @@ class BrandController extends Controller
     {
         $hasProducts = DB::table('products')->where('brand_id', $id)->count() > 0;
         if ($hasProducts) {
-            return redirect()->back()->withErrors(['error' => 'Cannot delete brand because it has related products.']);
+            return redirect()->back()->withErrors(['error' => 'Không thể xoá vì liên quan tới sản phẩm.']);
         }
 
         DB::table('brands')->where('id', $id)->delete();
