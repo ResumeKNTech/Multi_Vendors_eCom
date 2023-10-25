@@ -24,7 +24,7 @@ class CategoryController extends Controller
         $data = $request->except('_token');
         $data['created_at']=new \DateTime();
         DB::table('categories')->insert($data);
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.category.index')->with('success', 'Bạn đã tạo thành công.');
     }
 
     public function update(Request $request, $id)
@@ -32,16 +32,8 @@ class CategoryController extends Controller
         $data = $request->except('_token');
         $data['updated_at']=new \DateTime();
         DB::table('categories')->where('id', $id)->update($data);
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.category.index')->with('success', 'Bạn đã chỉnh sửa thành công.');
     }
-
-
-    public function edit($id)
-    {
-        $category = DB::table('categories')->where('id', $id)->first();
-        return view('admin.category.edit', ['category' => $category]);
-    }
-
 
     public function destroy($id)
     {
@@ -53,7 +45,7 @@ class CategoryController extends Controller
 
         DB::table('categories')->where('id', $id)->delete();
 
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.category.index')->with('success', 'Bạn đã xóa thành công.');
     }
 }
 

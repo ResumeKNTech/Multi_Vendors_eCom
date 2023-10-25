@@ -59,7 +59,7 @@ class ProductController extends Controller
             $data['images_gallery'] = implode(',', $imageNames);
         }
         DB::table('products')->insert($data);
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.product.index')->with('success', 'Bạn đã tạo thành công.');
     }
 
     public function update(Request $request, $id)
@@ -96,7 +96,7 @@ class ProductController extends Controller
         }
 
         DB::table('products')->where('id', $id)->update($data);
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.product.index')->with('success', 'Bạn đã chỉnh sửa thành công.');
     }
 
 
@@ -112,7 +112,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         DB::table('products')->where('id', $id)->delete();
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.product.index')->with('success', 'Bạn đã xoá thành công.');
     }
     public function getSubcategories(Request $request)
     {

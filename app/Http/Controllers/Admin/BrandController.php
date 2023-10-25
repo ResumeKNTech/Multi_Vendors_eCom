@@ -34,7 +34,7 @@ class BrandController extends Controller
 
 
         DB::table('brands')->insert($data);
-        return redirect()->route('admin.brand.index');
+        return redirect()->route('admin.brand.index')->with('success', 'Bạn đã tạo thành công.');
     }
 
     public function update(Request $request, $id)
@@ -51,18 +51,8 @@ class BrandController extends Controller
         }
 
         DB::table('brands')->where('id', $id)->update($data);
-        return redirect()->route('admin.brand.index');
+        return redirect()->route('admin.brand.index')->with('success', 'Bạn đã chỉnh sửa thành công.');
     }
-
-
-
-    public function edit($id)
-    {
-        $brand = DB::table('brands')->where('id', $id)->first();
-        return view('admin.brand.edit', ['brand' => $brand]);
-    }
-
-
 
     public function destroy($id)
     {
@@ -72,6 +62,6 @@ class BrandController extends Controller
         }
 
         DB::table('brands')->where('id', $id)->delete();
-        return redirect()->route('admin.brand.index');
-    }
+        return redirect()->route('admin.brand.index')->with('success', 'Bạn đã xóa thành công.');
+        }
 }

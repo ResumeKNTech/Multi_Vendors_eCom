@@ -17,22 +17,18 @@ use App\Http\Controllers\Auth\LoginController;
             Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function () {
                 Route::get('index', 'index')->name('index');
                 Route::post('store', 'store')->name('store');
-                Route::get('edit/{id}', 'edit')->name('edit');
                 Route::get('show/{id}', 'show')->name('show');
                 Route::post('update/{id}', 'update')->name('update');
                 Route::get('destroy/{id}', 'destroy')->name('destroy');
             });
             Route::prefix('sub_category')->controller(SubCategoryController::class)->name('sub_category.')->group(function () {
-
                 Route::get('index', 'index')->name('index');
                 Route::post('store', 'store')->name('store');
-                Route::get('edit/{id}', 'edit')->name('edit');
                 Route::get('show/{id}', 'show')->name('show');
                 Route::post('update/{id}', 'update')->name('update');
                 Route::get('destroy/{id}', 'destroy')->name('destroy');
             });
             Route::prefix('product')->controller(ProductController::class)->name('product.')->group(function () {
-              
                 Route::get('create', 'create')->name('create');
                 Route::get('index', 'index')->name('index');
                 Route::post('store', 'store')->name('store');
@@ -44,10 +40,8 @@ use App\Http\Controllers\Auth\LoginController;
 
             });
             Route::prefix('brand')->controller(BrandController::class)->name('brand.')->group(function () {
-
                 Route::get('index', 'index')->name('index');
                 Route::post('store', 'store')->name('store');
-                Route::get('edit/{id}', 'edit')->name('edit');
                 Route::get('show/{id}', 'show')->name('show');
                 Route::post('update/{id}', 'update')->name('update');
                 Route::get('destroy/{id}', 'destroy')->name('destroy');
