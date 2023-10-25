@@ -82,3 +82,5 @@ $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')
 
 Ý nghĩa: Ràng buộc khóa ngoại với bảng orders và products.
 Lý do thêm: Đảm bảo tính nhất quán và liên kết đúng giữa chi tiết đơn hàng, đơn hàng và sản phẩm.
+
+

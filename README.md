@@ -33,10 +33,8 @@ B4: Chạy tiếp lệnh php artisan serve để run trang web
 B5: Vào admin/dashboard để xem
 
 
-//Chưa làm edit ,delete,show 
-
 ![Clone](image.png)
 
-//Chưa làm edit ,delete,show 
+
 
 // Chưa làm Create User,Gian Hàng
