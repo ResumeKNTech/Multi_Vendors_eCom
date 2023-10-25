@@ -6,7 +6,7 @@
         <div class="card custom-card">
             <div class="card-header justify-content-between">
                 <div class="card-title">
-                    Danh Mục Cha
+                    Tạo Danh Mục Cha
                 </div>
 
             </div>
@@ -14,15 +14,15 @@
                 <form action="{{ route('admin.category.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="category_name" class="form-label">Tên Danh Mục</label>
+                        <label for="category_name" class="form-label">Tên Danh Mục:</label>
                         <input type="text" name="category_name" id="category_name" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="slug" class="form-label">Slug</label>
+                        <label for="slug" class="form-label">Slug:</label>
                         <input type="text" name="slug" id="slug" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label">Short Description</label>
+                        <label for="description" class="form-label">Mô Tả:</label>
                         <input type="text" name="description" id="description" class="form-control">
                         <div id="emailHelp" class="form-text">Làm ơn điền đầy đủ thông tin.</div>
                     </div>
@@ -43,7 +43,7 @@
                 <table id="responsivemodal-DataTable" class="table table-bordered text-nowrap w-100">
                     <thead>
                         <tr>
-
+                            <th>STT</th>
                             <th>Loại</th>
                             <th>Slug</th>
                             <th>Mô Tả</th>
@@ -55,9 +55,9 @@
                         @foreach ($categories as $i)
                             <tr>
                                 <td>
-                                    <span class="avatar avatar-xs me-2 online avatar-rounded">
-                                        <img src="{{ asset('admin/assets/images/faces/3.jpg') }}" alt="img">
-                                    </span>
+                                    {{ $loop->iteration }}
+                                </td>
+                                <td>
                                     {{ $i->category_name }}
                                 </td>
 
@@ -66,10 +66,12 @@
 
                                 <td>
                                     <div class="hstack gap-2 fs-15">
-                                        <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-success"><i
-                                                class="ri-download-2-line"></i></a>
-                                        <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-info"><i
-                                                class="ri-edit-line"></i></a>
+
+                                        <a href="{{ route('admin.category.edit', $i->id) }}"
+                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
+                                        <a href="{{ route('admin.category.destroy', $i->id) }}"
+                                            class="btn btn-icon btn-sm btn-danger"><i class="ri-delete-bin-6-line"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -155,7 +157,7 @@
                 'ỹ': 'y',
                 'ỵ': 'y',
                 'đ': 'd',
-                
+
             };
 
             // Replace accented characters with their non-accented counterparts
@@ -168,7 +170,7 @@
             // Replace spaces with hyphens
             text = text.replace(/\s+/g, '-');
             return text;
-        }   
+        }
         // Sự kiện khi nhập Product Title
         $('#category_name').on('input', function() {
             // Lấy giá trị của Product Title

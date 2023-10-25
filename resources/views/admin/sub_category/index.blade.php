@@ -2,7 +2,7 @@
 @section('module', 'Danh Mục Con')
 @section('action', 'Danh Sách')
 @section('content')
-    <div class="col-xl-4">
+    <div class="col-xl-3">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
                 <div class="card-title">
@@ -14,20 +14,20 @@
                 <form action="{{ route('admin.sub_category.store') }}" method="post">
                     @csrf
                     <div class="mb-3">
-                        <label for="sub_category_name" class="form-label">Danh Mục Con</label>
+                        <label for="sub_category_name" class="form-label">Danh Mục Con:</label>
                         <input type="text" name="sub_category_name" id="sub_category_name" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="slug" class="form-label">Slug</label>
+                        <label for="slug" class="form-label">Slug:</label>
                         <input type="text" id="slug" name="slug" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label">Short Description</label>
+                        <label for="description" class="form-label">Mô tả:</label>
                         <input type="text" id="description" name="description" class="form-control">
                     </div>
-                    <p class="fw-semibold mb-2">Danh Mục Cha</p>
+                    <p class="fw-semibold mb-2">Danh Mục Cha:</p>
                     <select class="form-control" data-trigger name="category_id" id="choices-single-groups">
-                        <option value="">Vui lòng chọn</option>
+                        <option value="">--  Vui lòng chọn --</option>
                         <optgroup label="Category">
                             @foreach ($categories as $i)
                                 <option value="{{ $i->id }}">{{ $i->category_name }}</option>
@@ -37,7 +37,7 @@
                     </select>
 
                     <div id="emailHelp" class="form-text">Làm ơn điền đầy đủ thông tin.</div>
-                    
+
                     <br>
                     <button type="submit" style="width:100%" class="btn btn-primary">Thêm</button>
 
@@ -47,7 +47,7 @@
 
         </div>
     </div>
-    <div class="col-xl-8">
+    <div class="col-xl-9">
         <div class="card custom-card">
             <div class="card-header">
                 <div class="card-title">
@@ -58,7 +58,7 @@
                 <table id="responsivemodal-DataTable" class="table table-bordered text-nowrap w-100">
                     <thead>
                         <tr>
-
+                            <th>STT</th>
                             <th>Danh Mục Cha</th>
                             <th>Danh Mục Con</th>
                             <th>Slug</th>
@@ -70,6 +70,7 @@
                     <tbody>
                         @foreach ($subCategories as $i)
                             <tr>
+                                <td>{{$loop->iteration}}</td>
                                 <td>
                                     {{ $i->category_name }}
                                 </td>
@@ -81,10 +82,12 @@
 
                                 <td>
                                     <div class="hstack gap-2 fs-15">
-                                        <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-success"><i
-                                                class="ri-download-2-line"></i></a>
-                                        <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-info"><i
-                                                class="ri-edit-line"></i></a>
+
+                                        <a href="{{ route('admin.sub_category.edit', $i->id) }}"
+                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
+                                        <a href="{{ route('admin.sub_category.destroy', $i->id) }}"
+                                            class="btn btn-icon btn-sm btn-danger"><i class="ri-delete-bin-6-line"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -184,9 +187,9 @@
             text = text.replace(/\s+/g, '-');
             return text;
         }
-        // Sự kiện khi nhập Product Title
+        // Sự kiện khi nhập Category Name
         $('#sub_category_name').on('input', function() {
-            // Lấy giá trị của Product Title
+            // Lấy giá trị của  Category Name
             var productTitle = $(this).val();
 
             // Chuyển đổi thành Slug
