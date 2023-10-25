@@ -10,8 +10,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Auth\LoginController;
 
-// Route::middleware(['check_login'])->group(
-//     function () {
+Route::middleware(['check_login'])->group(
+    function () {
         Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
             Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function () {
@@ -65,8 +65,8 @@ use App\Http\Controllers\Auth\LoginController;
                 Route::get('destroy/{id}', 'destroy')->name('destroy');
             });
         });
-//     }
-// );
+    }
+);
 // Tuyến đường Đăng nhập
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');

@@ -22,11 +22,13 @@
                                 </svg>
                             </span>
                         </div>
+
                         <div class="col-xxl-9 col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 px-0">
                             <div class="mb-2">Tổng Gian Hàng</div>
                             <div class="text-muted mb-1 fs-12">
                                 <span class="text-dark fw-semibold fs-20 lh-1 vertical-bottom">
                                    {{ $vendorCount }}
+
                                 </span>
                             </div>
 

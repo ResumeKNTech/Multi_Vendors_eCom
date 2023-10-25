@@ -399,13 +399,19 @@
                     data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                     <div class="d-flex align-items-center">
                         <div class="me-sm-2 me-0">
-                            <img src="{{ asset('admin/assets/images/faces/9.jpg') }}" alt="img" width="32"
-                                height="32" class="rounded-circle">
+                            @if(Auth::user()->user_image)
+                            <img src="{{ asset('upload/' . Auth::user()->user_image) }}" alt="Ảnh người dùng" width="32" height="32" class="rounded-circle">
+
+                            @else
+                                <img src="{{ asset('admin/assets/images/faces/9.jpg') }}" alt="Ảnh mặc định" width="32" height="32" class="rounded-circle">
+                            @endif
                         </div>
+
                         <div class="d-sm-block d-none">
-                            <p class="fw-semibold mb-0 lh-1">Admin</p>
-                            <span class="op-7 fw-normal d-block fs-11">Admin Website</span>
+                            <p class="fw-semibold mb-0 lh-1">{{ Auth::user()->name }}</p>
+                            <span class="op-7 fw-normal d-block fs-11">{{ Auth::user()->type_user }}</span>
                         </div>
+
                     </div>
                 </a>
                 <!-- End::header-link|dropdown-toggle -->
@@ -413,8 +419,15 @@
                     aria-labelledby="mainHeaderProfile">
                     <li><a class="dropdown-item d-flex" href="profile.html"><i
                                 class="ti ti-user-circle fs-18 me-2 op-7"></i>Profile</a></li>
-                    <li><a class="dropdown-item d-flex" href="signin-cover.html"><i
-                                class="ti ti-logout fs-18 me-2 op-7"></i>Log Out</a></li>
+                                <form method="POST" action="{{ route('auth.logout') }}">
+                                    @csrf
+                                    <li>
+                                        <a class="dropdown-item d-flex" href="javascript:void(0);" onclick="this.closest('form').submit();">
+                                            <i class="ti ti-logout fs-18 me-2 op-7"></i>Log Out
+                                        </a>
+                                    </li>
+                                </form>
+
                 </ul>
             </div>
             <!-- End::header-element -->

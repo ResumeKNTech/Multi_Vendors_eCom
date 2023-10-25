@@ -81,8 +81,8 @@
 
                                             <img id="previewImage" src="#" alt="Image Preview"
                                                 style="display:none; max-width:100%;">
-                                            <p>Drag & Drop your image or <label for="logo_images">Browse</label></p>
-                                        </div>
+                                                <p>Kéo & thả để chọn hình <label for="images">Tìm kiếm</label>
+                                                </div>
                                     </div>
                                 </div>
                             </div>

@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('first_name');
             $table->string('last_name');
-            $table->text('user_image')->nullable();
+            $table->text('user_image');
             $table->enum('gender', ['men', 'woman'])->default('men');
 
-            $table->enum('type_user', ['customer', 'vendor'])->default('customer');
+            $table->enum('type_user', ['customer', 'vendor','admin'])->default('customer');
             $table->text('address')->nullable();
             $table->date('birthday');
 

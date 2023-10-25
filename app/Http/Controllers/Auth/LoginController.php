@@ -22,7 +22,7 @@ class LoginController extends Controller
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        return redirect()->intended('admin/dashboard/index'); // Chuyển hướng đến trang chính sau khi đăng nhập thành công
+        return redirect()->intended('admin/dashboard/'); // Chuyển hướng đến trang chính sau khi đăng nhập thành công
     }
 
     $errors = [];

@@ -15,6 +15,21 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
+         // Tạo seed data cho bảng 'users'
+         DB::table('users')->insert([
+            'name' => 'Khoa Baby',
+            'first_name' => 'Khoa',
+            'last_name' => 'Nguyễn',
+            'user_image' => 'upload/khoa.jpg',
+            'gender' => 'men',
+            'type_user' => 'admin',
+            'address' => '629 Nguyễn Hữu Trí',
+            'birthday' => Carbon::parse('2003-06-03'),
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('admin@gmail.com'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
         // Tạo seed data cho bảng 'users'
         DB::table('users')->insert([
             'name' => 'Customer',
