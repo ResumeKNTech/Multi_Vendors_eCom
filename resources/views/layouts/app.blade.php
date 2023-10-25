@@ -61,11 +61,9 @@
                     <p class="alert alert-danger">{{ Session::get('error') }}</p>
                 @endif
 
-                <!-- Start::row-->
                 <div class="row">
                     @yield('content')
                 </div>
-                <!--End::row -->
 
 
 

@@ -58,7 +58,7 @@ class SubCategoryController extends Controller
     {
         $hasProducts = DB::table('products')->where('sub_category_id', $id)->count() > 0;
         if ($hasProducts) {
-            return redirect()->back()->withErrors(['error' => 'Cannot delete sub-category because it has related products.']);
+            return redirect()->back()->withErrors(['error' => 'Không thể xóa danh mục con này vì còn sản phẩm liên quan.']);
         }
 
         DB::table('sub_categories')->where('id', $id)->delete();

@@ -48,7 +48,7 @@ class CategoryController extends Controller
         $hasSubCategory = DB::table('sub_categories')->where('category_id', $id)->count() > 0;
         if ($hasSubCategory) {
             // Handle error: cannot delete due to foreign key constraint
-            return redirect()->back()->withErrors(['error' => 'Cannot delete category because it has related sub-categories.']);
+            return redirect()->back()->withErrors(['error' => 'Không thể xóa danh mục này vì còn tồn tại danh mục con liên quan tới nó.']);
         }
 
         DB::table('categories')->where('id', $id)->delete();
