@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('first_name');
             $table->string('last_name');
-            $table->text('user_image');
+            $table->string('user_image');
             $table->enum('gender', ['men', 'woman'])->default('men');
 
             $table->enum('type_user', ['customer', 'vendor','admin'])->default('customer');
