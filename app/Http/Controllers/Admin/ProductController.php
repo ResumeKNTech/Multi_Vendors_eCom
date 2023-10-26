@@ -41,8 +41,8 @@ class ProductController extends Controller
         if ($request->hasFile('images')) {
             $image = $request->file('images');
             $filename = time() . '-' . $image->getClientOriginalName();
-            $image->move(public_path('upload'), $filename);
-            $data['images'] = 'upload/' . $filename;
+            $image->move(public_path('product_upload'), $filename);
+            $data['images'] = 'product_upload/' . $filename;
         }
 
         // Upload gallery images
@@ -52,8 +52,8 @@ class ProductController extends Controller
 
             foreach ($images as $img) {
                 $filename = time() . '-' . $img->getClientOriginalName();
-                $img->move(public_path('upload'), $filename);
-                $imageNames[] = 'upload/' . $filename;
+                $img->move(public_path('product_gallery_upload'), $filename);
+                $imageNames[] = 'product_gallery_upload/' . $filename;
             }
 
             $data['images_gallery'] = implode(',', $imageNames);
@@ -71,8 +71,8 @@ class ProductController extends Controller
         if ($request->hasFile('images')) {
             $image = $request->file('images');
             $filename = time() . '-' . $image->getClientOriginalName();
-            $image->move(public_path('upload'), $filename);
-            $data['images'] = 'upload/' . $filename;
+            $image->move(public_path('product_upload'), $filename);
+            $data['images'] = 'product_upload/' . $filename;
         } else {
             // If no main image is provided, unset it from the data
             unset($data['images']);
@@ -85,8 +85,8 @@ class ProductController extends Controller
 
             foreach ($images as $img) {
                 $filename = time() . '-' . $img->getClientOriginalName();
-                $img->move(public_path('upload'), $filename);
-                $imageNames[] = 'upload/' . $filename;
+                $img->move(public_path('product_gallery_upload'), $filename);
+                $imageNames[] = 'product_gallery_upload/' . $filename;
             }
 
             $data['images_gallery'] = implode(',', $imageNames);
