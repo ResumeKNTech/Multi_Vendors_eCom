@@ -15,11 +15,6 @@ class BrandController extends Controller
         return view('admin.brand.index', ['brands' => $brands]);
     }
 
-    public function create()
-    {
-        return view('admin.brand.create');
-    }
-
     public function store(StoreRequest $request)
     {
         $data = $request->except('_token');

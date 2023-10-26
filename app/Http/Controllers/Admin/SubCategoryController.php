@@ -23,11 +23,7 @@ class SubCategoryController extends Controller
         return view('admin.sub_category.index', ['subCategories' => $subCategories,'categories'=> $categories]);
     }
 
-    public function create()
-    {
-        $categories = DB::table('categories')->get();
-        return view('admin.sub_category.create', ['categories' => $categories]);
-    }
+   
 
     public function store(StoreRequest $request)
     {
@@ -44,7 +40,7 @@ class SubCategoryController extends Controller
         $data = $request->except('_token');
         $data['updated_at']=new \DateTime();
         DB::table('sub_categories')->where('id', $id)->update($data);
-        return redirect()->route('admin.sub_category.index')->with('success', 'Bạn đã chỉnh sửa thành công.');;
+        return redirect()->route('admin.sub_category.index')->with('success', 'Bạn đã chỉnh sửa thành công.');
     }
 
     public function destroy($id)
@@ -55,6 +51,6 @@ class SubCategoryController extends Controller
         }
 
         DB::table('sub_categories')->where('id', $id)->delete();
-        return redirect()->route('admin.sub_category.index')->with('success', 'Bạn đã xóa thành công.');;
+        return redirect()->route('admin.sub_category.index')->with('success', 'Bạn đã xóa thành công.');
     }
 }

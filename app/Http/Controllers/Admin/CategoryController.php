@@ -15,10 +15,7 @@ class CategoryController extends Controller
         return view('admin.category.index', ['categories' => $categories]);
     }
 
-    public function create()
-    {
-        return view('admin.category.create');
-    }
+    
     public function store(StoreRequest $request)
     {
         $data = $request->except('_token');

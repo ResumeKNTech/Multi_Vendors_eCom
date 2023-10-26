@@ -52,8 +52,6 @@ use Illuminate\Support\Str;class UsersTableSeeder extends Seeder
                 'link_fb' => 'https://facebook.com',
                 'link_github' => 'https://github.com',
                 'link_zalo' => 'https://zalo.com',
-                'category_id' => random_int(1, 10),
-                'brand_id' => random_int(1, 10),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

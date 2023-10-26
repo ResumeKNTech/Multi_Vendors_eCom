@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserRelationshipController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -37,6 +38,16 @@ Route::middleware(['check_login'])->group(
                 Route::post('update/{id}', 'update')->name('update');
                 Route::get('destroy/{id}', 'destroy')->name('destroy');
                 Route::post('getSubcategories', 'getSubcategories')->name('getSubcategories');
+
+            });
+            Route::prefix('user_relationship')->controller(UserRelationshipController::class)->name('user_relationship.')->group(function () {
+                Route::get('create', 'create')->name('create');
+                Route::get('index', 'index')->name('index');
+                Route::post('store', 'store')->name('store');
+                Route::get('edit/{id}', 'edit')->name('edit');
+                Route::get('show/{id}', 'show')->name('show');
+                Route::post('update/{id}', 'update')->name('update');
+                Route::get('destroy/{id}', 'destroy')->name('destroy');
 
             });
             Route::prefix('brand')->controller(BrandController::class)->name('brand.')->group(function () {

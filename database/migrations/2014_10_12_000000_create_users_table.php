@@ -37,13 +37,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            // Foreign keys
-
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
-
-            $table->unsignedBigInteger('brand_id')->nullable();
-            $table->foreign('brand_id')->references('id')->on('brands');
+          
         });
     }
 

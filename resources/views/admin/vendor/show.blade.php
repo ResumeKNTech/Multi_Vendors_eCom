@@ -21,7 +21,8 @@
                                 <button class="btn btn-light btn-wave"><i
                                         class="ri-add-line me-1 align-middle d-inline-block"></i>Shop</button>
                             </div>
-                            <p class="mb-1 text-muted text-fixed-white op-7">{{ $user->type_user }}</p>
+                            <p class="mb-1 text-muted text-fixed-white op-7">{{ strtoupper($user->type_user) }}</p>
+
                             <p class="fs-12 text-fixed-white mb-4 op-5">
                                 <span class="me-3"><i class="ri-building-line me-1 align-middle"></i>{{ $user ->city }}</span>
                                 <span><i class="ri-map-pin-line me-1 align-middle"></i>{{ $user->address }}</span>
@@ -33,7 +34,7 @@
                                 </div>
                                 <div class="me-4">
                                     <p class="fw-bold fs-20 text-fixed-white text-shadow mb-0">{{ $user->brand_id }}</p>
-                                    <p class="mb-0 fs-11 op-5 text-fixed-white"></p>
+                                    <p class="mb-0 fs-11 op-5 text-fixed-white">Brand</p>
                                 </div>
 
                             </div>
@@ -41,9 +42,9 @@
                     </div>
                     <div class="p-4 border-bottom border-block-end-dashed">
                         <div class="mb-4">
-                            <p class="fs-15 mb-2 fw-semibold">Professional Bio :</p>
+                            <p class="fs-15 mb-2 fw-semibold">Thông tin :</p>
                             <p class="fs-12 text-muted op-7 mb-0">
-                                I am <b class="text-default">{{ $user->name }}</b> {{ $user->short_bio }}
+                                Tôi là <b class="text-default">{{ $user->name }}</b> {{ $user->short_bio }}
                             </p>
                         </div>
                         <div class="mb-0">
@@ -65,7 +66,7 @@
                         </div>
                     </div>
                     <div class="p-4 border-bottom border-block-end-dashed">
-                        <p class="fs-15 mb-2 me-4 fw-semibold">Contact Information :</p>
+                        <p class="fs-15 mb-2 me-4 fw-semibold">Thông tin liên lạc :</p>
                         <div class="text-muted">
                             <p class="mb-2">
                                 <span class="avatar avatar-sm avatar-rounded me-2 bg-light text-muted">
@@ -77,7 +78,7 @@
                                 <span class="avatar avatar-sm avatar-rounded me-2 bg-light text-muted">
                                     <i class="ri-phone-line align-middle fs-14"></i>
                                 </span>
-                                0989334345
+                                {{$user->phone}}
 
                             </p>
                             <p class="mb-0">
@@ -90,7 +91,7 @@
                         </div>
                     </div>
                     <div class="p-4 border-bottom border-block-end-dashed d-flex align-items-center">
-                        <p class="fs-15 mb-2 me-4 fw-semibold">Social Networks :</p>
+                        <p class="fs-15 mb-2 me-4 fw-semibold">Mạng Xã Hội :</p>
                         <div class="btn-list mb-0">
                             <button class="btn btn-sm btn-icon btn-primary-light btn-wave waves-effect waves-light">
                                 <i class="ri-facebook-line fw-semibold"></i>
@@ -110,44 +111,15 @@
                         </div>
                     </div>
                     <div class="p-4 border-bottom border-block-end-dashed">
-                        <p class="fs-15 mb-2 me-4 fw-semibold">Category :</p>
+                        <p class="fs-15 mb-2 me-4 fw-semibold">Danh Mục :</p>
                         <div>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">Cloud computing</span>
-                            </a>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">Data analysis</span>
-                            </a>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">DevOps</span>
-                            </a>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">Machine learning</span>
-                            </a>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">Programming</span>
-                            </a>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">Security</span>
-                            </a>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">Python</span>
-                            </a>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">JavaScript</span>
-                            </a>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">Ruby</span>
-                            </a>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">PowerShell</span>
-                            </a>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">Statistics</span>
-                            </a>
-                            <a href="javascript:void(0);">
-                                <span class="badge bg-light text-muted m-1">SQL</span>
-                            </a>
+                            @if($user->category_name)
+                                <a href="javascript:void(0);">
+                                    <span class="badge bg-light text-muted m-1">{{ $user->category_name }}</span>
+                                </a>
+                            @else
+                                <p>No category assigned</p>
+                            @endif
                         </div>
                     </div>
                     <div class="p-4">
@@ -265,144 +237,7 @@
                                     <div class="tab-pane show active fade p-0 border-0" id="activity-tab-pane"
                                         role="tabpanel" aria-labelledby="activity-tab" tabindex="0">
                                         <ul class="list-unstyled profile-timeline">
-                                            <li>
-                                                <div>
-                                                    <span
-                                                        class="avatar avatar-sm bg-primary-transparent avatar-rounded profile-timeline-avatar">
-                                                        E
-                                                    </span>
-                                                    <p class="mb-2">
-                                                        <b>You</b> Commented on <b>alexander taylor</b> post <a
-                                                            class="text-secondary"
-                                                            href="javascript:void(0);"><u>#beautiful
-                                                                day</u></a>.<span class="float-end fs-11 text-muted">24,Dec
-                                                            2022 - 14:34</span>
-                                                    </p>
-                                                    <p class="profile-activity-media mb-0">
-                                                        <a href="javascript:void(0);">
-                                                            <img src="{{ asset('admin/assets/images/media/media-17.jpg') }}"
-                                                                alt="">
-                                                        </a>
-                                                        <a href="javascript:void(0);">
-                                                            <img src="{{ asset('admin/assets/images/media/media-18.jpg') }}"
-                                                                alt="">
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <span class="avatar avatar-sm avatar-rounded profile-timeline-avatar">
-                                                        <img src="{{ asset('admin/assets/images/faces/11.jpg') }}"
-                                                            alt="">
-                                                    </span>
-                                                    <p class="text-muted mb-2">
-                                                        <span class="text-default"><b>Json Smith</b> reacted to the post
-                                                            &#128077;</span>.<span
-                                                            class="float-end fs-11 text-muted">18,Dec
-                                                            2022 - 12:16</span>
-                                                    </p>
-                                                    <p class="text-muted mb-0">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                        Repudiandae,
-                                                        repellendus rem rerum excepturi aperiam ipsam temporibus inventore
-                                                        ullam
-                                                        tempora eligendi libero sequi dignissimos cumque, et a sint tenetur
-                                                        consequatur omnis!
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <span class="avatar avatar-sm avatar-rounded profile-timeline-avatar">
-                                                        <img src="{{ asset('admin/assets/images/faces/4.jpg') }}"
-                                                            alt="">
-                                                    </span>
-                                                    <p class="text-muted mb-2">
-                                                        <span class="text-default"><b>Alicia Keys</b> shared a document
-                                                            with
-                                                            <b>you</b></span>.<span
-                                                            class="float-end fs-11 text-muted">21,Dec
-                                                            2022 - 15:32</span>
-                                                    </p>
-                                                    <p class="profile-activity-media mb-0">
-                                                        <a href="javascript:void(0);">
-                                                            <img src="{{ asset('admin/assets/images/media/file-manager/3.png') }}"
-                                                                alt="">
-                                                        </a>
-                                                        <span class="fs-11 text-muted">432.87KB</span>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <span
-                                                        class="avatar avatar-sm bg-success-transparent avatar-rounded profile-timeline-avatar">
-                                                        P
-                                                    </span>
-                                                    <p class="text-muted mb-2">
-                                                        <span class="text-default"><b>You</b> shared a post with 4 people
-                                                            <b>Simon,Sasha,Anagha,Hishen</b></span>.<span
-                                                            class="float-end fs-11 text-muted">28,Dec 2022 - 18:46</span>
-                                                    </p>
-                                                    <p class="profile-activity-media mb-2">
-                                                        <a href="javascript:void(0);">
-                                                            <img src="{{ asset('admin/assets/images/media/media-75.jpg') }}"
-                                                                alt="">
-                                                        </a>
-                                                    </p>
-                                                    <div>
-                                                        <div class="avatar-list-stacked">
-                                                            <span class="avatar avatar-sm avatar-rounded">
-                                                                <img src="{{ asset('admin/assets/images/faces/2.jpg') }}"
-                                                                    alt="img">
-                                                            </span>
-                                                            <span class="avatar avatar-sm avatar-rounded">
-                                                                <img src="{{ asset('admin/assets/images/faces/8.jpg') }}"
-                                                                    alt="img">
-                                                            </span>
-                                                            <span class="avatar avatar-sm avatar-rounded">
-                                                                <img src="{{ asset('admin/assets/images/faces/2.jpg') }}"
-                                                                    alt="img">
-                                                            </span>
-                                                            <span class="avatar avatar-sm avatar-rounded">
-                                                                <img src="{{ asset('admin/assets/images/faces/10.jpg') }}"
-                                                                    alt="img">
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <span class="avatar avatar-sm avatar-rounded profile-timeline-avatar">
-                                                        <img src="{{ asset('admin/assets/images/faces/5.jpg') }}"
-                                                            alt="">
-                                                    </span>
-                                                    <p class="text-muted mb-1">
-                                                        <span class="text-default"><b>Melissa Blue</b> liked your post
-                                                            <b>travel excites</b></span>.<span
-                                                            class="float-end fs-11 text-muted">11,Dec 2022 - 11:18</span>
-                                                    </p>
-                                                    <p class="text-muted">you are already feeling the tense atmosphere of
-                                                        the
-                                                        video playing in the background</p>
-                                                    <p class="profile-activity-media mb-0">
-                                                        <a href="javascript:void(0);">
-                                                            <img src="{{ asset('admin/assets/images/media/media-59.jpg') }}"
-                                                                class="m-1" alt="">
-                                                        </a>
-                                                        <a href="javascript:void(0);">
-                                                            <img src="{{ asset('admin/assets/images/media/media-60.jpg') }}"
-                                                                class="m-1" alt="">
-                                                        </a>
-                                                        <a href="javascript:void(0);">
-                                                            <img src="{{ asset('admin/assets/images/media/media-61.jpg') }}"
-                                                                class="m-1" alt="">
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </li>
+                                           
                                             <li>
                                                 <div>
                                                     <span class="avatar avatar-sm avatar-rounded profile-timeline-avatar">
@@ -410,25 +245,13 @@
                                                             alt="">
                                                     </span>
                                                     <p class="mb-1">
-                                                        <b>You</b> Commented on <b>Peter Engola</b> post <a
-                                                            class="text-secondary" href="javascript:void(0);"><u>#Mother
-                                                                Nature</u></a>.<span
-                                                            class="float-end fs-11 text-muted">24,Dec
-                                                            2022 - 14:34</span>
+                                                        <b>{{$user->name}}</b> sở hữu danh mục <b>{{$user->category_name}}</b> .<span
+                                                            class="float-end fs-11 text-muted">{{$user->category_created_at}}</span>
+                                                            
                                                     </p>
-                                                    <p class="text-muted">Technology id developing rapidly kepp uo your
-                                                        work
+                                                    <p class="text-muted">{{$user->description}}
                                                         &#128076;</p>
-                                                    <p class="profile-activity-media mb-0">
-                                                        <a href="javascript:void(0);">
-                                                            <img src="{{ asset('admin/assets/images/media/media-26.jpg') }}"
-                                                                alt="">
-                                                        </a>
-                                                        <a href="javascript:void(0);">
-                                                            <img src="../assets/images/media/media-29.jpg')}}"
-                                                                alt="">
-                                                        </a>
-                                                    </p>
+                                                   
                                                 </div>
                                             </li>
                                         </ul>

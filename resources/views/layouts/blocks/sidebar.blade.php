@@ -190,6 +190,9 @@
                             <a href="{{ route('admin.vendor.create')}}" class="side-menu__item">Thêm Gian Hàng</a>
                         </li>
                         <li class="slide">
+                            <a href="{{ route('admin.user_relationship.index')}}" class="side-menu__item">Đăng Ký Gian Hàng</a>
+                        </li>
+                        <li class="slide">
                             <a href="{{ route('admin.vendor.index')}}" class="side-menu__item">Xem Danh Sách</a>
                         </li>
                     </ul>
