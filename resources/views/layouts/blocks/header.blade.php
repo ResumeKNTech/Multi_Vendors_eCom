@@ -399,11 +399,12 @@
                     data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                     <div class="d-flex align-items-center">
                         <div class="me-sm-2 me-0">
-                            @if(Auth::user()->user_image)
-                            <img src="{{ asset(Auth::user()->user_image) }}" alt="Ảnh người dùng" width="32" height="32" class="rounded-circle">
-
+                            @if (Auth::user()->user_image)
+                                <img src="{{ asset(Auth::user()->user_image) }}" alt="Ảnh người dùng" width="32"
+                                    height="32" class="rounded-circle">
                             @else
-                                <img src="{{ asset('admin/assets/images/faces/9.jpg') }}" alt="Ảnh mặc định" width="32" height="32" class="rounded-circle">
+                                <img src="{{ asset('admin/assets/images/faces/9.jpg') }}" alt="Ảnh mặc định"
+                                    width="32" height="32" class="rounded-circle">
                             @endif
                         </div>
 
@@ -417,16 +418,21 @@
                 <!-- End::header-link|dropdown-toggle -->
                 <ul class="main-header-dropdown dropdown-menu pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end"
                     aria-labelledby="mainHeaderProfile">
-                    <li><a class="dropdown-item d-flex" href="profile.html"><i
-                                class="ti ti-user-circle fs-18 me-2 op-7"></i>Profile</a></li>
-                                <form method="POST" action="{{ route('auth.logout') }}">
-                                    @csrf
-                                    <li>
-                                        <a class="dropdown-item d-flex" href="javascript:void(0);" onclick="this.closest('form').submit();">
-                                            <i class="ti ti-logout fs-18 me-2 op-7"></i>Log Out
-                                        </a>
-                                    </li>
-                                </form>
+                    <li>
+                        <a class="dropdown-item d-flex" href="{{ route('admin.vendor.show', Auth::user()->id) }}">
+                            <i class="ti ti-user-circle fs-18 me-2 op-7"></i>Profile
+                        </a>
+
+                    </li>
+                    <form method="POST" action="{{ route('auth.logout') }}">
+                        @csrf
+                        <li>
+                            <a class="dropdown-item d-flex" href="javascript:void(0);"
+                                onclick="this.closest('form').submit();">
+                                <i class="ti ti-logout fs-18 me-2 op-7"></i>Log Out
+                            </a>
+                        </li>
+                    </form>
 
                 </ul>
             </div>

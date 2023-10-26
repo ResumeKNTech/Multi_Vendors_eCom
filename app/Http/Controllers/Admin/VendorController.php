@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class VendorController extends Controller
 {
+
+    public function show($id)
+    {
+        // Find the user by ID using Query Builder
+        $user = DB::table('users')->where('id', $id)->first();
+
+        // Check if the user exists
+        if (!$user) {
+            abort(404, 'User not found');
+        }
+
+        // Return the view with the user details
+        return view('admin.vendor.show', ['user' => $user]);
+    }
     public function index()
     {
         $users = DB::table('users')

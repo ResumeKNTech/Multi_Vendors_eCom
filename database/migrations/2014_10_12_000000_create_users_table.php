@@ -17,11 +17,19 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('user_image');
+            $table->string('phone');
+            $table->date('birthday')->nullable();
             $table->enum('gender', ['men', 'woman'])->default('men');
+            $table->string('short_bio')->nullable();
+            $table->text('address')->nullable();
+            $table->text('city')->nullable();
+
 
             $table->enum('type_user', ['customer', 'vendor','admin'])->default('customer');
-            $table->text('address')->nullable();
-            $table->date('birthday');
+
+            $table->string('link_fb')->nullable();
+            $table->string('link_github')->nullable();
+            $table->string('link_zalo')->nullable();
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
