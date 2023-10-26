@@ -28,8 +28,8 @@ class BrandController extends Controller
         if ($request->hasFile('logo_images')) {
             $image = $request->file('logo_images');
             $filename = time() . '-' . $image->getClientOriginalName();
-            $image->move(public_path('upload'), $filename);
-            $data['logo_images'] = 'upload/' . $filename;
+            $image->move(public_path('brand_upload'), $filename);
+            $data['logo_images'] = 'brand_upload/' . $filename;
         }
 
 
@@ -46,8 +46,8 @@ class BrandController extends Controller
         if ($request->hasFile('logo_images')) {
             $image = $request->file('logo_images');
             $filename = time() . '-' . $image->getClientOriginalName();
-            $image->move(public_path('upload'), $filename);
-            $data['logo_images'] = 'upload/' . $filename;
+            $image->move(public_path('brand_upload'), $filename);
+            $data['logo_images'] = 'brand_upload/' . $filename;
         }
 
         DB::table('brands')->where('id', $id)->update($data);
