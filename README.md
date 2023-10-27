@@ -21,10 +21,12 @@ B3: Mở Terminal chạy lần lượt lệnh
   php artisan db:seed --class=SubCategoriesSeeder
   
   php artisan db:seed --class=BrandsSeeder
+
+  php artisan db:seed --class=UsersTableSeeder
   
   php artisan db:seed --class=ProductsSeeder
   
-  php artisan db:seed --class=UsersSeeder
+
   
 + npm install
   
