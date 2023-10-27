@@ -30,19 +30,22 @@ return new class extends Migration
             $table->integer('stock');
             $table->enum('stock_status', ['in_stock', 'out_of_stock'])->default('in_stock');
             $table->enum('status', ['published', 'draft'])->default('published');
-            
+
             $table->datetime('publish');
             $table->timestamps();
-            
+
             // Foreign keys
             $table->unsignedBigInteger('sub_category_id')->nullable();
             $table->foreign('sub_category_id')->references('id')->on('sub_categories');
-            
+
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
-            
+
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->foreign('brand_id')->references('id')->on('brands');
+
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

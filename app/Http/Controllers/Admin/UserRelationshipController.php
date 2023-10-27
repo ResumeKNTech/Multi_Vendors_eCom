@@ -23,7 +23,7 @@ class UserRelationshipController extends Controller
             )
             ->get();
 
-            $users = DB::table('users')->where('type_user', 'vendor')->get();
+        $users = DB::table('users')->where('type_user', 'vendor')->get();
         $categories = DB::table('categories')->get();
         $brands = DB::table('brands')->get();
 
@@ -37,7 +37,16 @@ class UserRelationshipController extends Controller
 
     public function store(StoreRequest $request)
     {
+
         $data = $request->except('_token');
+        // Lấy giá trị từ trường select (category_id và brand_id)
+        $categoryIds = $request->input('category_id', []);
+        $brandIds = $request->input('brand_id', []);
+
+        // Lưu giá trị vào cơ sở dữ liệu
+        $data['category_id'] = implode(',', $categoryIds); // Lưu dưới dạng chuỗi CSV hoặc JSON tùy bạn
+        $data['brand_id'] = implode(',', $brandIds); // Lưu dưới dạng chuỗi CSV hoặc JSON tùy bạn
+
         $data['created_at'] = now();
         DB::table('user_relationships')->insert($data);
 

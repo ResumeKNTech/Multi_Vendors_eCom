@@ -15,7 +15,7 @@ class BrandsSeeder extends Seeder
     {
         // Tạo seed data cho bảng 'brands'
         DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_1.png',
+            'logo_images' => 'upload/ss.png',
             'brand_name' => 'Samsung',
             'is_featured' => 'public',
             'status' => 'published',
@@ -24,7 +24,7 @@ class BrandsSeeder extends Seeder
         ]);
 
         DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_2.png',
+            'logo_images' => 'upload/apple.png',
             'brand_name' => 'Apple',
             'is_featured' => 'public',
             'status' => 'published',
@@ -33,7 +33,7 @@ class BrandsSeeder extends Seeder
         ]);
 
         DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_3.png',
+            'logo_images' => 'upload/logo_nike.jpg',
             'brand_name' => 'Nike',
             'is_featured' => 'public',
             'status' => 'published',
@@ -42,7 +42,7 @@ class BrandsSeeder extends Seeder
         ]);
 
         DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_4.png',
+            'logo_images' => 'upload/adidas.png',
             'brand_name' => 'Adidas',
             'is_featured' => 'public',
             'status' => 'published',
@@ -51,7 +51,7 @@ class BrandsSeeder extends Seeder
         ]);
 
         DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_5.png',
+            'logo_images' => 'upload/jh_baby.png',
             'brand_name' => 'Johnson & Johnson',
             'is_featured' => 'public',
             'status' => 'published',
@@ -78,7 +78,7 @@ class BrandsSeeder extends Seeder
         ]);
 
         DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_8.png',
+            'logo_images' => 'upload/cc.jpg',
             'brand_name' => 'Coca-Cola',
             'is_featured' => 'public',
             'status' => 'published',
@@ -86,18 +86,9 @@ class BrandsSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        // Tạo seed data cho thêm các thương hiệu khác
-        DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_9.png',
-            'brand_name' => 'Nike',
-            'is_featured' => 'public',
-            'status' => 'published',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
 
         DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_10.png',
+            'logo_images' => 'upload/puma.png',
             'brand_name' => 'Puma',
             'is_featured' => 'public',
             'status' => 'published',
@@ -115,7 +106,7 @@ class BrandsSeeder extends Seeder
         ]);
 
         DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_12.png',
+            'logo_images' => 'upload/lg.jpg',
             'brand_name' => 'LG',
             'is_featured' => 'public',
             'status' => 'published',
@@ -124,7 +115,7 @@ class BrandsSeeder extends Seeder
         ]);
 
         DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_13.png',
+            'logo_images' => 'upload/dell.png',
             'brand_name' => 'Dell',
             'is_featured' => 'public',
             'status' => 'published',
@@ -133,7 +124,7 @@ class BrandsSeeder extends Seeder
         ]);
 
         DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_14.png',
+            'logo_images' => 'upload/asus.jpg',
             'brand_name' => 'Asus',
             'is_featured' => 'public',
             'status' => 'published',
@@ -178,15 +169,7 @@ class BrandsSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        // Tạo seed data cho các thương hiệu liên quan đến danh mục 'Thực Phẩm'
-        DB::table('brands')->insert([
-            'logo_images' => 'upload/path_to_logo_19.png',
-            'brand_name' => 'Coca-Cola',
-            'is_featured' => 'public',
-            'status' => 'published',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+      
 
         DB::table('brands')->insert([
             'logo_images' => 'upload/path_to_logo_20.png',

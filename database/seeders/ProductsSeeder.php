@@ -34,6 +34,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 1, // sub_category_id cho 'Laptop'
             'category_id' => 1, // category_id cho 'Điện Tử'
             'brand_id' => 1, // brand_id cho 'Samsung'
+            'user_id' => 2,
         ]);
         DB::table('products')->insert([
             'product_name' => 'Apple MacBook Air',
@@ -55,6 +56,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 1, // sub_category_id cho 'Laptop'
             'category_id' => 1, // category_id cho 'Điện Tử'
             'brand_id' => 2, // brand_id cho 'Apple'
+            'user_id' => 2,
         ]);
 
         DB::table('products')->insert([
@@ -77,6 +79,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 3, // sub_category_id cho 'Thời Trang'
             'category_id' => 3, // category_id cho 'Thời Trang'
             'brand_id' => 3, // brand_id cho 'Nike'
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 4
@@ -100,6 +103,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 1,
             'category_id' => 1,
             'brand_id' => 6,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 5
@@ -123,6 +127,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 3,
             'category_id' => 3,
             'brand_id' => 4,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 6
@@ -169,6 +174,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 5,
             'category_id' => 5,
             'brand_id' => 7,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 8
@@ -192,29 +198,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 9,
             'category_id' => 7,
             'brand_id' => 8,
-        ]);
-
-        // Sản phẩm 9
-        DB::table('products')->insert([
-            'product_name' => 'Philips Hue Smart Bulbs',
-            'product_title' => 'Philips Hue White and Color Ambiance Smart Bulbs (4-Pack)',
-            'slug' => Str::slug('Philips Hue Smart Bulbs'),
-            'product_description' => 'Philips Hue Smart Bulbs allow you to control your lighting with your smartphone or voice.',
-            'short_description' => 'Smart bulbs for smartphone and voice-controlled lighting.',
-            'images' => 'upload/path_to_product_image_9.jpg',
-            'images_gallery' => 'upload/path_to_gallery_images_9',
-            'product_tags' => 'Philips Hue, Smart Bulbs, Lighting, Smartphone Control',
-            'price' => 149.99,
-            'offer_price' => 129.99,
-            'sales_begin' => now(),
-            'sales_end' => now()->addDays(30),
-            'stock' => 35,
-            'stock_status' => 'in_stock',
-            'status' => 'published',
-            'publish' => now(),
-            'sub_category_id' => 11,
-            'category_id' => 7,
-            'brand_id' => 9,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 10
@@ -238,6 +222,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 13,
             'category_id' => 8,
             'brand_id' => 10,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 11
@@ -261,6 +246,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 15,
             'category_id' => 5,
             'brand_id' => 11,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 12
@@ -284,6 +270,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 1,
             'category_id' => 1,
             'brand_id' => 12,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 13
@@ -307,6 +294,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 1,
             'category_id' => 1,
             'brand_id' => 13,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 14
@@ -330,6 +318,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 1,
             'category_id' => 1,
             'brand_id' => 14,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 15
@@ -353,6 +342,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 9,
             'category_id' => 7,
             'brand_id' => 15,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 16
@@ -376,6 +366,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 1,
             'category_id' => 1,
             'brand_id' => 6,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 17
@@ -399,6 +390,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 3,
             'category_id' => 3,
             'brand_id' => 3,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 18
@@ -422,6 +414,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 15,
             'category_id' => 5,
             'brand_id' => 11,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 19
@@ -445,6 +438,7 @@ class ProductsSeeder extends Seeder
             'sub_category_id' => 1,
             'category_id' => 1,
             'brand_id' => 6,
+            'user_id' => 2,
         ]);
 
         // Sản phẩm 20
@@ -467,7 +461,8 @@ class ProductsSeeder extends Seeder
             'publish' => now(),
             'sub_category_id' => 9,
             'category_id' => 7,
-            'brand_id' => 16,
+            'brand_id' => 2,
+            'user_id' => 2,
         ]);
     }
 }

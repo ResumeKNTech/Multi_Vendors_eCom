@@ -203,13 +203,7 @@
                                             </div>
                                             <div class="col-xl-6">
                                                 <label for="product-tags" class="form-label">Thẻ Tags:</label>
-                                                <select class="form-control" name="product_tags" id="product-tags"
-                                                    multiple>
-                                                    @foreach ($categories as $i)
-                                                        <option value="{{ $i->id }}">{{ $i->category_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
+                                                <input type="text" multiple class="form-control" name="product_tags[]" id="product-tags" placeholder="Nhập thẻ tags">
                                             </div>
 
                                         </div>

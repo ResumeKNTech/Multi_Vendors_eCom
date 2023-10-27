@@ -8,7 +8,7 @@
     content="dashboard, template dashboard, Bootstrap dashboard, admin panel template, sales dashboard, Bootstrap admin panel, stocks dashboard, crm admin dashboard, ecommerce admin panel, admin template, admin panel dashboard, course dashboard, template ecommerce website, dashboard hrm, admin dashboard">
 
 <!-- TITLE -->
-<title>@yield('module') - @yield('action')</title>
+<title>@yield('action') - @yield('module')</title>
 
 <!-- FAVICON -->
 <link rel="icon" href="https://php.spruko.com/ynex/ynex/assets/images/brand-logos/favicon.ico" type="image/x-icon">

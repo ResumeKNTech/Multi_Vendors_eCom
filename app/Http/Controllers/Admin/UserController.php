@@ -12,12 +12,8 @@ class UserController extends Controller
     public function index()
     {
         $users = DB::table('users')
-            ->leftJoin('categories', 'users.category_id', '=', 'categories.id')
-            ->leftJoin('brands', 'users.brand_id', '=', 'brands.id')
             ->select(
                 'users.*',
-                'categories.category_name',
-                'brands.brand_name'
             )
             ->where('users.type_user', '=', 'customer') // Chỉ lấy người dùng có type_user là "customer"
             ->get();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -74,6 +75,9 @@ Route::middleware(['check_login'])->group(
                 Route::get('show/{id}', 'show')->name('show');
                 Route::post('update/{id}', 'update')->name('update');
                 Route::get('destroy/{id}', 'destroy')->name('destroy');
+            });
+            Route::prefix('admin')->controller(AdminController::class)->name('admin.')->group(function () {
+                Route::get('index', 'index')->name('index');
             });
         });
     }

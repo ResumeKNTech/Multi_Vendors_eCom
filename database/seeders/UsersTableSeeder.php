@@ -24,13 +24,15 @@ use Illuminate\Support\Str;class UsersTableSeeder extends Seeder
             'Nguyễn Hoàng Phúc',
             'Bành Bảo Huân',
             'Huỳnh Bảo Ngọc',
+            'Trần Thanh Nhân',
+            'Trần Lê Bình'
         ];
 
         $userTypes = ['customer', 'vendor', 'admin'];
 
         foreach ($names as $name) {
             $fullName = explode(' ', $name);
-            $email = Str::slug($name) . '@example.com'; // Sử dụng Str::slug để loại bỏ các ký tự đặc biệt
+            $email = Str::slug($name) . '@gmail.com'; // Sử dụng Str::slug để loại bỏ các ký tự đặc biệt
 
             $randomUserTypeIndex = random_int(0, count($userTypes) - 1);
             $typeUser = $userTypes[$randomUserTypeIndex];
