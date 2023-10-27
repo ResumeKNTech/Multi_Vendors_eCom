@@ -41,7 +41,7 @@ use Illuminate\Support\Str;class UsersTableSeeder extends Seeder
                 'name' => $name,
                 'first_name' => $fullName[0],
                 'last_name' => end($fullName),
-                'user_image' => 'default.jpg',
+                'user_image' => 'upload/khoa.png',
                 'gender' => 'men',
                 'type_user' => $typeUser,
                 'email' => $email,
