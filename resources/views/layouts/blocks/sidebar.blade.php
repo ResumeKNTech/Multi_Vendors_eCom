@@ -240,6 +240,54 @@
                 <!-- End::slide -->
                 {{-- ! End  Admin --}}
 
+                {{-- ! Auth --}}
+                <!-- Start::slide__category -->
+                <li class="slide__category"><span class="category-name">Xác Thực Người Dùng</span></li>
+                <!-- End::slide__category -->
+
+                <!-- Start::slide -->
+                <li class="slide has-sub">
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
+                        <span class="side-menu__label">Nhóm Quyền</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0);">Nhóm Quyền</a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.user_role.index')}}" class="side-menu__item">Đăng Ký Quyền</a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.role.index')}}" class="side-menu__item">Danh Sách</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End::slide -->
+                <!-- Start::slide -->
+                <li class="slide has-sub">
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
+                        <span class="side-menu__label">Chức Năng</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0);">Chức Năng</a>
+                        </li>
+
+                        <li class="slide">
+                            <a href="{{ route('admin.permission.index')}}" class="side-menu__item">Danh Sách</a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.role_permission.index')}}" class="side-menu__item">Đăng Ký Nhóm Quyền</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- End::slide -->
+                {{-- ! End Auth --}}
             </ul>
 
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
