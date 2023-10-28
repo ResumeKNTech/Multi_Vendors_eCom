@@ -22,14 +22,50 @@ class VendorController extends Controller
 
         // Lấy thông tin category và brand từ bảng user_relationships và các bảng liên quan
         $userData = DB::table('user_relationships')
-            ->select('user_relationships.*', 'categories.category_name as category_name', 'brands.brand_name as brand_name')
+            ->select('user_relationships.*', 'categories.category_name as category_name', 'categories.created_at as category_created_at', 'brands.brand_name as brand_name')
             ->leftJoin('categories', 'user_relationships.category_id', '=', 'categories.id')
             ->leftJoin('brands', 'user_relationships.brand_id', '=', 'brands.id')
             ->where('user_relationships.user_id', $user->id)
             ->get(); // Sử dụng get() thay vì first()
+        // Đếm số lượng category duy nhất liên quan
+        $categoryCount = DB::table('user_relationships')
+            ->where('user_relationships.user_id', $user->id)
+            ->whereNotNull('user_relationships.category_id')
+            ->distinct('category_id')
+            ->count('category_id');
 
-        // Return the view with the user and related data
-        return view('admin.vendor.show', ['user' => $user, 'userData' => $userData]);
+        // Đếm số lượng brand duy nhất liên quan
+        $brandCount = DB::table('user_relationships')
+            ->where('user_relationships.user_id', $user->id)
+            ->whereNotNull('user_relationships.brand_id')
+            ->distinct('brand_id')
+            ->count('brand_id');
+        // Sử dụng Query Builder để lấy thông tin sản phẩm dựa trên user_id
+        $products = DB::table('products')
+            ->select('products.created_at', 'products.product_name', 'products.images', 'products.images_gallery', 'products.short_description', 'brands.brand_name', 'brands.logo_images')
+            ->join('brands', 'products.brand_id', '=', 'brands.id')
+            ->where('products.user_id', $user->id)
+            ->get();
+        $recentProducts = DB::table('products')
+            ->select('created_at', 'product_name', 'images', 'short_description')
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'asc') // Sắp xếp theo thời gian tạo tăng dần
+            ->take(3) // Lấy 3 sản phẩm đầu tiên
+            ->get();
+
+        // Phân tách chuỗi images_gallery thành mảng
+        foreach ($products as $product) {
+            $product->images_gallery = explode(',', $product->images_gallery);
+        }
+        // Return the view with the user, related data, and counts
+        return view('admin.vendor.show', [
+            'user' => $user,
+            'userData' => $userData,
+            'categoryCount' => $categoryCount,
+            'brandCount' => $brandCount,
+            'products' => $products,
+            'recentProducts' =>$recentProducts
+        ]);
     }
 
 

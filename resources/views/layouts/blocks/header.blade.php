@@ -409,7 +409,7 @@
                         </div>
 
                         <div class="d-sm-block d-none">
-                            <p class="fw-semibold mb-0 lh-1">{{ Auth::user()->name }}</p>
+                            <p class="fw-semibold mb-0 lh-1">{{ Auth::user()->first_name }}</p>
                             <span class="op-7 fw-normal d-block fs-11">{{ strtoupper(Auth::user()->type_user) }}</span>
                         </div>
 

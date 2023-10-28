@@ -55,7 +55,8 @@
 
 <!-- INTERNAL DATATABLES JS -->
 <script src="{{ asset('admin/assets/js/datatables.js') }}"></script>
-
+<!-- INTERNAL PROFILE JS -->
+<script src="{{ asset('admin/assets/js/profile.js') }}"></script>
 <!-- STICKY JS -->
 <script src="{{ asset('admin/assets/js/sticky.js') }}"></script>
 

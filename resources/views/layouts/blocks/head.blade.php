@@ -47,9 +47,12 @@
 <link rel="stylesheet" href="{{ asset('admin/assets/libs/prismjs/themes/prism-coy.min.css') }}">
 
 
- <!-- QUILL CSS -->
- <link rel="stylesheet" href="{{ asset('admin/assets/libs/quill/quill.snow.css') }}">
- <link rel="stylesheet" href="{{ asset('admin/assets/libs/quill/quill.bubble.css') }}">
+<!-- QUILL CSS -->
+<link rel="stylesheet" href="{{ asset('admin/assets/libs/quill/quill.snow.css') }}">
+<link rel="stylesheet" href="{{ asset('admin/assets/libs/quill/quill.bubble.css') }}">
 
- <!-- DATE & TIME PICKER CSS -->
- <link rel="stylesheet" href="{{ asset('admin/assets/libs/flatpickr/flatpickr.min.css') }}">
+<!-- DATE & TIME PICKER CSS -->
+<link rel="stylesheet" href="{{ asset('admin/assets/libs/flatpickr/flatpickr.min.css') }}">
+
+<!-- GLIGHTBOX CSS -->
+<link rel="stylesheet" href="{{ asset('admin/assets/libs/glightbox/css/glightbox.min.css') }}">
