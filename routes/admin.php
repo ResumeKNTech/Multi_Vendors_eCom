@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserRelationshipController;
 use App\Http\Controllers\Admin\VendorController;
@@ -83,6 +84,11 @@ Route::middleware(['check_login'])->group(
             });
             Route::prefix('admin')->controller(AdminController::class)->name('admin.')->group(function () {
                 Route::get('index', 'index')->name('index');
+                Route::get('create', 'create')->name('create');
+            });
+            Route::prefix('customer')->controller(CustomerController::class)->name('customer.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::get('create', 'create')->name('create');
             });
 
 

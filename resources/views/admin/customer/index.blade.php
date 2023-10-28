@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('module', 'Admin')
+@section('module', 'Khách Hàng')
 @section('action', 'Danh Sách')
 @section('content')
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
                 <div class="card-title">
-                    Danh Sách Admin
+                    Danh Sách Khách Hàng
                 </div>
 
             </div>
@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($admins as $i)
+                            @foreach ($customers as $i)
                                 <tr>
 
                                     <td>

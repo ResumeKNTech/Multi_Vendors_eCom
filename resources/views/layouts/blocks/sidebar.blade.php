@@ -165,10 +165,10 @@
                             <a href="javascript:void(0);">Khách Hàng</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.user.create')}}" class="side-menu__item">Thêm Khách Hàng</a>
+                            <a href="{{ route('admin.customer.create')}}" class="side-menu__item">Thêm Khách Hàng</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.user.index')}}" class="side-menu__item">Xem Danh Sách</a>
+                            <a href="{{ route('admin.customer.index')}}" class="side-menu__item">Xem Danh Sách</a>
                         </li>
                     </ul>
                 </li>
