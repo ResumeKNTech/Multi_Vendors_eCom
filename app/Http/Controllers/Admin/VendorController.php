@@ -26,7 +26,7 @@ class VendorController extends Controller
             ->leftJoin('categories', 'user_relationships.category_id', '=', 'categories.id')
             ->leftJoin('brands', 'user_relationships.brand_id', '=', 'brands.id')
             ->where('user_relationships.user_id', $user->id)
-            ->get(); // Sử dụng get() thay vì first()
+            ->get(); //
         // Đếm số lượng category duy nhất liên quan
         $categoryCount = DB::table('user_relationships')
             ->where('user_relationships.user_id', $user->id)
@@ -42,7 +42,7 @@ class VendorController extends Controller
             ->count('brand_id');
         // Sử dụng Query Builder để lấy thông tin sản phẩm dựa trên user_id
         $products = DB::table('products')
-            ->select('products.created_at', 'products.product_name', 'products.images', 'products.images_gallery', 'products.short_description', 'brands.brand_name', 'brands.logo_images')
+            ->select('products.created_at', 'products.product_name', 'products.images','products.price', 'products.images_gallery', 'products.short_description', 'brands.brand_name', 'brands.logo_images')
             ->join('brands', 'products.brand_id', '=', 'brands.id')
             ->where('products.user_id', $user->id)
             ->get();
@@ -64,7 +64,7 @@ class VendorController extends Controller
             'categoryCount' => $categoryCount,
             'brandCount' => $brandCount,
             'products' => $products,
-            'recentProducts' =>$recentProducts
+            'recentProducts' => $recentProducts
         ]);
     }
 

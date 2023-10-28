@@ -242,28 +242,25 @@
                                                                                             alt="">
                                                                                     </span>
                                                                                 </a>
+
                                                                             @endforeach
                                                                         </div>
+
                                                                     </div>
-                                                                    {{-- <div
+                                                                    <p class="fs-11 mb-2 text-muted">
+                                                                        {{ $product->short_description }}</p>
+                                                                    <div
                                                                     class="d-flex align-items-center justify-content-between mb-md-0 mb-2">
                                                                     <div>
                                                                         <div class="btn-list">
                                                                             <button
-                                                                                class="btn btn-primary-light btn-sm btn-wave">
-                                                                                Comment
+                                                                                class="btn btn-primary-light btn-sm btn-wave" disabled>
+                                                                           Giá: {{ $product->price }}
                                                                             </button>
-                                                                            <button
-                                                                                class="btn btn-icon btn-sm btn-success-light btn-wave">
-                                                                                <i class="ri-thumb-up-line"></i>
-                                                                            </button>
-                                                                            <button
-                                                                                class="btn btn-icon btn-sm btn-danger-light btn-wave">
-                                                                                <i class="ri-share-line"></i>
-                                                                            </button>
+
                                                                         </div>
                                                                     </div>
-                                                                </div> --}}
+                                                                </div>
                                                                 </div>
                                                                 <div>
                                                                     <div class="d-flex align-items-top">
