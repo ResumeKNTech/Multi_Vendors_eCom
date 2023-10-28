@@ -228,29 +228,42 @@
                                 <div class="tab-pane show active fade p-0 border-0" id="activity-tab-pane"
                                     role="tabpanel" aria-labelledby="activity-tab" tabindex="0">
                                     @php
-                                    $displayedCategories = [];
-                                @endphp
+                                        $displayedCategories = [];
+                                    @endphp
 
-                                <ul class="list-unstyled profile-timeline">
-                                    @foreach ($userData as $data)
-                                    @if (!in_array($data->category_name, $displayedCategories))
-                                        <li>
-                                            <div>
-                                                <span class="avatar avatar-sm avatar-rounded profile-timeline-avatar">
-                                                    <img src="{{ asset('admin/assets/images/media/media-39.jpg') }}" alt="">
-                                                </span>
-                                                <p class="mb-1">
-                                                    <b>{{ $user->name }}</b> có danh mục <b>{{ $data->category_name }}</b>.<span class="float-end fs-11 text-muted">ss</span>
-                                                </p>
-                                                <p class="text-muted">dd &#128076;</p>
-                                            </div>
-                                        </li>
-                                        @php
-                                            $displayedCategories[] = $data->category_name;
-                                        @endphp
-                                    @endif
-                                    @endforeach
-                                </ul>
+                                    <ul class="list-unstyled profile-timeline">
+                                        @foreach ($userData as $data)
+                                            @if (!in_array($data->category_name, $displayedCategories))
+                                                <li>
+                                                    <div>
+                                                        <span
+                                                            class="avatar avatar-sm avatar-rounded profile-timeline-avatar">
+                                                            <img src="{{ asset('admin/assets/images/media/media-39.jpg') }}"
+                                                                alt="">
+                                                        </span>
+                                                        <p class="mb-1">
+                                                            <b>{{ $user->name }}</b> có danh mục
+                                                            <b>{{ $data->category_name }}</b>.<span
+                                                                class="float-end fs-11 text-muted">ss</span>
+                                                        </p>
+                                                        @php
+                                                            // Gather all the brand names for this category
+                                                            $brandsForCategory = $userData->filter(function ($item) use ($data) {
+                                                                return $item->category_name == $data->category_name;
+                                                            });
+                                                            $brandNames = $brandsForCategory->pluck('brand_name')->toArray();
+                                                        @endphp
+                                                        <p class="text-muted">gồm các thương hiệu
+                                                            {{ implode(', ', $brandNames) }}</p>
+                                                    </div>
+                                                </li>
+                                                @php
+                                                    $displayedCategories[] = $data->category_name;
+                                                @endphp
+                                            @endif
+                                        @endforeach
+                                    </ul>
+
 
 
                                 </div>
