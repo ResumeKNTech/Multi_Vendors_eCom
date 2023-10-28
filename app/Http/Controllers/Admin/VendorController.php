@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,26 +11,26 @@ class VendorController extends Controller
 {
 
     public function show()
-{
-    // Lấy thông tin của người dùng đang đăng nhập
-    $user = Auth::user();
+    {
+        // Lấy thông tin của người dùng đang đăng nhập
+        $user = Auth::user();
 
-    // Kiểm tra xem người dùng có tồn tại không
-    if (!$user) {
-        abort(404, 'User not found');
+        // Kiểm tra xem người dùng có tồn tại không
+        if (!$user) {
+            return view('error.error');
+        }
+
+        // Lấy thông tin category và brand từ bảng user_relationships và các bảng liên quan
+        $userData = DB::table('user_relationships')
+            ->select('user_relationships.*', 'categories.category_name as category_name', 'brands.brand_name as brand_name')
+            ->leftJoin('categories', 'user_relationships.category_id', '=', 'categories.id')
+            ->leftJoin('brands', 'user_relationships.brand_id', '=', 'brands.id')
+            ->where('user_relationships.user_id', $user->id)
+            ->get(); // Sử dụng get() thay vì first()
+
+        // Return the view with the user and related data
+        return view('admin.vendor.show', ['user' => $user, 'userData' => $userData]);
     }
-
-    // Lấy thông tin category và brand từ bảng user_relationships và các bảng liên quan
-    $userData = DB::table('user_relationships')
-        ->select('user_relationships.*', 'categories.category_name as category_name', 'brands.brand_name as brand_name')
-        ->leftJoin('categories', 'user_relationships.category_id', '=', 'categories.id')
-        ->leftJoin('brands', 'user_relationships.brand_id', '=', 'brands.id')
-        ->where('user_relationships.user_id', $user->id)
-        ->get(); // Sử dụng get() thay vì first()
-
-    // Return the view with the user and related data
-    return view('admin.vendor.show', ['user' => $user, 'userData' => $userData]);
-}
 
 
     public function index()
