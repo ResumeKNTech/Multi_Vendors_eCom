@@ -12,7 +12,7 @@
         content="dashboard, template dashboard, Bootstrap dashboard, admin panel template, sales dashboard, Bootstrap admin panel, stocks dashboard, crm admin dashboard, ecommerce admin panel, admin template, admin panel dashboard, course dashboard, template ecommerce website, dashboard hrm, admin dashboard">
 
     <!-- TITLE -->
-    <title>Xác Thực Người Dùng</title>
+    <title>Đăng Nhập</title>
 
     <!-- FAVICON -->
     <link rel="icon" href="https://php.spruko.com/ynex/ynex/assets/images/brand-logos/favicon.ico"
@@ -45,10 +45,10 @@
                 </div>
                 <div class="card custom-card">
                     <div class="card-body p-5">
-                        <form method="POST" action="{{ route('auth.login') }}">
+                        <form method="POST" action="{{ route('client.login') }}">
                             @csrf
                             <p class="h5 fw-semibold mb-2 text-center">Đăng Nhập</p>
-                            <p class="mb-4 text-muted op-7 fw-normal text-center">Chào Mừng Bạn Đến Với Trang Quản Trị Admin !</p>
+                            <p class="mb-4 text-muted op-7 fw-normal text-center">Chào Mừng Đến Với Thương Hiệu  !</p>
                             <div class="row gy-3">
                                 <div class="col-xl-12">
                                     <label for="email" class="form-label text-default">Email</label>
@@ -56,11 +56,11 @@
                                         placeholder="Email">
                                 </div>
                                 <div class="col-xl-12 mb-2">
-                                    <label for="password" class="form-label text-default d-block">Mật Khẩu<a
-                                            href="a.html" class="float-end text-danger">Quên Mật Khẩu?</a></label>
+                                    <label for="password" class="form-label text-default d-block">Mật khẩu<a
+                                            href="a.html" class="float-end text-danger">Quên Mật Khẩu ?</a></label>
                                     <div class="input-group">
                                         <input type="password" name="password" class="form-control form-control-lg"
-                                            id="password" placeholder="Password">
+                                            id="password" placeholder="Mật Khẩu">
                                         <button class="btn btn-light" type="button"
                                             onclick="createpassword('password',this)" id="button-addon2"><i
                                                 class="ri-eye-off-line align-middle"></i></button>
@@ -80,8 +80,12 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="text-center">
+                            <p class="fs-12 text-muted mt-3">Chưa có tài khoản ? <a
+                                    href="{{route('client.register')}}" class="text-primary">Đăng Ký</a></p>
+                        </div>
                         <div class="text-center my-3 authentication-barrier">
-                            <span>OR</span>
+                            <span>Hoặc</span>
                         </div>
                         <div class="btn-list text-center">
                             <button class="btn btn-icon btn-light">
