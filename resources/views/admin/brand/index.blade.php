@@ -81,8 +81,8 @@
 
                                             <img id="previewImage" src="#" alt="Image Preview"
                                                 style="display:none; max-width:100%;">
-                                                <p>Kéo & thả để chọn hình <label for="images">Tìm kiếm</label>
-                                                </div>
+                                            <p>Kéo & thả để chọn hình <label for="images">Tìm kiếm</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +135,9 @@
 
                                         </button>
 
-                                        <a href="#" class="btn btn-icon btn-sm btn-danger" onclick="confirmDelete('{{ route('admin.brand.destroy', $i->id) }}')"><i class="ri-delete-bin-6-line"></i></a>
+                                        <a href="#" class="btn btn-icon btn-sm btn-danger"
+                                            onclick="confirmDelete('{{ route('admin.brand.destroy', $i->id) }}')"><i
+                                                class="ri-delete-bin-6-line"></i></a>
 
                                     </div>
                                 </td>
@@ -143,12 +145,14 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 Bạn có chắc chắn muốn xóa sản phẩm này không?
@@ -166,10 +170,10 @@
 
     <!-- Edit Modal -->
     <div class="modal fade" id="editBrandModal" tabindex="-1" role="dialog" aria-labelledby="editBrandModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h5 class="modal-title" id="editBrandModalLabel">Chỉnh sửa thương hiệu</h5>
 
 
@@ -234,7 +238,6 @@
         }
     </script>
     <script>
-
         $(document).ready(function() {
             $('.editBrandBtn').click(function() {
                 var id = $(this).data('id');
