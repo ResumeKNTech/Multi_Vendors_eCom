@@ -16,17 +16,8 @@ B3: Mở Terminal chạy lần lượt lệnh
   
 + php artisan migrate:refresh
   
-+ php artisan db:seed --class=CategoriesSeeder
++ php artisan db:seed --class=AdminSeeder
   
-  php artisan db:seed --class=SubCategoriesSeeder
-  
-  php artisan db:seed --class=BrandsSeeder
-
-  php artisan db:seed --class=UsersTableSeeder
-  
-  php artisan db:seed --class=ProductsSeeder
-  
-
   
 + npm install
   

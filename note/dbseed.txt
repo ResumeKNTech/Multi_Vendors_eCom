@@ -1,6 +1,1 @@
-php artisan db:seed --class=CategoriesSeeder
-php artisan db:seed --class=SubCategoriesSeeder
-php artisan db:seed --class=BrandsSeeder
- php artisan db:seed --class=UsersTableSeeder
-php artisan db:seed --class=ProductsSeeder
-
+php artisan db:seed --class=AdminSeeder
