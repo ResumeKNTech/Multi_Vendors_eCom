@@ -16,10 +16,21 @@ B3: Mở Terminal chạy lần lượt lệnh
   
 + php artisan migrate:refresh
   
++ npm install
+
+
+  
 + php artisan db:seed --class=AdminSeeder
   
-  
-+ npm install
+  tk: admin@gmail.com
+
+  mật khẩu : password
+
++ /auth/register để đăng ký vendor
+
++ /client/register để đăng ký khách hàng
+
+
   
 B4: Chạy tiếp lệnh php artisan serve để run trang web
 
