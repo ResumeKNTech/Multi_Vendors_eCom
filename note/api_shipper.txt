@@ -1,2 +1,13 @@
 https://viblo.asia/p/su-dung-api-giao-hang-nhanh-de-tinh-gia-cuoc-van-chuyen-1Je5EQB45nL
 https://github.com/jacksonit/GHN/blob/master/src/GHNV1.php
+
+
+
+
+@if(auth()->check())
+    @foreach ($notifications as $notification)
+        <div class="alert alert-info">
+            {{ $notification->message }}
+        </div>
+    @endforeach
+@endif

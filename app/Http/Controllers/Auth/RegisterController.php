@@ -50,10 +50,14 @@ class RegisterController extends Controller
             'category_id' => $request->input('category_id'),
             'brand_id' => $request->input('brand_id'),
         ];
+        // Tạo một mảng dữ liệu cho thông báo
+        $notificationData = [
+            'user_id' => $user_id,
+            'message' => 'Shop ' . $userData['name'] . ' vừa được tạo.',
+        ];
 
-        // Sử dụng Query Builder để thêm bản ghi vào bảng 'user_relationships'
         DB::table('user_relationships')->insert($userRelationshipData);
-
+        DB::table('notifications')->insert($notificationData);
         // Đăng nhập người dùng sau khi đăng ký
         $user = DB::table('users')->where('email', $request->input('email'))->first();
         Auth::loginUsingId($user->id);

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\UserRelationshipController;
 use App\Http\Controllers\Admin\VendorController;
 
@@ -119,6 +120,12 @@ Route::middleware(['check_login'])->group(
                 Route::post('update/{id}', 'update')->name('update');
                 Route::get('destroy/{id}', 'destroy')->name('destroy');
             });
+
+
+            //?Route thông báo
+            Route::patch('markAsRead/{notificationId}', [NotificationController::class, 'markAsRead'])
+            ->name('markAsRead');
+
         });
     }
 );
@@ -129,7 +136,6 @@ Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
     Route::post('register', [RegisterController::class, 'register']);
-
 });
 
 // ? Route 404
