@@ -19,7 +19,7 @@ Route::prefix('client')->name('client.')->group(function () {
 
 Route::middleware(['check_login_customer'])->group(
     function () {
-        Route::prefix('client')->name('client')->group(function () {
+        Route::prefix('client')->name('client.')->group(function () {
             Route::get('home', [HomeController::class,'index'])->name('home');
         });
     }
