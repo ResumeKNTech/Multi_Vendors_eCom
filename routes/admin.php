@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\UserRelationshipController;
 use App\Http\Controllers\Admin\VendorController;
 
@@ -28,6 +29,12 @@ Route::middleware(['check_login'])->group(
         Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
             Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::post('store', 'store')->name('store');
+                Route::post('update/{id}', 'update')->name('update');
+                Route::get('destroy/{id}', 'destroy')->name('destroy');
+            });
+            Route::prefix('shipping')->controller(ShippingController::class)->name('shipping.')->group(function () {
                 Route::get('index', 'index')->name('index');
                 Route::post('store', 'store')->name('store');
                 Route::post('update/{id}', 'update')->name('update');

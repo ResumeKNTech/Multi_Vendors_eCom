@@ -266,34 +266,32 @@
                                         @if (auth()->check())
                                             @foreach ($notifications as $notification)
                                                 <p class="mb-0 fw-semibold">
-                                                    <a class="@if ($notification->read_at) read @endif"
-                                                        href="#">
+                                                    <a class="@if ($notification->read_at) read @endif" href="#">
                                                         {{ $notification->message }}
                                                     </a><br>
                                                     <span class="text-warning"> {{ $notification->read_at }}</span>
                                                 </p>
+
+                                                <!-- Đưa form vào đây -->
+                                                <span class="badge bg-secondary-transparent" id="notifiation-data-{{ $notification->id }}">
+                                                    <form method="POST" action="{{ route('admin.markAsRead', ['notificationId' => $notification->id]) }}">
+                                                        @method('PATCH')
+                                                        @csrf
+                                                        <button style="border: none" type="submit">Đánh dấu là đã đọc</button>
+                                                    </form>
+                                                </span>
                                             @endforeach
+                                        @else
+                                            <h1>Không có thông báo</h1>
                                         @endif
                                     </div>
-
-
-                                    <div>
-                                        <span class="badge bg-secondary-transparent" id="notifiation-data">
-                                            <form method="POST"
-                                                action="{{ route('admin.markAsRead', ['notificationId' => $notification->id]) }}">
-                                                @method('PATCH')
-                                                @csrf
-                                                <button style="border: none" type="submit">Đánh dấu là đã
-                                                    đọc</button>
-                                            </form>
-                                        </span>
-                                    </div>
                                 </div>
+
                             </div>
                         </li>
 
                     </ul>
-                   
+
                 </div>
                 <!-- End::main-header-dropdown -->
             </div>

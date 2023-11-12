@@ -102,7 +102,7 @@
                 {{-- ! End Products --}}
 
                 {{-- ! Category --}}
-             
+
 
                 <!-- Start::slide -->
                 <li class="slide has-sub">
@@ -139,12 +139,36 @@
                         </li>
 
                         <li class="slide">
-                            <a href="{{ route('admin.sub_category.index') }}" class="side-menu__item">Xem Danh Sách</a>
+                            <a href="{{ route('admin.sub_category.index') }}" class="side-menu__item">Xem Danh
+                                Sách</a>
                         </li>
                     </ul>
                 </li>
                 <!-- End::slide -->
                 {{-- ! End Sub Category --}}
+                {{-- ! Shipping --}}
+
+
+                <!-- Start::slide -->
+                <li class="slide has-sub">
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="bx bx-grid-alt side-menu__icon"></i>
+                        <span class="side-menu__label">Vận Chuyển</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0);">Vận Chuyển</a>
+                        </li>
+
+                        <li class="slide">
+                            <a href="{{ route('admin.shipping.index') }}" class="side-menu__item">Vận Chuyển</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- End::slide -->
+                {{-- ! End Shipping --}}
 
                 {{-- ! Client --}}
                 <!-- Start::slide__category -->
@@ -163,10 +187,11 @@
                             <a href="javascript:void(0);">Khách Hàng</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.customer.create')}}" class="side-menu__item">Thêm Khách Hàng</a>
+                            <a href="{{ route('admin.customer.create') }}" class="side-menu__item">Thêm Khách
+                                Hàng</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.customer.index')}}" class="side-menu__item">Xem Danh Sách</a>
+                            <a href="{{ route('admin.customer.index') }}" class="side-menu__item">Xem Danh Sách</a>
                         </li>
                     </ul>
                 </li>
@@ -185,13 +210,14 @@
                         </li>
 
                         <li class="slide">
-                            <a href="{{ route('admin.vendor.create')}}" class="side-menu__item">Thêm Gian Hàng</a>
+                            <a href="{{ route('admin.vendor.create') }}" class="side-menu__item">Thêm Gian Hàng</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.user_relationship.index')}}" class="side-menu__item">Đăng Ký Gian Hàng</a>
+                            <a href="{{ route('admin.user_relationship.index') }}" class="side-menu__item">Đăng Ký
+                                Gian Hàng</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.vendor.index')}}" class="side-menu__item">Xem Danh Sách</a>
+                            <a href="{{ route('admin.vendor.index') }}" class="side-menu__item">Xem Danh Sách</a>
                         </li>
                     </ul>
                 </li>
@@ -216,10 +242,10 @@
                             <a href="javascript:void(0);">Nhân Viên</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.user.create')}}" class="side-menu__item">Thêm Nhân Viên</a>
+                            <a href="{{ route('admin.user.create') }}" class="side-menu__item">Thêm Nhân Viên</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.user.index')}}"" class="side-menu__item">Xem Danh Sách</a>
+                            <a href="{{ route('admin.user.index') }}"" class="side-menu__item">Xem Danh Sách</a>
                         </li>
                     </ul>
                 </li>
@@ -230,7 +256,7 @@
                 {{-- !  Admin --}}
                 <!-- Start::slide -->
                 <li class="slide">
-                    <a href="{{ route('admin.admin.index')}}" class="side-menu__item">
+                    <a href="{{ route('admin.admin.index') }}" class="side-menu__item">
                         <i class="bx bx-bar-chart-square side-menu__icon"></i>
                         <span class="side-menu__label">Danh Sách Admin</span>
                     </a>
@@ -255,10 +281,11 @@
                             <a href="javascript:void(0);">Nhóm Quyền</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.user_role.index')}}" class="side-menu__item">Đăng Ký Quyền</a>
+                            <a href="{{ route('admin.user_role.index') }}" class="side-menu__item">Đăng Ký
+                                Quyền</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.role.index')}}" class="side-menu__item">Danh Sách</a>
+                            <a href="{{ route('admin.role.index') }}" class="side-menu__item">Danh Sách</a>
                         </li>
                     </ul>
                 </li>
@@ -276,10 +303,11 @@
                         </li>
 
                         <li class="slide">
-                            <a href="{{ route('admin.permission.index')}}" class="side-menu__item">Danh Sách</a>
+                            <a href="{{ route('admin.permission.index') }}" class="side-menu__item">Danh Sách</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.role_permission.index')}}" class="side-menu__item">Đăng Ký Nhóm Quyền</a>
+                            <a href="{{ route('admin.role_permission.index') }}" class="side-menu__item">Đăng Ký
+                                Nhóm Quyền</a>
                         </li>
 
                     </ul>
@@ -289,7 +317,7 @@
 
 
 
-    {{-- ! Order --}}
+                {{-- ! Order --}}
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Doanh Thu</span></li>
                 <!-- End::slide__category -->
@@ -306,10 +334,10 @@
                             <a href="javascript:void(0);">Gian Hàng</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.role.index')}}" class="side-menu__item">Danh Sách</a>
+                            <a href="{{ route('admin.role.index') }}" class="side-menu__item">Danh Sách</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.role.index')}}" class="side-menu__item">Lợi Nhuận</a>
+                            <a href="{{ route('admin.role.index') }}" class="side-menu__item">Lợi Nhuận</a>
                         </li>
                     </ul>
                 </li>
@@ -327,10 +355,11 @@
                         </li>
 
                         <li class="slide">
-                            <a href="{{ route('admin.permission.index')}}" class="side-menu__item">Danh Sách</a>
+                            <a href="{{ route('admin.permission.index') }}" class="side-menu__item">Danh Sách</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.role_permission.index')}}" class="side-menu__item">Tạo Đơn Hàng Mới</a>
+                            <a href="{{ route('admin.role_permission.index') }}" class="side-menu__item">Tạo Đơn
+                                Hàng Mới</a>
                         </li>
 
                     </ul>
