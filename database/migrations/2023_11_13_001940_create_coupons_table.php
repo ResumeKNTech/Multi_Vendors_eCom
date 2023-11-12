@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment_methods', function (Blueprint $table) {
+        Schema::create('coupons', function (Blueprint $table) {
             $table->id();
+
+
+            $table->string('code')->unique();
+            $table->enum('type',['fixed','percent'])->default('fixed');
+            $table->decimal('value',20,2);
+            $table->enum('status',['active','inactive'])->default('inactive');
+
             $table->timestamps();
         });
     }
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment_methods');
+        Schema::dropIfExists('coupons');
     }
 };

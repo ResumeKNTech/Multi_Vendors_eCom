@@ -16,11 +16,11 @@ Route::prefix('client')->name('client.')->group(function () {
     Route::post('register', [RegisterController::class, 'register']);
 
 });
+Route::get('/{slug}', [HomeController::class,'index'])->name('home');
 
 Route::middleware(['check_login_customer'])->group(
     function () {
-        Route::prefix('client')->name('client.')->group(function () {
-            Route::get('home', [HomeController::class,'index'])->name('home');
+        Route::prefix('/')->name('client.')->group(function () {
         });
     }
 );

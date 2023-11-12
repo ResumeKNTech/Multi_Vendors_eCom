@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customer_histories', function (Blueprint $table) {
+        Schema::create('shippings', function (Blueprint $table) {
             $table->id();
+
+            $table->string('type');
+            $table->decimal('price');
+            $table->enum('status',['active','inactive'])->default('active');
+
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customer_histories');
+        Schema::dropIfExists('shippings');
     }
 };

@@ -11,19 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_reviews', function (Blueprint $table) {
+        Schema::create('wishlists', function (Blueprint $table) {
             $table->id();
 
+            $table->float('price');
+            $table->integer('quantity');
+            $table->float('amount');
 
-            $table->tinyInteger('rate')->default(0);
-            $table->text('review')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
-
-            // * Foreins Key
+            // *Foreins Key
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('cart_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('product_id')->nullable();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('CASCADE');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('SET NULL');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('SET NULL');
+            $table->foreign('cart_id')->references('id')->on('carts')->onDelete('SET NULL');
 
             $table->timestamps();
         });
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_reviews');
+        Schema::dropIfExists('wishlists');
     }
 };

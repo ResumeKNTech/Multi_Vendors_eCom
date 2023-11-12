@@ -58,7 +58,7 @@
 
                 {{-- ! Products --}}
                 <!-- Start::slide__category -->
-                <li class="slide__category"><span class="category-name">Sản Phẩm</span></li>
+                <li class="slide__category"><span class="category-name">Gian hàng</span></li>
                 <!-- End::slide__category -->
 
                 <!-- Start::slide -->
@@ -102,9 +102,7 @@
                 {{-- ! End Products --}}
 
                 {{-- ! Category --}}
-                <!-- Start::slide__category -->
-                <li class="slide__category"><span class="category-name">Danh Mục Sản Phẩm</span></li>
-                <!-- End::slide__category -->
+             
 
                 <!-- Start::slide -->
                 <li class="slide has-sub">
