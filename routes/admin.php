@@ -11,6 +11,9 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\PostCategoryController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\PostTagController;
 use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\UserRelationshipController;
 use App\Http\Controllers\Admin\VendorController;
@@ -99,8 +102,35 @@ Route::middleware(['check_login'])->group(
                 Route::get('index', 'index')->name('index');
                 Route::get('create', 'create')->name('create');
             });
+// ? Route Post
+Route::prefix('post')->controller(PostController::class)->name('post.')->group(function () {
+    Route::get('create', 'create')->name('create');
+    Route::get('index', 'index')->name('index');
+    Route::post('store', 'store')->name('store');
+    Route::get('edit/{id}', 'edit')->name('edit');
+    Route::get('show/{id}', 'show')->name('show');
+    Route::post('update/{id}', 'update')->name('update');
+    Route::get('destroy/{id}', 'destroy')->name('destroy');
 
-
+});
+Route::prefix('post-tag')->controller(PostTagController::class)->name('post-tag.')->group(function () {
+    Route::get('create', 'create')->name('create');
+    Route::get('index', 'index')->name('index');
+    Route::post('store', 'store')->name('store');
+    Route::get('edit/{id}', 'edit')->name('edit');
+    Route::get('show/{id}', 'show')->name('show');
+    Route::post('update/{id}', 'update')->name('update');
+    Route::get('destroy/{id}', 'destroy')->name('destroy');
+});
+Route::prefix('post-category')->controller(PostCategoryController::class)->name('post-category.')->group(function () {
+    Route::get('create', 'create')->name('create');
+    Route::get('index', 'index')->name('index');
+    Route::post('store', 'store')->name('store');
+    Route::get('edit/{id}', 'edit')->name('edit');
+    Route::get('show/{id}', 'show')->name('show');
+    Route::post('update/{id}', 'update')->name('update');
+    Route::get('destroy/{id}', 'destroy')->name('destroy');
+});
             // ? Route phân quyền
 
             Route::prefix('role')->controller(RoleController::class)->name('role.')->group(function () {

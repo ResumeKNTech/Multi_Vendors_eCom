@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Client\Auth\LoginController;
 use App\Http\Controllers\Client\Auth\RegisterController;
+use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,10 @@ Route::prefix('client')->name('client.')->group(function () {
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
     Route::post('register', [RegisterController::class, 'register']);
+    Route::get('/', [HomeController::class,'index'])->name('home');
+    Route::get('checkout', [CartController::class,'checkout'])->name('checkout');
 
 });
-Route::get('/{slug}', [HomeController::class,'index'])->name('home');
 
 Route::middleware(['check_login_customer'])->group(
     function () {

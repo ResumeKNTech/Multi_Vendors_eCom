@@ -167,9 +167,74 @@
 
                     </ul>
                 </li>
+
+
+
+
                 <!-- End::slide -->
                 {{-- ! End Shipping --}}
+                <!-- Start::slide__category -->
+                <li class="slide__category"><span class="category-name">Bài Viết</span></li>
+                <!-- End::slide__category -->
+                <!-- Start::slide -->
+                <li class="slide has-sub">
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="bx bx-grid-alt side-menu__icon"></i>
+                        <span class="side-menu__label">Bài Viết</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0);">Bài Viết</a>
+                        </li>
 
+                        <li class="slide">
+                            <a href="{{ route('admin.post.index') }}" class="side-menu__item">Bài Viết</a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.post.create') }}" class="side-menu__item"> Tạo Bài Viết</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Start::slide -->
+                <li class="slide has-sub">
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="bx bx-grid-alt side-menu__icon"></i>
+                        <span class="side-menu__label">Danh Mục</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0);">Danh Mục</a>
+                        </li>
+
+                        <li class="slide">
+                            <a href="{{ route('admin.post-category.index') }}" class="side-menu__item">Danh Mục</a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.post-category.create') }}" class="side-menu__item"> Tạo Danh Mục</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="slide has-sub">
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="bx bx-grid-alt side-menu__icon"></i>
+                        <span class="side-menu__label">Tag</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0);">Tag</a>
+                        </li>
+
+                        <li class="slide">
+                            <a href="{{ route('admin.post-tag.index') }}" class="side-menu__item">Tag</a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.post-tag.create') }}" class="side-menu__item"> Tạo Tag</a>
+                        </li>
+                    </ul>
+                </li>
                 {{-- ! Client --}}
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Người Tiêu Dùng</span></li>

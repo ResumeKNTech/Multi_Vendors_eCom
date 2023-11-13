@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>eGreen - Tự hào thương hiệu Việt</title>
+ @include('client.layouts.blocks.head')
 </head>
 <body>
     @yield('content')
+
+    @include('client.layouts.blocks.footer')
+
 </body>
 </html>

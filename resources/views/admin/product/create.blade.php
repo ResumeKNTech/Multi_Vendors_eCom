@@ -112,8 +112,10 @@
                                                     quá 500 từ</label>
                                             </div>
                                             <div class="col-xl-12">
-                                                <label class="form-label">Tính Năng Sản Phẩm:</label>
-                                              <div id="product-features"></div>
+                                                <label for="product-features" class="form-label">Tính Năng Sản Phẩm:</label>
+                                                <textarea class="form-control" id="product-features" name="product_description" rows="3" placeholder="Nhập tính năng sản phẩm ở đây..."></textarea>
+                                            </div>
+
                                             </div>
                                         </div>
                                     </div>

@@ -28,7 +28,6 @@ class StoreRequest extends FormRequest
             'short_description' => 'nullable|string',
             'images' => 'required', // Đảm bảo validate đúng kiểu dữ liệu ảnh nếu cần
             'images_gallery' => 'required', // Tương tự với images
-            'product_tags' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'offer_price' => 'nullable|numeric|min:0',
             'sales_begin' => 'nullable|date',
