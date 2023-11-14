@@ -2,20 +2,20 @@
 @section('module', 'Bài Viết')
 @section('action', 'Thêm')
 @section('content')
- <!-- Bootstrap CSS -->
- <!-- TinyMCE -->
- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
- <script>
-    tinymce.init({
-        selector: 'textarea#quote'
-      });
-      tinymce.init({
-        selector: 'textarea#summary'
-      });
-      tinymce.init({
-        selector: 'textarea#description'
-      });
-</script>
+    <!-- Bootstrap CSS -->
+    <!-- TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#quote'
+        });
+        tinymce.init({
+            selector: 'textarea#summary'
+        });
+        tinymce.init({
+            selector: 'textarea#description'
+        });
+    </script>
     <style>
         #image-label {
             border: 2px dashed #ccc;
@@ -73,8 +73,7 @@
 
                                             <div class="col-xl-12">
                                                 <label for="product-features" class="form-label">Quote:</label>
-                                                <textarea class="form-control" id="quote" name="quote" rows="3"
-                                                   ></textarea>
+                                                <textarea class="form-control" id="quote" name="quote" rows="3"></textarea>
                                             </div>
                                             <div class="col-xl-12">
                                                 <label for="product-features" class="form-label">Tóm Tắt:</label>
@@ -116,7 +115,7 @@
                                         </div>
 
 
-                                     =
+                                        =
                                         <div class="col-xl-6">
                                             <label for="product-status-add1" class="form-label">Trạng Thái:</label>
                                             <select class="form-control" data-trigger name="status"
@@ -141,8 +140,8 @@
                 <div class="form-group mb-3">
                     <button type="reset" class="btn btn-warning">Reset</button>
                     <button type="submit" class="btn btn-primary-light m-1">Thêm Sản Phẩm<i
-                        class="bi bi-plus-lg ms-2"></i></button>
-                  </div>
+                            class="bi bi-plus-lg ms-2"></i></button>
+                </div>
 
             </div>
             </form>
