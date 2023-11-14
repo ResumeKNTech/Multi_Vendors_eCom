@@ -136,6 +136,7 @@
                                                         <textarea class="form-control form-control-light" name="address" id="contact-mail-message" rows="2"></textarea>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="col-xl-3">
                                                     <label for="contact-address-firstname" class="form-label">Tên
                                                         Nhân Viên
@@ -159,7 +160,19 @@
                                                     </div>
                                                 </div>
 
-                                               
+                                               <div class="col-xl-6">
+                                                    <label for="contact-mail-message" class="form-label">Ngày Sinh
+                                                        :</label>
+                                                    <div class="input-group">
+                                                        <input type="date"  class="form-control form-control-light" name="birthday" id="contact-mail-message" rows="2"></textarea>
+                                                    </div>
+                                                </div><div class="col-xl-6">
+                                                    <label for="contact-mail-message" class="form-label">Số điện thoại
+                                                        :</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control form-control-light" name="phone" id="contact-mail-message" rows="2"></textarea>
+                                                    </div>
+                                                </div>
 
                                                 <div class="col-xl-3">
                                                     <label for="1" class="form-label">Link FB
