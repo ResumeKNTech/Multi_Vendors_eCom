@@ -67,6 +67,11 @@
                                     <input type="text" class="form-control form-control-lg" name="last_name" id="signup-lastname"
                                         placeholder="Vui lòng nhập Họ">
                                 </div>
+                                 <div class="col-xl-12">
+                                    <label for="phone" class="form-label text-default">Số điện thoại</label>
+                                    <input type="text" class="form-control form-control-lg" name="phone" id="phone"
+                                        placeholder="Vui lòng nhập Họ">
+                                </div>
                                 <div class="col-xl-12">
                                     <label for="email" class="form-label text-default">Email</label>
                                     <input type="text" class="form-control form-control-lg" name="email" id="email"
