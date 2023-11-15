@@ -20,7 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password','images'
     ];
 
     /**
@@ -33,11 +33,17 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+    // Mối quan hệ với UserRelationship
+    public function userRelationships()
+    {
+        return $this->hasMany(UserRelationship::class, 'user_id');
+    }
+
+    public function relatedCategories()
+    {
+        return $this->hasManyThrough(Category::class, UserRelationship::class, 'user_id', 'id', 'id', 'category_id');
+    }
+
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',

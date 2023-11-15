@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('module', '')
-@section('action', '')
+@section('module', 'Chỉnh Sửa')
+@section('action', 'Gian Hàng')
 @section('content')
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
@@ -24,7 +24,7 @@
                     <div class="card custom-card shadow-none mb-0 border-0">
                         <div class="card-header">
                             <div class="card-title">
-                                Vui lòng điền hết để dăng ký gian hàng nhé !
+                                Vui lòng điền hết để chỉnh sửa thông tin  nhé !
                             </div>
                         </div>
                         <div class="card-body">

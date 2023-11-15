@@ -2,7 +2,7 @@
 
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header">
-        <a href="{{route('client.index')}}" class="header-logo">
+        <a href="{{ route('client.index') }}" class="header-logo">
             <img src="{{ asset('admin/assets/images/brand-logos/desktop-logo.png') }}" alt="logo" class="desktop-logo">
             <img src="{{ asset('admin/assets/images/brand-logos/toggle-logo.png') }}" alt="logo" class="toggle-logo">
             <img src="{{ asset('admin/assets/images/brand-logos/desktop-dark.png') }}" alt="logo"
@@ -211,7 +211,7 @@
                         <li class="slide">
                             <a href="{{ route('admin.post-category.index') }}" class="side-menu__item">Danh Mục</a>
                         </li>
-                      
+
                     </ul>
                 </li>
 
@@ -241,7 +241,7 @@
                 <!-- End::slide__category -->
 
                 <!-- Start::slide -->
-                <li class="slide has-sub">
+                {{-- <li class="slide has-sub">
                     <a href="javascript:void(0);" class="side-menu__item">
                         <i class="bx bx-bar-chart-square side-menu__icon"></i>
                         <span class="side-menu__label">Khách Hàng</span>
@@ -259,7 +259,7 @@
                             <a href="{{ route('admin.customer.index') }}" class="side-menu__item">Xem Danh Sách</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <!-- End::slide -->
 
                 <!-- Start::slide -->
@@ -274,9 +274,7 @@
                             <a href="javascript:void(0);">Gian Hàng</a>
                         </li>
 
-                        <li class="slide">
-                            <a href="{{ route('admin.vendor.create') }}" class="side-menu__item">Thêm Gian Hàng</a>
-                        </li>
+                       
                         <li class="slide">
                             <a href="{{ route('admin.user_relationship.index') }}" class="side-menu__item">Đăng Ký
                                 Gian Hàng</a>
@@ -290,95 +288,12 @@
                 {{-- ! End Client --}}
 
 
-                {{-- !  Staft --}}
-                <!-- Start::slide__category -->
-                <li class="slide__category"><span class="category-name">Nhân Viên</span></li>
-                <!-- End::slide__category -->
-
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
-                        <span class="side-menu__label">Nhân Viên</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide side-menu__label1">
-                            <a href="javascript:void(0);">Nhân Viên</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ route('admin.user.create') }}" class="side-menu__item">Thêm Nhân Viên</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ route('admin.user.index') }}"" class="side-menu__item">Xem Danh Sách</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End::slide -->
-                {{-- ! End Staft --}}
 
 
-                {{-- !  Admin --}}
-                <!-- Start::slide -->
-                <li class="slide">
-                    <a href="{{ route('admin.admin.index') }}" class="side-menu__item">
-                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
-                        <span class="side-menu__label">Danh Sách Admin</span>
-                    </a>
-                </li>
-                <!-- End::slide -->
-                {{-- ! End  Admin --}}
 
-                {{-- ! Auth --}}
-                <!-- Start::slide__category -->
-                <li class="slide__category"><span class="category-name">Xác Thực Người Dùng</span></li>
-                <!-- End::slide__category -->
 
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
-                        <span class="side-menu__label">Nhóm Quyền</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide side-menu__label1">
-                            <a href="javascript:void(0);">Nhóm Quyền</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ route('admin.user_role.index') }}" class="side-menu__item">Đăng Ký
-                                Quyền</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ route('admin.role.index') }}" class="side-menu__item">Danh Sách</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End::slide -->
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
-                        <span class="side-menu__label">Chức Năng</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide side-menu__label1">
-                            <a href="javascript:void(0);">Chức Năng</a>
-                        </li>
 
-                        <li class="slide">
-                            <a href="{{ route('admin.permission.index') }}" class="side-menu__item">Danh Sách</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ route('admin.role_permission.index') }}" class="side-menu__item">Đăng Ký
-                                Nhóm Quyền</a>
-                        </li>
 
-                    </ul>
-                </li>
-                <!-- End::slide -->
-                {{-- ! End Auth --}}
 
 
 
@@ -431,7 +346,114 @@
                 </li>
                 <!-- End::slide -->
                 {{-- ! End Order --}}
+                {{-- ! Cấu Hình Web --}}
+                <!-- Start::slide__category -->
+                <li class="slide__category"><span class="category-name">Genaral Settings</span></li>
+                <!-- End::slide__category -->
 
+                <!-- Start::slide -->
+                {{-- !  Vendor --}}
+                <!-- Start::slide -->
+                <li class="slide">
+                    <a href="{{ route('admin.vendor.index') }}" class="side-menu__item">
+                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
+                        <span class="side-menu__label">Danh Sách Gian Hàng</span>
+                    </a>
+                </li>
+                <!-- End::slide -->
+                {{-- ! End  Vendor --}}
+
+                <!-- End::slide -->
+                <!-- Start::slide -->
+                {{-- !  Admin --}}
+                <!-- Start::slide -->
+                <li class="slide">
+                    <a href="{{ route('admin.admin.index') }}" class="side-menu__item">
+                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
+                        <span class="side-menu__label">Danh Sách Admin</span>
+                    </a>
+                </li>
+                <!-- End::slide -->
+                {{-- ! End  Admin --}}
+
+                <!-- Start::slide -->
+                <li class="slide has-sub">
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
+                        <span class="side-menu__label">Nhóm Quyền</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0);">Nhóm Quyền</a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.user_role.index') }}" class="side-menu__item">Đăng Ký
+                                Quyền</a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.role.index') }}" class="side-menu__item">Danh Sách</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End::slide -->
+                <!-- Start::slide -->
+                <li class="slide has-sub">
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
+                        <span class="side-menu__label">Chức Năng</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0);">Chức Năng</a>
+                        </li>
+
+                        <li class="slide">
+                            <a href="{{ route('admin.permission.index') }}" class="side-menu__item">Danh Sách</a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.role_permission.index') }}" class="side-menu__item">Đăng Ký
+                                Nhóm Quyền</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- End::slide -->
+
+                <li class="slide has-sub">
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
+                        <span class="side-menu__label">Banner</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0);">Banner</a>
+                        </li>
+
+                        <li class="slide">
+                            <a href="{{ route('admin.banner.index') }}" class="side-menu__item">Danh Sách</a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('admin.banner.create') }}" class="side-menu__item">Tạo Banner</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- End::slide -->
+
+                <!-- End::slide -->
+                {{-- !  setting --}}
+                <!-- Start::slide -->
+                <li class="slide">
+                    <a href="{{ route('admin.setting.index') }}" class="side-menu__item">
+                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
+                        <span class="side-menu__label">Settings</span>
+                    </a>
+                </li>
+                <!-- End::slide -->
+                {{-- ! End  setting --}}
             </ul>
 
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"

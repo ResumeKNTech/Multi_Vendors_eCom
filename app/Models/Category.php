@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = ['category_name', 'slug', 'description'];
 
     public function subCategories()
@@ -18,6 +18,10 @@ class Category extends Model
     public static function getAllCategoriesWithSubCategories()
     {
         return Category::with('subCategories')->orderBy('id', 'DESC')->paginate(10);
+    }
+    public function userRelationships()
+    {
+        return $this->hasMany(UserRelationship::class, 'category_id');
     }
 
     public static function countActiveCategories()

@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Banner;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\PostTag;
+use App\Models\Post;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,11 +16,21 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = DB::table('categories')
-            ->where('categories.slug', $request->slug)
-            ->join('sub_categories', 'categories.id', '=', 'sub_categories.category_id')
-            ->select('sub_categories.*')
-            ->get();
-        return view('client.pages.index', ['categories' => $categories]);
+
+        $posts = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
+        $banners = Banner::where('status', 'active')->limit(3)->orderBy('id', 'DESC')->get();
+        // return $banner;
+        $products = Product::where('status', 'published')->orderBy('id', 'DESC')->limit(8)->get();
+        $category = Category::orderBy('id', 'DESC')->get();
+        // Lấy thông tin của tất cả vendors
+        $vendors = User::where('type_user', 'vendor')->get();
+        // Lấy tất cả người dùng và danh mục liên quan của họ
+        $vendors = User::with('relatedCategories')->get();
+        return view('client.pages.index')
+            ->with('posts', $posts)
+            ->with('banners', $banners)
+            ->with('product_lists', $products)
+            ->with('category_lists', $category)
+            ->with('vendors', $vendors);
     }
 }

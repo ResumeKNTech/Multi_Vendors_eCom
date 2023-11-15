@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\PostTagController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\UserRelationshipController;
 use App\Http\Controllers\Admin\VendorController;
@@ -31,8 +33,19 @@ Route::middleware(['check_login'])->group(
     function () {
         Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+            Route::prefix('setting')->controller(SettingController::class)->name('setting.')->group(function () {
+                Route::get('index', 'settings')->name('index');
+                Route::post('update', 'settingsUpdate')->name('update');
+            });
             Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function () {
                 Route::get('index', 'index')->name('index');
+                Route::post('store', 'store')->name('store');
+                Route::post('update/{id}', 'update')->name('update');
+                Route::get('destroy/{id}', 'destroy')->name('destroy');
+            });
+            Route::prefix('banner')->controller(BannerController::class)->name('banner.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::get('create', 'create')->name('create');
                 Route::post('store', 'store')->name('store');
                 Route::post('update/{id}', 'update')->name('update');
                 Route::get('destroy/{id}', 'destroy')->name('destroy');
@@ -102,35 +115,34 @@ Route::middleware(['check_login'])->group(
                 Route::get('index', 'index')->name('index');
                 Route::get('create', 'create')->name('create');
             });
-// ? Route Post
-Route::prefix('post')->controller(PostController::class)->name('post.')->group(function () {
-    Route::get('create', 'create')->name('create');
-    Route::get('index', 'index')->name('index');
-    Route::post('store', 'store')->name('store');
-    Route::get('edit/{id}', 'edit')->name('edit');
-    Route::get('show/{id}', 'show')->name('show');
-    Route::post('update/{id}', 'update')->name('update');
-    Route::get('destroy/{id}', 'destroy')->name('destroy');
-
-});
-Route::prefix('post-tag')->controller(PostTagController::class)->name('post-tag.')->group(function () {
-    Route::get('create', 'create')->name('create');
-    Route::get('index', 'index')->name('index');
-    Route::post('store', 'store')->name('store');
-    Route::get('edit/{id}', 'edit')->name('edit');
-    Route::get('show/{id}', 'show')->name('show');
-    Route::post('update/{id}', 'update')->name('update');
-    Route::get('destroy/{id}', 'destroy')->name('destroy');
-});
-Route::prefix('post-category')->controller(PostCategoryController::class)->name('post-category.')->group(function () {
-    Route::get('create', 'create')->name('create');
-    Route::get('index', 'index')->name('index');
-    Route::post('store', 'store')->name('store');
-    Route::get('edit/{id}', 'edit')->name('edit');
-    Route::get('show/{id}', 'show')->name('show');
-    Route::post('update/{id}', 'update')->name('update');
-    Route::get('destroy/{id}', 'destroy')->name('destroy');
-});
+            // ? Route Post
+            Route::prefix('post')->controller(PostController::class)->name('post.')->group(function () {
+                Route::get('create', 'create')->name('create');
+                Route::get('index', 'index')->name('index');
+                Route::post('store', 'store')->name('store');
+                Route::get('edit/{id}', 'edit')->name('edit');
+                Route::get('show/{id}', 'show')->name('show');
+                Route::post('update/{id}', 'update')->name('update');
+                Route::get('destroy/{id}', 'destroy')->name('destroy');
+            });
+            Route::prefix('post-tag')->controller(PostTagController::class)->name('post-tag.')->group(function () {
+                Route::get('create', 'create')->name('create');
+                Route::get('index', 'index')->name('index');
+                Route::post('store', 'store')->name('store');
+                Route::get('edit/{id}', 'edit')->name('edit');
+                Route::get('show/{id}', 'show')->name('show');
+                Route::post('update/{id}', 'update')->name('update');
+                Route::get('destroy/{id}', 'destroy')->name('destroy');
+            });
+            Route::prefix('post-category')->controller(PostCategoryController::class)->name('post-category.')->group(function () {
+                Route::get('create', 'create')->name('create');
+                Route::get('index', 'index')->name('index');
+                Route::post('store', 'store')->name('store');
+                Route::get('edit/{id}', 'edit')->name('edit');
+                Route::get('show/{id}', 'show')->name('show');
+                Route::post('update/{id}', 'update')->name('update');
+                Route::get('destroy/{id}', 'destroy')->name('destroy');
+            });
             // ? Route phân quyền
 
             Route::prefix('role')->controller(RoleController::class)->name('role.')->group(function () {
@@ -161,8 +173,7 @@ Route::prefix('post-category')->controller(PostCategoryController::class)->name(
 
             //?Route thông báo
             Route::patch('markAsRead/{notificationId}', [NotificationController::class, 'markAsRead'])
-            ->name('markAsRead');
-
+                ->name('markAsRead');
         });
     }
 );
