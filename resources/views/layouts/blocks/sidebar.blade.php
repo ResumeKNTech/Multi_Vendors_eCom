@@ -211,12 +211,12 @@
                         <li class="slide">
                             <a href="{{ route('admin.post-category.index') }}" class="side-menu__item">Danh Mục</a>
                         </li>
-                        <li class="slide">
-                            <a href="{{ route('admin.post-category.create') }}" class="side-menu__item"> Tạo Danh Mục</a>
-                        </li>
+                      
                     </ul>
                 </li>
-                <li class="slide has-sub">
+
+                {{-- ! Tag --}}
+                {{-- <li class="slide has-sub">
                     <a href="javascript:void(0);" class="side-menu__item">
                         <i class="bx bx-grid-alt side-menu__icon"></i>
                         <span class="side-menu__label">Tag</span>
@@ -234,7 +234,7 @@
                             <a href="{{ route('admin.post-tag.create') }}" class="side-menu__item"> Tạo Tag</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 {{-- ! Client --}}
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Người Tiêu Dùng</span></li>

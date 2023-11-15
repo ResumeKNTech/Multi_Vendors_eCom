@@ -17,6 +17,7 @@
                                 <th scope="col">Gian Hàng</th>
                                 <th scope="col">Mặt Hàng </th>
                                 <th scope="col">Gmail</th>
+                                <th scope="col">Zalo</th>
                                 <th scope="col">Thương Hiệu</th>
                                 <th scope="col">Doanh Thu</th>
                                 <th scope="col">Action</th>
@@ -51,6 +52,8 @@
                                         </td>
 
                                         <td>{{ $item->email }}</td>
+                                        
+                                        <td>{{ $item->link_zalo }}</td>
                                         <td>
                                             <div class="avatar-list-stacked">
                                                 @foreach ($userBrands[$item->user_id] as $brand)

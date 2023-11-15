@@ -78,6 +78,7 @@ class VendorController extends Controller
             ->select(
                 'users.id as user_id',
                 'users.name as user_name',
+                'users.link_zalo as link_zalo',
                 'users.user_image as user_image',
                 'users.type_user as type_user',
                 'users.email as email',
@@ -158,13 +159,13 @@ class VendorController extends Controller
         }
 
         DB::table('users')->where('id', $id)->update($data);
-        return redirect()->route('admin.vendor.index');
+        return redirect()->route('admin.vendor.show',$id);
     }
 
     public function edit($id)
     {
         $user = DB::table('users')->where('id', $id)->first();
-        return view('admin.user.edit', ['user' => $user]);
+        return view('admin.vendor.edit', ['user' => $user]);
     }
 
 
