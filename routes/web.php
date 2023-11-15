@@ -15,7 +15,7 @@ Route::prefix('client')->name('client.')->group(function () {
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
     Route::post('register', [RegisterController::class, 'register']);
-    Route::get('/', [HomeController::class,'index'])->name('home');
+    Route::get('/', [HomeController::class,'index'])->name('index');
     Route::get('checkout', [CartController::class,'checkout'])->name('checkout');
 
 });
