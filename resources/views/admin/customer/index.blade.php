@@ -44,8 +44,7 @@
 
                                     <td>
                                         <div class="hstack gap-2 fs-15">
-                                            <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-success"><i
-                                                    class="ri-download-2-line"></i></a>
+                                       
                                             <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-info"><i
                                                     class="ri-edit-line"></i></a>
                                         </div>

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Client\AboutUsController;
 use App\Http\Controllers\Client\Auth\LoginController;
 use App\Http\Controllers\Client\Auth\RegisterController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\CartController;
+use App\Http\Controllers\Client\ContactUsController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\PostCommentController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +41,14 @@ Route::get('blog-cat/{slug}', [BlogController::class, 'blogByCategory'])->name('
 Route::get('blog-tag/{slug}', [BlogController::class, 'blogByTag'])->name('blog.tag');
 Route::post('post/{slug}/comment', [PostCommentController::class, 'store'])->name('post-comment.store');
 Route::resource('/comment', 'PostCommentController');
+
+
+
+Route::get('about-us', [AboutUsController::class, 'aboutUs'])->name('about-us');
+Route::get('contact-us', [ContactUsController::class, 'contactUs'])->name('contact-us');
+Route::post('/contact/message', [ContactUsController::class, 'store'])->name('contact.store');
+
+
 Route::middleware(['check_login_customer'])->group(
     function () {
         Route::prefix('/')->name('client.')->group(function () {

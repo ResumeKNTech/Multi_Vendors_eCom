@@ -69,7 +69,9 @@
                                         <button class="btn btn-icon btn-sm btn-info editBtn" data-id="{{ $i->id }}"
                                             data-name="{{ $i->category_name }}" data-slug="{{ $i->slug }}"
                                             data-description="{{ $i->description }}"><i class="ri-edit-line"></i></button>
-                                            <a href="#" class="btn btn-icon btn-sm btn-danger" onclick="confirmDelete('{{ route('admin.category.destroy', $i->id) }}')"><i class="ri-delete-bin-6-line"></i></a>
+                                        <a href="#" class="btn btn-icon btn-sm btn-danger"
+                                            onclick="confirmDelete('{{ route('admin.category.destroy', $i->id) }}')"><i
+                                                class="ri-delete-bin-6-line"></i></a>
 
 
                                     </div>
@@ -78,12 +80,14 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 Bạn có chắc chắn muốn xóa sản phẩm này không?
@@ -97,47 +101,41 @@
                 </div>
             </div>
         </div>
+    </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Chỉnh sửa danh mục</h5>
 
-       <!-- Edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Chỉnh sửa danh mục</h5>
-
-            </div>
-            <div class="modal-body">
-                <form id="editForm" method="POST">
-                    @csrf
+                </div>
+                <div class="modal-body">
+                    <form id="editForm" method="POST">
+                        @csrf
 
 
-                    <div class="mb-3">
-                        <label for="edit_category_name" class="form-label">Tên Danh Mục:</label>
-                        <input type="text" name="category_name" id="edit_category_name" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_slug" class="form-label">Slug:</label>
-                        <input type="text" name="slug" id="edit_slug" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_description" class="form-label">Mô Tả:</label>
-                        <input type="text" name="description" id="edit_description" class="form-control">
-                        <div id="edit_emailHelp" class="form-text">Làm ơn điền đầy đủ thông tin.</div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="edit_category_name" class="form-label">Tên Danh Mục:</label>
+                            <input type="text" name="category_name" id="edit_category_name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_slug" class="form-label">Slug:</label>
+                            <input type="text" name="slug" id="edit_slug" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_description" class="form-label">Mô Tả:</label>
+                            <input type="text" name="description" id="edit_description" class="form-control">
+                            <div id="edit_emailHelp" class="form-text">Làm ơn điền đầy đủ thông tin.</div>
+                        </div>
 
-                    <button type="submit" style="width:100%" class="btn btn-primary">Lưu</button>
-                </form>
+                        <button type="submit" style="width:100%" class="btn btn-primary">Lưu</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
-
-
-
-
-
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -158,9 +156,10 @@
                 var description = $(this).data('description');
 
                 var updateUrl = "{{ route('admin.category.update', ['id' => ':id']) }}";
-            updateUrl = updateUrl.replace(':id', id);
+                updateUrl = updateUrl.replace(':id', id);
 
-            $('#editForm').attr('action', updateUrl); // Điều chỉnh URL của form dựa vào ID// Điều chỉnh URL của form dựa vào ID
+                $('#editForm').attr('action',
+                    updateUrl); // Điều chỉnh URL của form dựa vào ID// Điều chỉnh URL của form dựa vào ID
                 $('#editForm input[name="category_name"]').val(name);
                 $('#editForm input[name="slug"]').val(slug);
                 $('#editForm input[name="description"]').val(description);
@@ -168,8 +167,8 @@
                 $('#editModal').modal('show'); // Hiển thị modal
             });
         });
-         // Sự kiện khi nhập Category Name trong modal
-         $('#edit_category_name').on('input', function() {
+        // Sự kiện khi nhập Category Name trong modal
+        $('#edit_category_name').on('input', function() {
             // Lấy giá trị của Category Name
             var categoryName = $(this).val();
 

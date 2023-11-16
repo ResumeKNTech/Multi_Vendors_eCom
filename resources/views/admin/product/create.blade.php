@@ -27,7 +27,7 @@
                     @csrf
                     <div class="p-4">
                         <div class="row gx-5">
-                            <div class="col-xxl-6 col-xl-12 col-lg-12 col-md-6">
+                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-6">
                                 <div class="card custom-card shadow-none mb-0 border-0">
                                     <div class="card-body p-0">
                                         <div class="row gy-3">

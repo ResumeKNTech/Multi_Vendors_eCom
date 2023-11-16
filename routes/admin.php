@@ -28,6 +28,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\Auth\RolePermissionController;
 use App\Http\Controllers\Auth\UserRoleController;
+use App\Http\Controllers\Client\ContactUsController;
 
 Route::middleware(['check_login'])->group(
     function () {
@@ -47,14 +48,21 @@ Route::middleware(['check_login'])->group(
                 Route::get('index', 'index')->name('index');
                 Route::get('create', 'create')->name('create');
                 Route::post('store', 'store')->name('store');
+                Route::get('edit/{id}', 'edit')->name('edit');
+
                 Route::post('update/{id}', 'update')->name('update');
                 Route::get('destroy/{id}', 'destroy')->name('destroy');
             });
             Route::prefix('shipping')->controller(ShippingController::class)->name('shipping.')->group(function () {
                 Route::get('index', 'index')->name('index');
                 Route::post('store', 'store')->name('store');
+
                 Route::post('update/{id}', 'update')->name('update');
                 Route::get('destroy/{id}', 'destroy')->name('destroy');
+            });
+            Route::prefix('message')->controller(ContactUsController::class)->name('message.')->group(function () {
+                Route::get('show/{id}', 'show')->name('show');
+                Route::get('destroy/{id}', 'destroy')->name('destroy'); 
             });
             Route::prefix('sub_category')->controller(SubCategoryController::class)->name('sub_category.')->group(function () {
                 Route::get('index', 'index')->name('index');
@@ -109,7 +117,7 @@ Route::middleware(['check_login'])->group(
             });
             Route::prefix('admin')->controller(AdminController::class)->name('admin.')->group(function () {
                 Route::get('index', 'index')->name('index');
-                Route::get('create', 'create')->name('create');
+                Route::get('message_contact', 'message_contact')->name('message_contact');
             });
             Route::prefix('customer')->controller(CustomerController::class)->name('customer.')->group(function () {
                 Route::get('index', 'index')->name('index');

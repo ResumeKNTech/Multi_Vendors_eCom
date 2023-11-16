@@ -14,8 +14,8 @@ class BannerController extends Controller
 
     public function index()
     {
-        $banner = DB::table($this->table)->orderBy('id', 'DESC')->paginate(10);
-        return view('admin.banner.index', ['banners' => $banner]);
+        $banners = DB::table($this->table)->orderBy('id', 'DESC')->paginate(10);
+        return view('admin.banner.index', ['banners' => $banners]);
     }
 
     public function create()
@@ -40,6 +40,7 @@ class BannerController extends Controller
         }
         $data['slug'] = $slug;
         // Upload main image
+
         if ($request->hasFile('photo')) {
             $image = $request->file('photo');
             $filename = time() . '-' . $image->getClientOriginalName();
@@ -69,35 +70,44 @@ class BannerController extends Controller
         $this->validate($request, [
             'title' => 'string|required|max:50',
             'description' => 'string|nullable',
-            'photo' => 'string|required',
+            'photo' => 'sometimes|required', // 'sometimes' để không bắt buộc khi không tải ảnh mới
             'status' => 'required|in:active,inactive',
         ]);
-
+    
         $data = $request->except('_token');
-
-        $status = DB::table($this->table)->where('id', $id)->update($data);
+        $slug = Str::slug($request->title);
+        $count = DB::table($this->table)->where('slug', $slug)->where('id', '!=', $id)->count();
+        if ($count > 0) {
+            $slug = $slug . '-' . date('ymdis') . '-' . rand(0, 999);
+        }
+        $data['slug'] = $slug;
         // Upload main image
+    
         if ($request->hasFile('photo')) {
             $image = $request->file('photo');
             $filename = time() . '-' . $image->getClientOriginalName();
             $image->move(public_path('banner'), $filename);
             $data['photo'] = 'banner/' . $filename;
         }
+    
+        $status = DB::table($this->table)->where('id', $id)->update($data);
+    
         if ($status) {
-            return redirect()->route('admin.banner.index')->with('success', 'Banner successfully deleted');
+            return redirect()->route('admin.banner.index')->with('success', 'Banner successfully updated');
         } else {
-            return redirect()->route('admin.banner.index')->with('error', 'Error occurred while deleting banner');
+            return redirect()->route('admin.banner.index')->with('error', 'Error occurred while updating banner');
         }
     }
+    
 
     public function destroy($id)
     {
         $status = DB::table($this->table)->where('id', $id)->delete();
 
         if ($status) {
-            return redirect()->route('banner.index')->with('success', 'Banner successfully deleted');
+            return redirect()->route('admin.banner.index')->with('success', 'Banner successfully deleted');
         } else {
-            return redirect()->route('banner.index')->with('error', 'Error occurred while deleting banner');
+            return redirect()->route('admin.banner.index')->with('error', 'Error occurred while deleting banner');
         }
     }
 }

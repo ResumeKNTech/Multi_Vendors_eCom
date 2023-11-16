@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('module', 'Banner')
-@section('action', 'Danh Sách')
+@section('module','Liên Hệ')
+@section('action','Danh Sách')
 @section('content')
     <div class="col-xl-12">
         <div class="card custom-card">
@@ -14,36 +14,35 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Tiêu Đề</th>
-                            <th>Nội Dung</th>
-                            <th>Hình </th>
-                            <th>Trạng Thái</th>
+                            <th>Tên Người Gửi</th>
+                            <th>Chủ Đề</th>
+                            <th>Email</th>
+                            <th>Điện Thoại</th>
+                            <th>Tình Trạng</th>
                             <th>Hành Động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($banners as $i)
+                        @foreach ($message as $i)
                             <tr>
                                 <td>
                                     {{ $loop->iteration }}
                                 </td>
                                 <td>
-                                    {{ $i->title }}
+                                    {{ $i->name }}
                                 </td>
 
-                                <td> {!! strip_tags($i->description) !!} </td>
-                                <td>
-                                    <img src="{{ asset($i->photo) }}" width="100px" height="100px" />
-                                </td>
-
-                                <td><span class="badge bg-primary-transparent">{{ $i->status }}</span></td>
+                                <td>{{ $i->subject }}</td>
+                                <td>{{ $i->email }}</td>
+                                <td>{{ $i->phone }}</td>
+                                <td>{{ $i->read_at ? 'Đã Đọc' : 'Chưa Xem' }}</td>
 
                                 <td>
                                     <div class="hstack gap-2 fs-15">
-                                        <a href="{{ route('admin.banner.edit', $i->id) }}"
-                                            class="btn btn-icon btn-sm btn-info"><i class="ri-edit-line"></i></a>
+                                        <a href="{{ route('admin.message.show', $i->id) }}"
+                                            class="btn btn-icon btn-sm btn-info"><i class="bi-eye-fill  "></i></a>
                                         <a href="#" class="btn btn-icon btn-sm btn-danger"
-                                            onclick="confirmDelete('{{ route('admin.banner.destroy', $i->id) }}')"><i
+                                            onclick="confirmDelete('{{ route('admin.message.destroy', $i->id) }}')"><i
                                                 class="ri-delete-bin-6-line"></i></a>
                                     </div>
                                 </td>

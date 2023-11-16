@@ -22,10 +22,11 @@ class HomeController extends Controller
         // return $banner;
         $products = Product::where('status', 'published')->orderBy('id', 'DESC')->limit(8)->get();
         $category = Category::orderBy('id', 'DESC')->get();
-        // Lấy thông tin của tất cả vendors
-        $vendors = User::where('type_user', 'vendor')->get();
+
         // Lấy tất cả người dùng và danh mục liên quan của họ
-        $vendors = User::with('relatedCategories')->get();
+        $vendors = User::with('relatedCategories')
+            ->where('type_user', 'vendor')
+            ->get();
         return view('client.pages.index')
             ->with('posts', $posts)
             ->with('banners', $banners)

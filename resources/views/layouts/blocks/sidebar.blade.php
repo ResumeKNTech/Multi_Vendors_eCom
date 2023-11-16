@@ -346,6 +346,16 @@
                 </li>
                 <!-- End::slide -->
                 {{-- ! End Order --}}
+
+
+                <li class="slide__category"><span class="category-name">Liên Hệ </span></li>
+
+                <li class="slide">
+                    <a href="{{ route('admin.admin.message_contact') }}" class="side-menu__item">
+                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
+                        <span class="side-menu__label">Liên Lạc</span>
+                    </a>
+                </li>
                 {{-- ! Cấu Hình Web --}}
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Genaral Settings</span></li>

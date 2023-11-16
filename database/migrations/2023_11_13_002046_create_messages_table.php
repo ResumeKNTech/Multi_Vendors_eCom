@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->enum('status',['active','inactive'])->default('active');
+            $table->string('name');
+            $table->text('subject');
+            $table->string('email');
+            $table->string('user_image')->nullable();
+            $table->string('phone')->nullable();
+            $table->longText('message');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }

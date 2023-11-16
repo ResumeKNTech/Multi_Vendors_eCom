@@ -20,4 +20,10 @@ class AdminController extends Controller
         return view('admin.admin.index', ['admins' => $admins]);
     }
 
+
+    public function message_contact()
+    {
+        $message = DB::table('messages')->orderBy('id', 'DESC')->paginate(10);
+        return view('admin.message.message_contact', ['message' => $message]);
+    }
 }
