@@ -9,6 +9,7 @@ use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Client\ContactUsController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\PostCommentController;
+use App\Http\Controllers\Client\WishListController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,7 +22,6 @@ Route::prefix('')->name('client.')->group(function () {
     Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
     Route::post('register', [RegisterController::class, 'register']);
     Route::get('/', [HomeController::class, 'index'])->name('index');
-    Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
 
 
 
@@ -53,6 +53,19 @@ Route::match(['get', 'post'], '/filter', [ClientController::class, 'productFilte
 Route::get('/product-cat/{slug}', [ClientController::class, 'productCat'])->name('product-cat');
 Route::get('/product-sub-cat/{slug}/{sub_slug}', [ClientController::class, 'productSubCat'])->name('product-sub-cat');
 Route::get('/product-lists', [ClientController::class, 'productLists'])->name('product-lists');
+Route::get('product-detail/{slug}', [ClientController::class, 'productDetail'])->name('product-detail');
+Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
+
+// Cart section
+Route::get('/add-to-cart/{slug}', [CartController::class, 'addToCart'])->name('add-to-cart')->middleware('check_login_customer');
+Route::post('/add-to-cart', [CartController::class, 'singleAddToCart'])->name('single-add-to-cart')->middleware('check_login_customer');
+Route::get('cart-delete/{id}', [CartController::class, 'cartDelete'])->name('cart-delete');
+Route::post('cart-update', [CartController::class, 'cartUpdate'])->name('cart.update');
+Route::get('/wishlist/{slug}', [WishListController::class, 'wishlist'])->name('add-to-wishlist')->middleware('check_login_customer');
+Route::get('wishlist-delete/{id}', [WishListController::class, 'wishlistDelete'])->name('wishlist-delete');
+Route::get('/cart', function () {
+    return view('client.pages.cart');
+})->name('cart');
 Route::middleware(['check_login_customer'])->group(
     function () {
         Route::prefix('/')->name('client.')->group(function () {

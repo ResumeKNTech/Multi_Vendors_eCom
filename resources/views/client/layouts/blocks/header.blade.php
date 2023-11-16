@@ -127,13 +127,13 @@
                                         {{-- {{Helper::getAllProductFromCart()}} --}}
                                         @foreach (Helper::getAllProductFromWishlist() as $data)
                                             @php
-                                                $photo = explode(',', $data->product['photo']);
+                                                $photo = explode(',', $data->product['images']);
                                             @endphp
                                             <li>
                                                 <a href=""><i class="fa fa-remove"></i></a>
                                                 <a class="cart-img" href="#"><img src="{{ $photo[0] }}"
                                                         alt="{{ $photo[0] }}"></a>
-                                                <h4><a href="" target="_blank">{{ $data->product['title'] }}</a>
+                                                <h4><a href="" target="_blank">{{ $data->product['product_title'] }}</a>
                                                 </h4>
                                                 <p class="quantity">{{ $data->quantity }} x - <span
                                                         class="amount">${{ number_format($data->price, 2) }}</span></p>
@@ -163,20 +163,20 @@
                                 <div class="shopping-item">
                                     <div class="dropdown-cart-header">
                                         <span>{{ count(Helper::getAllProductFromCart()) }} Items</span>
-                                        <a href="">View Cart</a>
+                                        <a href="{{route('cart')}}">View Cart</a>
                                     </div>
                                     <ul class="shopping-list">
                                         {{-- {{Helper::getAllProductFromCart()}} --}}
                                         @foreach (Helper::getAllProductFromCart() as $data)
                                             @php
-                                                $photo = explode(',', $data->product['photo']);
+                                                $photo = explode(',', $data->product['images']);
                                             @endphp
                                             <li>
                                                 <a href="" class="remove" title="Remove this item"><i
                                                         class="fa fa-remove"></i></a>
                                                 <a class="cart-img" href="#"><img src="{{ $photo[0] }}"
                                                         alt="{{ $photo[0] }}"></a>
-                                                <h4><a href="">{{ $data->product['title'] }}</a></h4>
+                                                <h4><a href="">{{ $data->product['product_title'] }}</a></h4>
                                                 <p class="quantity">{{ $data->quantity }} x - <span
                                                         class="amount">${{ number_format($data->price, 2) }}</span></p>
                                             </li>

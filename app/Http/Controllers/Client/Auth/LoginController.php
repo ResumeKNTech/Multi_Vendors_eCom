@@ -21,7 +21,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('client/home'); // Chuyển hướng đến trang chính sau khi đăng nhập thành công
+            return redirect()->intended('/'); // Chuyển hướng đến trang chính sau khi đăng nhập thành công
         }
 
         $errors = [];

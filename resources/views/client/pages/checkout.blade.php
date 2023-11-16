@@ -1,7 +1,8 @@
 @extends('client.layouts.app')
-@section('title', 'Checkout page')
 
-@section('content')
+@section('title','E-SHOP || Blog Page')
+
+@section('main-content')
 <style>
     .khoa {
         margin-top: calc(50% - 200px); /* Thay <giá_trị_nửa_chiều_cao_phần_tử> bằng giá trị cụ thể */

@@ -177,4 +177,9 @@ class ClientController extends Controller
       
         return view('client.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);
     }
+    public function productDetail($slug){
+        $product_detail= Product::getProductBySlug($slug);
+        // dd($product_detail);
+        return view('client.pages.product_detail')->with('product_detail',$product_detail);
+    }
 }
