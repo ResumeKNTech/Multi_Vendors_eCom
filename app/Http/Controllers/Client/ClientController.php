@@ -10,6 +10,29 @@ use App\Models\Brand;
 
 class ClientController extends Controller
 {
+    public function productSubCat(Request $request){
+        $subCategory = Category::getSubCategoryBySlug($request->sub_slug);
+        if (!$subCategory) {
+            return redirect()->back()->with('error', 'Danh mục không tìm thấy');
+        }
+        
+    
+        $products = $subCategory->products; // Đây là danh sách sản phẩm của danh mục con
+        $recent_products = Product::where('status','published')->orderBy('id','DESC')->limit(3)->get();
+    
+        if (request()->is('e-shop.loc/product-grids')) {
+            return view('client.pages.product-grids', [
+                'products' => $products,
+                'recent_products' => $recent_products
+            ]);
+        } else {
+            return view('client.pages.product-lists', [
+                'products' => $products,
+                'recent_products' => $recent_products
+            ]);
+        }
+    }
+    
     public function productCat(Request $request){
         $products=Category::getProductByCat($request->slug);
         // return $request->slug;
@@ -113,5 +136,45 @@ class ClientController extends Controller
 
 
         return view('client.pages.product-grids')->with('products', $products)->with('recent_products', $recent_products);
+    }
+    public function productLists(){
+        $products=Product::query();
+        
+        if(!empty($_GET['category'])){
+            $slug=explode(',',$_GET['category']);
+            // dd($slug);
+            $cat_ids=Category::select('id')->whereIn('slug',$slug)->pluck('id')->toArray();
+            // dd($cat_ids);
+            $products->whereIn('cat_id',$cat_ids)->paginate;
+            // return $products;
+        }
+       
+        if(!empty($_GET['sortBy'])){
+            if($_GET['sortBy']=='product_title'){
+                $products=$products->where('status','published')->orderBy('product_title','ASC');
+            }
+            if($_GET['sortBy']=='price'){
+                $products=$products->orderBy('price','ASC');
+            }
+        }
+
+        if(!empty($_GET['price'])){
+            $price=explode('-',$_GET['price']);
+           
+            $products->whereBetween('price',$price);
+        }
+
+        $recent_products=Product::where('status','published')->orderBy('id','DESC')->limit(3)->get();
+        // Sort by number
+        if(!empty($_GET['show'])){
+            $products=$products->where('status','published')->paginate($_GET['show']);
+        }
+        else{
+            $products=$products->where('status','published')->paginate(6);
+        }
+        // Sort by name , price, category
+
+      
+        return view('client.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);
     }
 }

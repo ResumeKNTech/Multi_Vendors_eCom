@@ -51,7 +51,8 @@ Route::post('/contact/message', [ContactUsController::class, 'store'])->name('co
 Route::get('product-grids', [ClientController::class, 'productGrids'])->name('product-grids');
 Route::match(['get', 'post'], '/filter', [ClientController::class, 'productFilter'])->name('shop.filter');
 Route::get('/product-cat/{slug}', [ClientController::class, 'productCat'])->name('product-cat');
-
+Route::get('/product-sub-cat/{slug}/{sub_slug}', [ClientController::class, 'productSubCat'])->name('product-sub-cat');
+Route::get('/product-lists', [ClientController::class, 'productLists'])->name('product-lists');
 Route::middleware(['check_login_customer'])->group(
     function () {
         Route::prefix('/')->name('client.')->group(function () {
