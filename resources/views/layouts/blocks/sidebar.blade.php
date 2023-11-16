@@ -493,10 +493,12 @@
 
                 </li>
                 <li class="slide">
-                    <a href="{{ route('admin.user_relationship.index') }}" class="side-menu__item">Đăng Ký
-                        Gian Hàng</a>
+                    <a href="{{ route('admin.user_relationship.index') }}" class="side-menu__item">
+                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
+                        <span class="side-menu__label">Đăng Ký Bán Hàng</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
                 </li>
-    
                 {{-- ! Shipping --}}
                 <!-- Start::slide -->
                 <li class="slide has-sub">
@@ -546,23 +548,7 @@
                     </ul>
                 </li>
                 <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        <i class="bx bx-grid-alt side-menu__icon"></i>
-                        <span class="side-menu__label">Danh Mục</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide side-menu__label1">
-                            <a href="javascript:void(0);">Danh Mục</a>
-                        </li>
-
-                        <li class="slide">
-                            <a href="{{ route('admin.post-category.index') }}" class="side-menu__item">Danh Mục</a>
-                        </li>
-
-                    </ul>
-                </li>
+             
 
         
 
