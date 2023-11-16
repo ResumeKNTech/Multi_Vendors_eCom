@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('module', 'Bài Viết')
-@section('action', '')
+@section('action', 'Danh Sách ')
 @section('content')
-
+@if (Auth::user())
 <div class="col-xl-12">
     <div class="card custom-card">
         <div class="card-header justify-content-between">
@@ -107,4 +107,5 @@
 
     </script>
 </div>
+@endif
 @endsection
