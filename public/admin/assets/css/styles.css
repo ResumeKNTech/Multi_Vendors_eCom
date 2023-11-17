@@ -14862,7 +14862,7 @@ table.dataTable thead th,
 table.dataTable thead td,
 table.dataTable tfoot th,
 table.dataTable tfoot td {
-  text-align: start !important;
+  text-align: center !important;
 }
 table.table-bordered.dataTable th:first-child,
 table.table-bordered.dataTable th:first-child,

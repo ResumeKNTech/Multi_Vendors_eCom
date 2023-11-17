@@ -9,6 +9,7 @@ use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Client\ContactUsController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\PostCommentController;
+use App\Http\Controllers\Client\ProductReviewController;
 use App\Http\Controllers\Client\WishListController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,14 @@ Route::get('/product-sub-cat/{slug}/{sub_slug}', [ClientController::class, 'prod
 Route::get('/product-lists', [ClientController::class, 'productLists'])->name('product-lists');
 Route::get('product-detail/{slug}', [ClientController::class, 'productDetail'])->name('product-detail');
 Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::get('/product-brand/{brand_name}', [ClientController::class, 'productBrand'])->name('product-brand');
+Route::get('product-detail/{slug}', [ClientController::class, 'productDetail'])->name('product-detail');
+Route::post('product/search', [ClientController::class, 'productSearch'])->name('product.search');
+
+
+// Product Review
+Route::resource('/review', 'ProductRe');
+Route::post('product/{slug}/review', [ProductReviewController::class, 'store'])->name('review.store');
 
 // Cart section
 Route::get('/add-to-cart/{slug}', [CartController::class, 'addToCart'])->name('add-to-cart')->middleware('check_login_customer');

@@ -90,7 +90,7 @@
                                     <option>{{ $cat->category_name }}</option>
                                 @endforeach
                             </select>
-                            <form method="POST" action="">
+                            <form method="POST" action="{{ route('product.search') }}">
                                 @csrf
                                 <input name="search" placeholder="Search Products Here....." type="search">
                                 <button class="btnn" type="submit"><i class="ti-search"></i></button>
@@ -133,7 +133,8 @@
                                                 <a href=""><i class="fa fa-remove"></i></a>
                                                 <a class="cart-img" href="#"><img src="{{ $photo[0] }}"
                                                         alt="{{ $photo[0] }}"></a>
-                                                <h4><a href="" target="_blank">{{ $data->product['product_title'] }}</a>
+                                                <h4><a href=""
+                                                        target="_blank">{{ $data->product['product_title'] }}</a>
                                                 </h4>
                                                 <p class="quantity">{{ $data->quantity }} x - <span
                                                         class="amount">${{ number_format($data->price, 2) }}</span></p>
@@ -163,7 +164,7 @@
                                 <div class="shopping-item">
                                     <div class="dropdown-cart-header">
                                         <span>{{ count(Helper::getAllProductFromCart()) }} Items</span>
-                                        <a href="{{route('cart')}}">View Cart</a>
+                                        <a href="{{ route('cart') }}">View Cart</a>
                                     </div>
                                     <ul class="shopping-list">
                                         {{-- {{Helper::getAllProductFromCart()}} --}}
@@ -216,11 +217,12 @@
                                             <li class="{{ Request::path() == 'about-us' ? 'active' : '' }}"><a
                                                     href="{{ route('about-us') }}">About Us</a></li>
                                             <li class="@if (Request::path() == 'product-grids' || Request::path() == 'product-lists') active @endif"><a
-                                                    href="{{route('product-grids')}}">Products</a><span class="new">New</span></li>
+                                                    href="{{ route('product-grids') }}">Products</a><span
+                                                    class="new">New</span></li>
                                             {{ Helper::getHeaderCategory() }}
                                             <li class="{{ Request::path() == 'blog' ? 'active' : '' }}"><a
                                                     href="{{ route('blog') }}">Blog</a></li>
-
+                                          
                                             <li class="{{ Request::path() == 'contact' ? 'active' : '' }}"><a
                                                     href="{{ route('contact-us') }}">Contact Us</a></li>
                                         </ul>

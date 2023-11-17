@@ -15,11 +15,11 @@ class ClientController extends Controller
         if (!$subCategory) {
             return redirect()->back()->with('error', 'Danh mục không tìm thấy');
         }
-        
-    
+
+
         $products = $subCategory->products; // Đây là danh sách sản phẩm của danh mục con
         $recent_products = Product::where('status','published')->orderBy('id','DESC')->limit(3)->get();
-    
+
         if (request()->is('e-shop.loc/product-grids')) {
             return view('client.pages.product-grids', [
                 'products' => $products,
@@ -32,17 +32,41 @@ class ClientController extends Controller
             ]);
         }
     }
-    
+    public function productSearch(Request $request){
+        $recent_products=Product::where('status','published')->orderBy('id','DESC')->limit(3)->get();
+        $products=Product::orwhere('product_title','like','%'.$request->search.'%')
+                    ->orwhere('slug','like','%'.$request->search.'%')
+                    ->orwhere('product_description','like','%'.$request->search.'%')
+                    ->orwhere('short_description','like','%'.$request->search.'%')
+                    ->orwhere('price','like','%'.$request->search.'%')
+                    ->orderBy('id','DESC')
+                    ->paginate('9');
+        return view('client.pages.product-grids')->with('products',$products)->with('recent_products',$recent_products);
+    }
+
     public function productCat(Request $request){
-        $products=Category::getProductByCat($request->slug);
+        $products=Category::getCategoryBySlug($request->slug);
         // return $request->slug;
-        $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(3)->get();
+        $recent_products=Product::where('status','published')->orderBy('id','DESC')->limit(3)->get();
 
         if(request()->is('e-shop.loc/product-grids')){
-            return view('frontend.pages.product-grids')->with('products',$products->products)->with('recent_products',$recent_products);
+            return view('client.pages.product-grids')->with('products',$products->products)->with('recent_products',$recent_products);
         }
         else{
-            return view('frontend.pages.product-lists')->with('products',$products->products)->with('recent_products',$recent_products);
+            return view('client.pages.product-lists')->with('products',$products->products)->with('recent_products',$recent_products);
+        }
+
+    }
+    public function productBrand(Request $request){
+        $products=Brand::getProductByBrand($request->brand_name);
+
+        $recent_products=Product::where('status','published')->orderBy('id','DESC')->limit(3)->get();
+        if(request()->is('e-shop.loc/product-grids')){
+
+            return view('client.pages.product-grids')->with('products',$products->products)->with('recent_products',$recent_products);
+        }
+        else{
+            return view('client.pages.product-lists')->with('products',$products->products)->with('recent_products',$recent_products);
         }
 
     }
@@ -84,8 +108,8 @@ class ClientController extends Controller
         // return $brandURL;
 
         $priceRangeURL = "";
-        if (!empty($data['offer_price'])) {
-            $priceRangeURL .= '&price=' . $data['offer_price'];
+        if (!empty($data['price_range'])) {
+            $priceRangeURL .= '&price=' . $data['price_range'];
         }
         if (request()->is('e-shop.loc/product-grids')) {
             return redirect()->route('product-grids', $catURL . $brandURL . $priceRangeURL . $showURL . $sortByURL);
@@ -139,7 +163,7 @@ class ClientController extends Controller
     }
     public function productLists(){
         $products=Product::query();
-        
+
         if(!empty($_GET['category'])){
             $slug=explode(',',$_GET['category']);
             // dd($slug);
@@ -148,7 +172,7 @@ class ClientController extends Controller
             $products->whereIn('cat_id',$cat_ids)->paginate;
             // return $products;
         }
-       
+
         if(!empty($_GET['sortBy'])){
             if($_GET['sortBy']=='product_title'){
                 $products=$products->where('status','published')->orderBy('product_title','ASC');
@@ -160,7 +184,7 @@ class ClientController extends Controller
 
         if(!empty($_GET['price'])){
             $price=explode('-',$_GET['price']);
-           
+
             $products->whereBetween('price',$price);
         }
 
@@ -174,12 +198,20 @@ class ClientController extends Controller
         }
         // Sort by name , price, category
 
-      
+
         return view('client.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);
     }
     public function productDetail($slug){
         $product_detail= Product::getProductBySlug($slug);
         // dd($product_detail);
-        return view('client.pages.product_detail')->with('product_detail',$product_detail);
+        return view('client.pages.product-detail')->with('product_detail',$product_detail);
     }
+
+
+
+
+
+
+
+
 }

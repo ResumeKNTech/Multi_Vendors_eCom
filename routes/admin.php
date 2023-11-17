@@ -29,10 +29,19 @@ use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\Auth\RolePermissionController;
 use App\Http\Controllers\Auth\UserRoleController;
 use App\Http\Controllers\Client\ContactUsController;
+use App\Http\Controllers\Client\ProductReviewController;
 
 Route::middleware(['check_login'])->group(
     function () {
         Route::prefix('admin')->name('admin.')->group(function () {
+
+            Route::get('/notification/{id}', [NotificationController::class, 'show'])->name('notification');
+            Route::get('/notifications', [NotificationController::class, 'index'])->name('all.notification');
+            Route::delete('/notification/{id}', [NotificationController::class, 'delete'])->name('notification.delete');
+            Route::prefix('review')->controller(ProductReviewController::class)->name('review.')->group(function () {
+                Route::get('index', 'index')->name('index');
+
+            });
             Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
             Route::prefix('setting')->controller(SettingController::class)->name('setting.')->group(function () {
                 Route::get('index', 'settings')->name('index');
@@ -62,7 +71,7 @@ Route::middleware(['check_login'])->group(
             });
             Route::prefix('message')->controller(ContactUsController::class)->name('message.')->group(function () {
                 Route::get('show/{id}', 'show')->name('show');
-                Route::get('destroy/{id}', 'destroy')->name('destroy'); 
+                Route::get('destroy/{id}', 'destroy')->name('destroy');
             });
             Route::prefix('sub_category')->controller(SubCategoryController::class)->name('sub_category.')->group(function () {
                 Route::get('index', 'index')->name('index');

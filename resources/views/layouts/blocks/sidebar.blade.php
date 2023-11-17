@@ -216,11 +216,11 @@
                     </ul>
                 </li>
 
-              
+
                 {{-- ! Client --}}
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Người Tiêu Dùng</span></li>
-           
+
                 <!-- Start::slide -->
                 <li class="slide has-sub">
                     <a href="javascript:void(0);" class="side-menu__item">
@@ -233,7 +233,7 @@
                             <a href="javascript:void(0);">Gian Hàng</a>
                         </li>
 
-                       
+
                         <li class="slide">
                             <a href="{{ route('admin.user_relationship.index') }}" class="side-menu__item">Đăng Ký
                                 Gian Hàng</a>
@@ -261,7 +261,7 @@
                 <li class="slide__category"><span class="category-name">Doanh Thu</span></li>
                 <!-- End::slide__category -->
 
-          
+
                 <!-- End::slide -->
                 <!-- Start::slide -->
                 <li class="slide has-sub">
@@ -451,7 +451,7 @@
                 </svg>
             </div>
             <ul class="main-menu">
-            
+
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Gian hàng</span></li>
                 <!-- End::slide__category -->
@@ -518,11 +518,17 @@
 
                     </ul>
                 </li>
+                <li class="slide">
+                    <a href="{{ route('admin.review.index') }}" class="side-menu__item">
+                        <i class="bx bx-bar-chart-square side-menu__icon"></i>
+                        <span class="side-menu__label">Đánh Giá Sản Phẩm</span>
+                    </a>
+                </li>
 
 
 
 
-      
+
                 {{-- ! End Shipping --}}
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Bài Viết</span></li>
@@ -548,9 +554,9 @@
                     </ul>
                 </li>
                 <!-- Start::slide -->
-             
 
-        
+
+
 
 
                 {{-- ! Order --}}
@@ -558,7 +564,7 @@
                 <li class="slide__category"><span class="category-name">Doanh Thu</span></li>
                 <!-- End::slide__category -->
 
-          
+
                 <!-- End::slide -->
                 <!-- Start::slide -->
                 <li class="slide has-sub">
@@ -586,7 +592,7 @@
                 {{-- ! End Order --}}
 
 
-              
+
 
             </ul>
 

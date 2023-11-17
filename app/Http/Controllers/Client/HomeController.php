@@ -16,6 +16,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        $ok = Product::where('status', 'published')->orderBy('id', 'DESC')->limit(2)->get();
 
         $posts = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
         $banners = Banner::where('status', 'active')->limit(3)->orderBy('id', 'DESC')->get();
@@ -32,6 +33,7 @@ class HomeController extends Controller
             ->with('banners', $banners)
             ->with('product_lists', $products)
             ->with('category_lists', $category)
-            ->with('vendors', $vendors);
+            ->with('vendors', $vendors)
+            ->with('ok', $ok);
     }
 }

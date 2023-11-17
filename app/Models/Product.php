@@ -54,7 +54,7 @@ class Product extends Model
     // Sản phẩm liên quan
     public function rel_prods()
     {
-        return $this->hasMany(self::class, 'category_id', 'category_id')->where('status', 'active')->orderBy('id', 'DESC')->limit(8);
+        return $this->hasMany(self::class, 'category_id', 'id')->orderBy('id', 'DESC')->limit(8);
     }
 
     // Đánh giá sản phẩm

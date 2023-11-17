@@ -12,30 +12,28 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table text-nowrap">
+                    <table id="responsivemodal-DataTable" class="table table-bordered text-nowrap w-100">
                         <thead>
                             <tr>
                                 <th scope="col">STT</th>
-                                <th scope="col">Tiêu Đề</th>
-                                <th scope="col">Sản Phẩm</th>
-                                <th scope="col">Loại</th>
-                                <th scope="col">Mặt Hàng</th>
-                                <th scope="col">Giá(VND)</th>
-                                <th scope="col">Số Lượng</th>
-                                <th scope="col">Hàng Tồn</th>
-                                <th scope="col">Tình Trạng</th>
-                                <th scope="col">Ngày Đăng</th>
+                                <th scope="col">Tiêu Đề | Sản Phẩm</th>
+                                <th scope="col">Danh Mục</th>
+
+                                <th scope="col">Giá gốc | Giá KM</th>
+                                <th scope="col">Số Lượng |
+                                    Hàng Tồn</th>
+                                <th scope="col">Tình Trạng | Ngày Đăng </th>
+
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($products as $i)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>
+                                    <td style="text-align: center">{{ $loop->iteration }}</td>
+                                   <td style="text-align: center">
                                         {{ $i->product_title }}
-                                    </td>
-                                    <td>
+                                        /
                                         <div class="avatar-list-stacked">
                                             <span class="avatar avatar-sm avatar-rounded">
                                                 <img src="{{ asset('' . $i->lg) }}" alt="Logo">
@@ -43,30 +41,32 @@
                                             {{ $i->product_name }}
                                         </div>
                                     </td>
-                                    <td>{{ $i->category_name }}</td>
-                                    <td>
-                                        {{ $i->sub_category_name }}
-                                    </td>
+                                   <td style="text-align: center">{{ $i->category_name }}</td>
 
-                                    <td>{{ $i->price }}</td>
-                                    <td>{{ $i->stock }}</td>
-                                    <td>
-                                        @if($i->stock_status === 'in_stock')
-                                           Còn Hàng
+
+                                   <td style="text-align: center">{{ $i->price }}  VND |  <span class="badge bg-primary-transparent"> {{ $i->offer_price }}
+                                      VND  </span></td>
+                                   <td style="text-align: center">{{ $i->stock }} |
+                                        @if ($i->stock_status === 'in_stock')
+                                            <span class="badge bg-primary-transparent"> Còn Hàng</span>
                                         @elseif($i->stock_status === 'out_of_stock')
-                                            Hết Hàng
+                                            <span class="badge bg-primary-transparent"> Hết Hàng</span>
                                         @endif
                                     </td>
-                                    <td>
-                                        @if($i->status === 'published')
-                                            Xuất Bản
+                                   <td style="text-align: center">
+                                        @if ($i->status === 'published')
+                                            <span class="badge bg-info-transparent"> Xuất </span>
                                         @elseif($i->status === 'draft')
-                                            Nháp
+                                            <span class="badge bg-info-transparent"> Nháp </span>
                                         @endif
+
+                                     | {{ \Carbon\Carbon::parse($i->publish)->format('Y-m-d') }}
+
+
                                     </td>
 
-                                    <td>{{ $i->publish }}</td>
-                                    <td>
+
+                                   <td style="text-align: center">
 
                                         <div class="hstack gap-2 fs-15">
                                             <a href="{{ route('admin.product.edit', $i->id) }}"
