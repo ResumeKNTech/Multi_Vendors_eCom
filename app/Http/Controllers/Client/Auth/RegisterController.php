@@ -33,7 +33,7 @@ class RegisterController extends Controller
         $user = DB::table('users')->where('email', $request->input('email'))->first();
         Auth::loginUsingId($user->id);
 
-        // Chuyển hướng người dùng sau khi đăng ký thành công
-        return redirect('client/home');
+        return redirect()->route('client.index');
+
     }
 }

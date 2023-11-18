@@ -11,7 +11,7 @@ class LoginController extends Controller
     // Hiển thị form đăng nhập
     public function showLoginForm()
     {
-        return view('client.auth.login');
+        return view('client.login');
     }
 
     // Xử lý đăng nhập
@@ -44,6 +44,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('client.auth.login');
+        return redirect()->route('client.login');
     }
 }
