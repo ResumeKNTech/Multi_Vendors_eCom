@@ -11,7 +11,7 @@ class LoginController extends Controller
     // Hiển thị form đăng nhập
     public function showLoginForm()
     {
-        return view('client.login');
+        return view('client.auth.login');
     }
 
     // Xử lý đăng nhập

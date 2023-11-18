@@ -36,10 +36,10 @@
                                     <li><i class="ti-user"></i> <a href="{{ route('admin.dashboard') }}"
                                             target="_blank">Dashboard</a></li>
                                 @else
-                                    <li><i class="ti-user"></i> <a href="{{ route('admin.dashboard') }}"
+                                    <li><i class="ti-user"></i> <a href=""
                                             target="_blank">Dashboard</a></li>
                                 @endif
-                                <li><i class="ti-power-off"></i> <a href="{{ route('client.logout') }}">Logout</a></li>
+                                <li><i class="ti-power-off"></i> <a href="{{ route('auth.logout') }}">Logout</a></li>
                             @else
                                 <li><i class="ti-power-off"></i><a href="{{ route('client.login') }}">Login /</a> <a
                                         href="{{ route('client.register') }}">Register</a></li>
