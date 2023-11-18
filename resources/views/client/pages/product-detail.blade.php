@@ -25,7 +25,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{ route('client.index') }}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{ route('index') }}">Home<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="">Shop Details</a></li>
                         </ul>
                     </div>
@@ -83,12 +83,12 @@
                                         <a href="#"
                                             class="total-review">({{ $product_detail['getReview']->count() }}) Review</a>
                                     </div>
-                                    @php
-                                        $after_discount = $product_detail->offer_price;
-                                    @endphp
+
                                     <p class="price"><span
-                                            class="discount">{{ $after_discount }}</span><s>${{ number_format($product_detail->price, 2) }}</s>
+                                            class="discount">{{ $product_detail->offer_price }}VND</span><s>{{ $product_detail->price }}
+                                            VND</s>
                                     </p>
+
                                     <p class="description">{!! $product_detail->product_description !!}</p>
                                 </div>
 
@@ -384,7 +384,8 @@
                                         </div>
                                     </div>
                                     <div class="product-content">
-                                        <h3><a href="{{ route('product-detail', $data->slug) }}">{{ $data->product_title }}</a>
+                                        <h3><a
+                                                href="{{ route('product-detail', $data->slug) }}">{{ $data->product_title }}</a>
                                         </h3>
                                         <div class="product-price">
 

@@ -56,7 +56,7 @@
                                 <img src="{{ asset($brand->logo_images) }}" alt="Category Image">
                                 <div class="content">
                                     <h3>{{ $brand->brand_name }}</h3>
-                                    <a href="{{ route('client.index', $brand->brand_name) }}">Discover Now</a>
+                                    <a href="{{ route('index', $brand->brand_name) }}">Discover Now</a>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,6 @@
                             <ul class="nav nav-tabs filter-tope-group" id="myTab" role="tablist">
                                 @php
                                     $categories = DB::table('categories')->get();
-                                    // dd($categories);
                                 @endphp
                                 @if ($categories)
                                     <button class="btn" style="background:black"data-filter="*">
@@ -106,7 +105,7 @@
                             <!-- Start Single Tab -->
                             @if ($product_lists)
                                 @foreach ($product_lists as $key => $product)
-                                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ $product->cat_id }}">
+                                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ $product->category_id }}">
                                         <div class="single-product">
                                             <div class="product-img">
                                                 <a href="{{ route('product-detail', $product->slug) }}">
@@ -121,7 +120,7 @@
                                                     @if ($product->stock <= 0)
                                                         <span class="out-of-stock">Sale out</span>
                                                     @elseif($product->stock_status == 'in_stock')
-                                                    <span class="new">Hot</span @elseif($product->stock_status == 'out_of_stock')
+                                                    <span class="new">Hot</span> @elseif($product->stock_status == 'out_of_stock')
                                                             <span class="hot">OFF</span>
                                                     @else
                                                         @php
@@ -155,12 +154,9 @@
                                                         href="{{ route('product-detail', $product->slug) }}">{{ $product->product_title }}</a>
                                                 </h3>
                                                 <div class="product-price">
-                                                    @php
-                                                        $discountPercentage = (($product->price - $product->offer_price) / $product->price) * 100;
-                                                    @endphp
+                                                  
 
-                                                    <span class="price-dec">{{ round($discountPercentage, 2) }}%
-                                                        Off</span>
+                                                    <span class="price-dec">{{$product->price}} VND</span>
                                                     <del style="padding-left:4%;">${{ $product->price }}</del>
                                                 </div>
                                             </div>

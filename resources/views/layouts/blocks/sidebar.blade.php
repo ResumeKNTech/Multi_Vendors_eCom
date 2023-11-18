@@ -3,7 +3,7 @@
 
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header">
-        <a href="{{ route('client.index') }}" class="header-logo">
+        <a href="{{ route('index') }}" class="header-logo">
             <img src="{{ asset('admin/assets/images/brand-logos/desktop-logo.png') }}" alt="logo" class="desktop-logo">
             <img src="{{ asset('admin/assets/images/brand-logos/toggle-logo.png') }}" alt="logo" class="toggle-logo">
             <img src="{{ asset('admin/assets/images/brand-logos/desktop-dark.png') }}" alt="logo"
@@ -424,7 +424,7 @@
 
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header">
-        <a href="{{ route('client.index') }}" class="header-logo">
+        <a href="{{ route('index') }}" class="header-logo">
             <img src="{{ asset('admin/assets/images/brand-logos/desktop-logo.png') }}" alt="logo" class="desktop-logo">
             <img src="{{ asset('admin/assets/images/brand-logos/toggle-logo.png') }}" alt="logo" class="toggle-logo">
             <img src="{{ asset('admin/assets/images/brand-logos/desktop-dark.png') }}" alt="logo"

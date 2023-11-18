@@ -32,14 +32,23 @@
                             <li><i class="ti-location-pin"></i> <a href="">Track Order</a></li>
                             {{-- <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li> --}}
                             @auth
-                                @if (Auth::user()->type_user == 'admin')
+                                @if (Auth::user()->type_user == 'customer')
                                     <li><i class="ti-user"></i> <a href="{{ route('admin.dashboard') }}"
                                             target="_blank">Dashboard</a></li>
                                 @else
                                     <li><i class="ti-user"></i> <a href="{{ route('admin.dashboard') }}"
                                             target="_blank">Dashboard</a></li>
                                 @endif
-                                <li><i class="ti-power-off"></i> <a href="{{ route('client.logout') }}">Log out</a></li>
+                                <li >
+                                    <i class="ti-power-off" style="float:left"> </i>
+                                    <form method="POST" style="float:left" action="{{ route('client.logout') }}">
+                                      @csrf
+                                      <a  href="javascript:void(0);" onclick="this.closest('form').submit();">
+                                        Log Out
+                                      </a>
+                                    </form>
+                                   
+                                  </li>
                             @else
                                 <li><i class="ti-power-off"></i><a href="{{ route('client.login') }}">Login /</a> <a
                                         href="{{ route('auth.register') }}">Register</a></li>
@@ -61,7 +70,7 @@
                         @php
                             $settings = DB::table('settings')->get();
                         @endphp
-                        <a href="{{ route('client.index') }}"><img
+                        <a href="{{ route('index') }}"><img
                                 src="@foreach ($settings as $data) {{ asset($data->logo) }} @endforeach"
                                 alt="logo"></a>
                     </div>
@@ -173,13 +182,13 @@
                                                 $photo = explode(',', $data->product['images']);
                                             @endphp
                                             <li>
-                                                <a href="" class="remove" title="Remove this item"><i
+                                                <a href="{{route('cart-delete',$data->id)}}" class="remove" title="Remove this item"><i
                                                         class="fa fa-remove"></i></a>
-                                                <a class="cart-img" href="#"><img src="{{ $photo[0] }}"
+                                                <a class="cart-img" href="#"><img src="{{asset ($photo[0]) }}"
                                                         alt="{{ $photo[0] }}"></a>
-                                                <h4><a href="">{{ $data->product['product_title'] }}</a></h4>
+                                                <h4><a href="{{route('product-detail',$data->product['slug'])}}">{{ $data->product['product_title'] }}</a></h4>
                                                 <p class="quantity">{{ $data->quantity }} x - <span
-                                                        class="amount">${{ number_format($data->price, 2) }}</span></p>
+                                                        class="amount">{{ $data->price }} VND</span></p>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -187,7 +196,7 @@
                                         <div class="total">
                                             <span>Total</span>
                                             <span
-                                                class="total-amount">${{ number_format(Helper::totalCartPrice(), 2) }}</span>
+                                                class="total-amount">{{ (Helper::totalCartPrice()) }} VND</span>
                                         </div>
                                         <a href="" class="btn animate">Checkout</a>
                                     </div>
@@ -213,7 +222,7 @@
                                     <div class="nav-inner">
                                         <ul class="nav main-menu menu navbar-nav">
                                             <li class="{{ Request::path() == 'home' ? 'active' : '' }}"><a
-                                                    href="{{ route('client.index') }}">Home</a></li>
+                                                    href="{{ route('index') }}">Home</a></li>
                                             <li class="{{ Request::path() == 'about-us' ? 'active' : '' }}"><a
                                                     href="{{ route('about-us') }}">About Us</a></li>
                                             <li class="@if (Request::path() == 'product-grids' || Request::path() == 'product-lists') active @endif"><a

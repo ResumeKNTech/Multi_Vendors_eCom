@@ -33,7 +33,7 @@ class RegisterController extends Controller
         $user = DB::table('users')->where('email', $request->input('email'))->first();
         Auth::loginUsingId($user->id);
 
-        return redirect()->route('client.index');
+        return redirect()->route('index');
 
     }
 }

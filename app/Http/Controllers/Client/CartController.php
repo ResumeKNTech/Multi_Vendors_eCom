@@ -8,53 +8,51 @@ use App\Models\Product;
 use App\Models\Wishlist;
 use App\Models\Cart;
 use Illuminate\Support\Str;
-
 class CartController extends Controller
 {
-    protected $product = null;
-
+    protected $product=null;
     public function __construct(Product $product){
-        $this->product = $product;
+        $this->product=$product;
     }
 
     public function addToCart(Request $request){
+        // dd($request->all());
         if (empty($request->slug)) {
-            return back()->with('error', 'Invalid Products');
-        }
-
+            request()->session()->flash('error','Invalid Products');
+            return back();
+        }        
         $product = Product::where('slug', $request->slug)->first();
+        // return $product;
         if (empty($product)) {
-            return back()->with('error', 'Invalid Products');
+            request()->session()->flash('error','Invalid Products');
+            return back();
         }
 
-        $already_cart = Cart::where('user_id', auth()->user()->id)
-                            ->where('order_id', null)
-                            ->where('product_id', $product->id)
-                            ->first();
-        if ($already_cart) {
-            $already_cart->quantity += 1;
-            $already_cart->amount += $product->price;
-            if ($already_cart->product->stock < $already_cart->quantity || $already_cart->product->stock <= 0) {
-                return back()->with('error', 'Stock not sufficient!.');
-            }
+        $already_cart = Cart::where('user_id', auth()->user()->id)->where('order_id',null)->where('product_id', $product->id)->first();
+        // return $already_cart;
+        if($already_cart) {
+            // dd($already_cart);
+            $already_cart->quantity = $already_cart->quantity + 1;
+            $already_cart->amount = $product->price+ $already_cart->amount;
+            // return $already_cart->quantity;
+            if ($already_cart->product->stock < $already_cart->quantity || $already_cart->product->stock <= 0) return back()->with('error','Stock not sufficient!.');
             $already_cart->save();
-        } else {
+            
+        }else{
+            
             $cart = new Cart;
             $cart->user_id = auth()->user()->id;
             $cart->product_id = $product->id;
-            $cart->price = ($product->price-($product->price*$product->offer_price)/100);            $cart->quantity = 1;
-            $cart->amount = $cart->price * $cart->quantity;
-            if ($cart->product->stock < $cart->quantity || $cart->product->stock <= 0) {
-                return back()->with('error', 'Stock not sufficient!.');
-            }
+            $cart->price = ($product->price-($product->price*$product->offer_price)/100);
+            $cart->quantity = 1;
+            $cart->amount=$cart->price*$cart->quantity;
+            if ($cart->product->stock < $cart->quantity || $cart->product->stock <= 0) return back()->with('error','Stock not sufficient!.');
             $cart->save();
-            Wishlist::where('user_id', auth()->user()->id)
-                    ->where('cart_id', null)
-                    ->update(['cart_id' => $cart->id]);
+            $wishlist=Wishlist::where('user_id',auth()->user()->id)->where('cart_id',null)->update(['cart_id'=>$cart->id]);
         }
-        return back()->with('success', 'Product successfully added to cart');
-    }
-
+        request()->session()->flash('success','Product successfully added to cart');
+        return back();       
+    }  
 
     public function singleAddToCart(Request $request){
         $request->validate([
@@ -69,8 +67,8 @@ class CartController extends Controller
             return back()->with('error','Out of stock, You can add other products.');
         }
         if ( ($request->quant[1] < 1) || empty($product) ) {
-            return back()->with('success', 'Product successfully added to cart');
-
+            request()->session()->flash('error','Invalid Products');
+            return back();
         }    
 
         $already_cart = Cart::where('user_id', auth()->user()->id)->where('order_id',null)->where('product_id', $product->id)->first();
@@ -91,26 +89,26 @@ class CartController extends Controller
             $cart = new Cart;
             $cart->user_id = auth()->user()->id;
             $cart->product_id = $product->id;
-            $cart->price;
+            $cart->price = ($product->price-($product->price*$product->offer_price)/100);
             $cart->quantity = $request->quant[1];
             $cart->amount=($product->price * $request->quant[1]);
             if ($cart->product->stock < $cart->quantity || $cart->product->stock <= 0) return back()->with('error','Stock not sufficient!.');
             // return $cart;
             $cart->save();
         }
-        return back()->with('success', 'Product successfully added to cart');
-  
+        request()->session()->flash('success','Product successfully added to cart.');
+        return back();       
     } 
     
     public function cartDelete(Request $request){
         $cart = Cart::find($request->id);
         if ($cart) {
             $cart->delete();
-            return back()->with('success', 'Product successfully added to cart');
-
+            request()->session()->flash('success','Cart successfully removed');
+            return back();  
         }
-        return back()->with('success', 'Product successfully added to cart');
-    
+        request()->session()->flash('error','Error please try again');
+        return back();       
     }     
 
     public function cartUpdate(Request $request){
@@ -129,14 +127,14 @@ class CartController extends Controller
                     // return $quant;
 
                     if($cart->product->stock < $quant){
-                        return back()->with('success', 'Product successfully added to cart');
-
+                        request()->session()->flash('error','Out of stock');
+                        return back();
                     }
                     $cart->quantity = ($cart->product->stock > $quant) ? $quant  : $cart->product->stock;
                     // return $cart;
                     
                     if ($cart->product->stock <=0) continue;
-                    $after_price=($cart->product->offer_price);
+                    $after_price=($cart->product->price-($cart->product->price*$cart->product->offer_price)/100);
                     $cart->amount = $after_price * $quant;
                     // return $cart->price;
                     $cart->save();
@@ -150,8 +148,10 @@ class CartController extends Controller
             return back()->with('Cart Invalid!');
         }    
     }
+
+  
     public function checkout(Request $request){
-       
+      
         return view('client.pages.checkout');
     }
 }

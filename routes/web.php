@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 
 // ? Route đăng nhập client
-Route::prefix('')->name('client.')->group(function () {
+Route::prefix('client')->name('client.')->group(function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [LoginController::class, 'login'])->name('login');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
     Route::post('register', [RegisterController::class, 'register']);
-    Route::get('/', [HomeController::class, 'index'])->name('index');
+
 
 
 
@@ -34,6 +34,7 @@ Route::prefix('')->name('client.')->group(function () {
 
 
 });
+    Route::get('/', [HomeController::class, 'index'])->name('index');
 // Route liên quan đến Blog
 Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
 Route::get('/blog-detail/{slug}', [BlogController::class, 'blogDetail'])->name('blog.detail');
