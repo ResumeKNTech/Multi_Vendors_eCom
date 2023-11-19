@@ -3,46 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Shipping;
 use App\Models\User;
 use PDF;
+use Illuminate\Support\Facades\Notification;
 
 use Helper;
 use Illuminate\Support\Str;
+use App\Notifications\StatusNotification;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $orders=Order::orderBy('id','DESC')->paginate(10);
-        return view('backend.order.index')->with('orders',$orders);
+        return view('admin.order.index')->with('orders',$orders);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -57,10 +39,10 @@ class OrderController extends Controller
         ]);
         // return $request->all();
 
-        if(empty(Cart::where('user_id',auth()->user()->id)->where('order_id',null)->first())){
-            request()->session()->flash('error','Cart is Empty !');
-            return back();
+        if (empty(Cart::where('user_id', auth()->user()->id)->where('order_id', null)->first())) {
+            return back()->with('error', 'Cart is Empty!');
         }
+
 
 
         $order=new Order();
@@ -104,8 +86,8 @@ class OrderController extends Controller
         $order->fill($order_data);
         $status=$order->save();
         if($order)
-        // dd($order->id);
-        $users=User::where('role','admin')->first();
+        $users = User::whereIn('type_user', ['vendor', 'admin'])->first();
+
         $details=[
             'title'=>'New order created',
             'actionURL'=>route('order.show',$order->id),
@@ -121,43 +103,25 @@ class OrderController extends Controller
         }
         Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
 
-        // dd($users);
-        request()->session()->flash('success','Your product successfully placed in order');
-        return redirect()->route('home');
+        return redirect()->route('index')->with('success', 'Your product successfully placed in order');
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $order=Order::find($id);
         // return $order;
-        return view('backend.order.show')->with('order',$order);
+        return view('admin.order.show')->with('order',$order);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $order=Order::find($id);
-        return view('backend.order.edit')->with('order',$order);
+        return view('admin.order.edit')->with('order',$order);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $order=Order::find($id);
@@ -176,71 +140,51 @@ class OrderController extends Controller
         }
         $status=$order->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Successfully updated order');
+            return redirect()->route('admin.order.index')->with('success', 'Successfully updated order');
+        } else {
+            return redirect()->route('admin.order.index')->with('error', 'Error while updating order');
         }
-        else{
-            request()->session()->flash('error','Error while updating order');
-        }
-        return redirect()->route('order.index');
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $order=Order::find($id);
-        if($order){
-            $status=$order->delete();
-            if($status){
-                request()->session()->flash('success','Order Successfully deleted');
+        $order = Order::find($id);
+        if ($order) {
+            $status = $order->delete();
+            if ($status) {
+                return redirect()->route('admin.order.index')->with('success', 'Order successfully deleted');
+            } else {
+                return redirect()->route('admin.index')->with('error', 'Order cannot be deleted');
             }
-            else{
-                request()->session()->flash('error','Order can not deleted');
-            }
-            return redirect()->route('order.index');
-        }
-        else{
-            request()->session()->flash('error','Order can not found');
-            return redirect()->back();
+        } else {
+            return redirect()->back()->with('error', 'Order not found');
         }
     }
+
 
     public function orderTrack(){
-        return view('frontend.pages.order-track');
+        return view('client.pages.order-track');
     }
 
-    public function productTrackOrder(Request $request){
-        // return $request->all();
-        $order=Order::where('user_id',auth()->user()->id)->where('order_number',$request->order_number)->first();
-        if($order){
-            if($order->status=="new"){
-            request()->session()->flash('success','Your order has been placed. please wait.');
-            return redirect()->route('home');
+    public function productTrackOrder(Request $request)
+    {
+        $order = Order::where('user_id', auth()->user()->id)
+                      ->where('order_number', $request->order_number)
+                      ->first();
 
+        if ($order) {
+            if ($order->status == "new") {
+                return redirect()->route('index')->with('success', 'Your order has been placed. Please wait.');
+            } elseif ($order->status == "process") {
+                return redirect()->route('index')->with('success', 'Your order is under processing. Please wait.');
+            } elseif ($order->status == "delivered") {
+                return redirect()->route('index')->with('success', 'Your order has been successfully delivered.');
+            } else {
+                return redirect()->route('index')->with('error', 'Your order was canceled. Please try again.');
             }
-            elseif($order->status=="process"){
-                request()->session()->flash('success','Your order is under processing please wait.');
-                return redirect()->route('home');
-
-            }
-            elseif($order->status=="delivered"){
-                request()->session()->flash('success','Your order is successfully delivered.');
-                return redirect()->route('home');
-
-            }
-            else{
-                request()->session()->flash('error','Your order canceled. please try again');
-                return redirect()->route('home');
-
-            }
-        }
-        else{
-            request()->session()->flash('error','Invalid order numer please try again');
-            return back();
+        } else {
+            return back()->with('error', 'Invalid order number. Please try again.');
         }
     }
 
@@ -250,7 +194,7 @@ class OrderController extends Controller
         // return $order;
         $file_name=$order->order_number.'-'.$order->first_name.'.pdf';
         // return $file_name;
-        $pdf=PDF::loadview('backend.order.pdf',compact('order'));
+        $pdf=PDF::loadview('admin.order.pdf',compact('order'));
         return $pdf->download($file_name);
     }
     // Income chart
@@ -280,4 +224,3 @@ class OrderController extends Controller
         return $data;
     }
 }
-

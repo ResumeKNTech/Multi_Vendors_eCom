@@ -14,7 +14,7 @@
             <div class="carousel-inner" role="listbox">
                 @foreach ($banners as $key => $banner)
                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                        <img class="first-slide" src="{{ asset($banner->photo) }}" alt="First slide">
+                        <img class="first-slide" src="{{ asset($banner->photo) }}" alt=" slide">
                         <div class="carousel-caption d-none d-md-block text-left">
                             <h1 class="wow fadeInDown">{{ $banner->title }}</h1>
                             <p>{!! html_entity_decode($banner->description) !!}</p>
@@ -105,13 +105,14 @@
                             <!-- Start Single Tab -->
                             @if ($product_lists)
                                 @foreach ($product_lists as $key => $product)
-                                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ $product->category_id }}">
+                                    <div
+                                        class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ $product->category_id }}">
                                         <div class="single-product">
                                             <div class="product-img">
                                                 <a href="{{ route('product-detail', $product->slug) }}">
                                                     @php
                                                         $photo = explode(',', $product->images);
-                                                        // dd($photo);
+
                                                     @endphp
                                                     <img class="default-img" src="{{ asset($photo[0]) }}"
                                                         alt="{{ $photo[0] }}">
@@ -120,8 +121,9 @@
                                                     @if ($product->stock <= 0)
                                                         <span class="out-of-stock">Sale out</span>
                                                     @elseif($product->stock_status == 'in_stock')
-                                                    <span class="new">Hot</span> @elseif($product->stock_status == 'out_of_stock')
-                                                            <span class="hot">OFF</span>
+                                                        <span class="new">Hot</span>
+                                                    @elseif($product->stock_status == 'out_of_stock')
+                                                        <span class="hot">OFF</span>
                                                     @else
                                                         @php
                                                             $discountPercentage = (($product->price - $product->offer_price) / $data->price) * 100;
@@ -154,10 +156,14 @@
                                                         href="{{ route('product-detail', $product->slug) }}">{{ $product->product_title }}</a>
                                                 </h3>
                                                 <div class="product-price">
-                                                  
 
-                                                    <span class="price-dec">{{$product->price}} VND</span>
-                                                    <del style="padding-left:4%;">${{ $product->price }}</del>
+                                                    @if ($product->offer_price)
+                                                        <span class="price-dec">{{ $product->offer_price }} VND</span>
+                                                    @else
+                                                        <span class="price-dec">{{ $product->price }} VND</span>
+                                                    @endif
+                                                    <del style="padding-left:4%;">{{ $product->price }} VND</del>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -180,28 +186,35 @@
         <div class="container">
             <div class="row">
                 @if ($ok)
-                    @foreach ($ok as $data)
-                        <!-- Single Banner  -->
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <div class="single-banner">
-                                @php
-                                    $photo = explode(',', $data->images);
-                                @endphp
-                                <img src="{{ asset($photo[0]) }}" alt="{{ $photo[0] }}">
-                                <div class="content">
-                                    <p>{{ $data->cat_info['product_title'] }}</p>
-                                    <h3>{{ $data->title }} <br>Up to<span>
+                @foreach ($ok as $data)
+                    <!-- Single Banner  -->
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="single-banner">
+                            @php
+                                $photo = explode(',', $data->images);
+                            @endphp
+                            <img src="{{ asset($photo[0]) }}" alt="{{ $photo[0] }}">
+                            <div class="content">
+                                <p>{{ $data->cat_info['category_name'] ?? 'Danh mục không xác định' }}</p>
+                                <h3>{{ $data->product_title }} <br>Giảm tới<span>
+                                        @if ($data->offer_price)
                                             @php
-                                                $discountPercentage = (($product->price - $product->offer_price) / $product->price) * 100;
+                                                $discountAmount = $data->price - $data->offer_price;
                                             @endphp
-                                            <span> {{ round($discountPercentage, 2) }}%</span>
-                                            <a href="{{ route('product-detail', $data->slug) }}">Shop Now</a>
-                                </div>
+                                            <span>{{ $discountAmount }} VND</span>
+                                        @else
+                                            <span>Không có giảm giá</span>
+                                        @endif
+                                    </span>
+                                </h3>
+                                <a href="{{ route('product-detail', $data->slug) }}">Shop Now</a>
                             </div>
                         </div>
-                        <!-- /End Single Banner  -->
-                    @endforeach
-                @endif
+                    </div>
+                    <!-- /End Single Banner  -->
+                @endforeach
+            @endif
+
             </div>
         </div>
     </section>
@@ -255,9 +268,11 @@
                                                 href="{{ route('product-detail', $product->slug) }}">{{ $product->product_title }}</a>
                                         </h3>
                                         <div class="product-price">
-                                            <span class="old">{{ $product->price }}</span>
-
-                                            <span> {{ $product->offer_price }}%</span>
+                                            @if ($product->offer_price)
+                                            <span class="price-dec">{{ $product->offer_price }} VND</span>
+                                        @else
+                                            <span class="price-dec">{{ $product->price }} VND</span>
+                                        @endif
                                         </div>
                                     </div>
                                 </div>
@@ -312,8 +327,11 @@
                                                 <h4 class="title"><a href="#">{{ $product->product_title }}</a>
                                                 </h4>
 
-                                                <p class="price with-discount">{{ $product->offer_price }} VND
-                                                </p>
+                                                @if ($product->offer_price)
+                                                <span class="price-dec">{{ $product->offer_price }} VND</span>
+                                            @else
+                                                <span class="price-dec">{{ $product->price }} VND</span>
+                                            @endif
                                             </div>
                                         </div>
                                     </div>
@@ -579,7 +597,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script>
         /*==================================================================
-                                            [ Isotope ]*/
+                                                [ Isotope ]*/
         var $topeContainer = $('.isotope-grid');
         var $filter = $('.filter-tope-group');
 

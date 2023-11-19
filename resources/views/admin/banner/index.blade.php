@@ -8,6 +8,11 @@
                 <div class="card-title">
                     Danh Sách
                 </div>
+                <div class="prism-toggle">
+                    <a href="{{ route('admin.banner.create') }}" class="btn btn-sm btn-primary-light">
+                        Thêm Banner ?
+                    </a>
+                </div>
             </div>
             <div class="card-body">
                 <table id="responsivemodal-DataTable" class="table table-bordered text-nowrap w-100">

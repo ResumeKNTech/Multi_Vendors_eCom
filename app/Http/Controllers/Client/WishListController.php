@@ -11,11 +11,13 @@ class WishListController extends Controller
 {
     protected $product = null;
 
-    public function __construct(Product $product){
+    public function __construct(Product $product)
+    {
         $this->product = $product;
     }
 
-    public function wishlist(Request $request){
+    public function wishlist(Request $request)
+    {
         if (empty($request->slug)) {
             return back()->with('error', 'Invalid Products');
         }
@@ -26,16 +28,22 @@ class WishListController extends Controller
         }
 
         $already_wishlist = Wishlist::where('user_id', auth()->user()->id)
-                                     ->where('cart_id', null)
-                                     ->where('product_id', $product->id)
-                                     ->first();
+            ->where('cart_id', null)
+            ->where('product_id', $product->id)
+            ->first();
         if ($already_wishlist) {
             return back()->with('error', 'You already placed in wishlist');
         } else {
             $wishlist = new Wishlist;
             $wishlist->user_id = auth()->user()->id;
             $wishlist->product_id = $product->id;
-            $wishlist->price;
+            if (is_null($product->offer_price)) {
+                // Nếu offer_price là null, sử dụng giá gốc của sản phẩm
+                $wishlist->price = $product->price;
+            } else {
+                // Nếu offer_price không phải là null, trừ đi giá khuyến mãi từ giá gốc
+                $wishlist->price = $product->offer_price;
+            }
             $wishlist->quantity = 1;
             $wishlist->amount = $wishlist->price * $wishlist->quantity;
             if ($wishlist->product->stock < $wishlist->quantity || $wishlist->product->stock <= 0) {
@@ -46,12 +54,13 @@ class WishListController extends Controller
         }
     }
 
-    public function wishlistDelete(Request $request){
+    public function wishlistDelete(Request $request)
+    {
         $wishlist = Wishlist::find($request->id);
         if ($wishlist) {
             $wishlist->delete();
             return back()->with('success', 'Wishlist successfully removed');
         }
         return back()->with('error', 'Error please try again');
-    }     
+    }
 }

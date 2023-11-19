@@ -2,38 +2,50 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Models\Banner;
-use App\Models\Product;
-use App\Models\Category;
-use App\Models\PostTag;
-use App\Models\Post;
-use App\Models\User;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Order;
 class HomeController extends Controller
 {
-    public function index(Request $request)
+    public function __construct()
     {
-        $ok = Product::where('status', 'published')->orderBy('id', 'DESC')->limit(2)->get();
+        $this->middleware('auth');
+    }
 
-        $posts = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
-        $banners = Banner::where('status', 'active')->limit(3)->orderBy('id', 'DESC')->get();
-        // return $banner;
-        $products = Product::where('status', 'published')->orderBy('id', 'DESC')->get();
-        $category = Category::orderBy('id', 'DESC')->get();
+    public function index(){
+        return view('user.index');
+    }
+     // Order
+     public function orderIndex(){
+        $orders=Order::orderBy('id','DESC')->where('user_id',auth()->user()->id)->paginate(10);
+        return view('user.order.index')->with('orders',$orders);
+    }
+    public function userOrderDelete($id)
+    {
+        $order = Order::find($id);
+        if ($order) {
+            if (in_array($order->status, ["process", "delivered", "cancel"])) {
+                return redirect()->back()->with('error', 'You cannot delete this order now.');
+            } else {
+                $status = $order->delete();
+                if ($status) {
+                    return redirect()->route('user.order.index')->with('success', 'Order successfully deleted.');
+                } else {
+                    return redirect()->route('user.order.index')->with('error', 'Order cannot be deleted.');
+                }
+            }
+        } else {
+            return redirect()->back()->with('error', 'Order not found.');
+        }
+    }
 
-        // Lấy tất cả người dùng và danh mục liên quan của họ
-        $vendors = User::with('relatedCategories')
-            ->where('type_user', 'vendor')
-            ->get();
-        return view('client.pages.index')
-            ->with('posts', $posts)
-            ->with('banners', $banners)
-            ->with('product_lists', $products)
-            ->with('category_lists', $category)
-            ->with('vendors', $vendors)
-            ->with('ok', $ok);
+
+    public function orderShow($id)
+    {
+        $order=Order::find($id);
+        // return $order;
+        return view('user.order.show')->with('order',$order);
     }
 }

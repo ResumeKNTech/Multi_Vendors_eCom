@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Artisan;
 
 class DashboardController extends Controller
 {
@@ -24,4 +26,21 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', compact('categoryCount', 'productCount', 'customerCount', 'vendorCount'));
     }
+    public function storageLink()
+{
+    // Kiểm tra xem thư mục storage đã được liên kết chưa
+    if (File::exists(public_path('storage'))) {
+        // Xóa liên kết tượng trưng (symbolic link) hiện có
+        File::delete(public_path('storage'));
+    }
+
+    // Tạo lại liên kết tượng trưng cho thư mục storage
+    try {
+        Artisan::call('storage:link');
+        return redirect()->back()->with('success', 'Successfully linked storage.');
+    } catch (\Exception $exception) {
+        return redirect()->back()->with('error', $exception->getMessage());
+    }
+}
+
 }

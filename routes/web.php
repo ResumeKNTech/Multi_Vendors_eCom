@@ -8,6 +8,7 @@ use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\Client\ContactUsController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\PostCommentController;
 use App\Http\Controllers\Client\ProductReviewController;
 use App\Http\Controllers\Client\WishListController;
@@ -34,7 +35,8 @@ Route::prefix('client')->name('client.')->group(function () {
 
 
 });
-    Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('', [ClientController::class, 'index'])->name('index');
+
 // Route liên quan đến Blog
 Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
 Route::get('/blog-detail/{slug}', [BlogController::class, 'blogDetail'])->name('blog.detail');
@@ -56,15 +58,25 @@ Route::get('/product-cat/{slug}', [ClientController::class, 'productCat'])->name
 Route::get('/product-sub-cat/{slug}/{sub_slug}', [ClientController::class, 'productSubCat'])->name('product-sub-cat');
 Route::get('/product-lists', [ClientController::class, 'productLists'])->name('product-lists');
 Route::get('product-detail/{slug}', [ClientController::class, 'productDetail'])->name('product-detail');
-Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout')->middleware('check_login_customer');
+
 Route::get('/product-brand/{brand_name}', [ClientController::class, 'productBrand'])->name('product-brand');
 Route::get('product-detail/{slug}', [ClientController::class, 'productDetail'])->name('product-detail');
 Route::post('product/search', [ClientController::class, 'productSearch'])->name('product.search');
-
+Route::get('/wishlist', function () {
+    return view('client.pages.wishlist');
+})->name('wishlist');
 
 // Product Review
 Route::resource('/review', 'ProductRe');
 Route::post('product/{slug}/review', [ProductReviewController::class, 'store'])->name('review.store');
+
+Route::post('cart/order', [OrderController::class, 'store'])->name('cart.order');
+Route::get('order/pdf/{id}', [OrderController::class, 'pdf'])->name('order.pdf');
+Route::get('/income', [OrderController::class, 'incomeChart'])->name('product.order.income');
+// Order Track
+Route::get('/product/track', [OrderController::class, 'orderTrack'])->name('order.track');
+Route::post('product/track/order', [OrderController::class, 'productTrackOrder'])->name('product.track.order');
 
 // Cart section
 Route::get('/add-to-cart/{slug}', [CartController::class, 'addToCart'])->name('add-to-cart')->middleware('check_login_customer');
@@ -76,9 +88,14 @@ Route::get('wishlist-delete/{id}', [WishListController::class, 'wishlistDelete']
 Route::get('/cart', function () {
     return view('client.pages.cart');
 })->name('cart');
-Route::middleware(['check_login_customer'])->group(
-    function () {
-        Route::prefix('/')->name('client.')->group(function () {
-        });
-    }
-);
+// User section start
+Route::group(['prefix' => '/user', 'middleware' => ['check_login_customer']], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('user');
+    //  Order
+    Route::get('/order', [HomeController::class, 'orderIndex'])->name('user.order.index');
+    Route::get('/order/show/{id}', [HomeController::class, 'orderIndex'])->name('user.order.show');
+
+    Route::delete('/order/delete/{id}', [HomeController::class, 'userOrderDelete'])->name('user.order.delete');
+
+
+});

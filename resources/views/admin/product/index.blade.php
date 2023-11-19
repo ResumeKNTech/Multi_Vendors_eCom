@@ -2,6 +2,7 @@
 @section('module', 'Sản Phẩm')
 @section('action', 'Danh Sách')
 @section('content')
+@if (Auth::user())
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header justify-content-between">
@@ -45,7 +46,7 @@
 
 
                                    <td style="text-align: center">{{ $i->price }}  VND |  <span class="badge bg-primary-transparent"> {{ $i->offer_price }}
-                                      VND  </span></td>
+                                      KM  </span></td>
                                    <td style="text-align: center">{{ $i->stock }} |
                                         @if ($i->stock_status === 'in_stock')
                                             <span class="badge bg-primary-transparent"> Còn Hàng</span>
@@ -116,4 +117,5 @@
             }
         </script>
     </div>
+    @endif
 @endsection

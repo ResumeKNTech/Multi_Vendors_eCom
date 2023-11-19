@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_number')->unique();
-            $table->float('sub_total');
+            $table->float('sub_total',15,2);
             $table->float('coupon')->nullable();
-            $table->float('total_amount');
+            $table->float('total_amount',15,2);
             $table->integer('quantity');
 
             $table->enum('payment_method',['cod','paypal'])->default('cod');

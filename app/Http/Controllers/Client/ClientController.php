@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Banner;
 
+use App\Models\PostTag;
+use App\Models\Post;
+use App\Models\User;
 class ClientController extends Controller
 {
     public function productSubCat(Request $request){
@@ -160,6 +164,32 @@ class ClientController extends Controller
 
 
         return view('client.pages.product-grids')->with('products', $products)->with('recent_products', $recent_products);
+    }
+    public function index(Request $request)
+    {
+        $ok = Product::whereNotNull('offer_price')
+        ->where('offer_price', '<>', 0) // Điều kiện này đảm bảo rằng offer_price phải có giá trị khác 0
+        ->orderBy('id', 'DESC')
+        ->limit(2)
+        ->get();
+
+        $posts = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
+        $banners = Banner::where('status', 'active')->limit(3)->orderBy('id', 'DESC')->get();
+        // return $banner;
+        $products = Product::where('status', 'published')->orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->get();
+
+        // Lấy tất cả người dùng và danh mục liên quan của họ
+        $vendors = User::with('relatedCategories')
+            ->where('type_user', 'vendor')
+            ->get();
+        return view('client.pages.index')
+            ->with('posts', $posts)
+            ->with('banners', $banners)
+            ->with('product_lists', $products)
+            ->with('category_lists', $category)
+            ->with('vendors', $vendors)
+            ->with('ok', $ok);
     }
     public function productLists(){
         $products=Product::query();

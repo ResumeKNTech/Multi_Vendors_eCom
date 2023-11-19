@@ -22,8 +22,8 @@ return new class extends Migration
             $table->text('images_gallery');
             $table->text('product_tags')->nullable();
 
-            $table->float('price');
-            $table->float('offer_price')->nullable();
+            $table->float('price',10,2);
+            $table->float('offer_price',10,2)->nullable();
             $table->dateTime('sales_begin')->nullable();
             $table->dateTime('sales_end')->nullable();
 

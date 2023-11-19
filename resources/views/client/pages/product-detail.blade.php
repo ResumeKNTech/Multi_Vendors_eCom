@@ -84,10 +84,11 @@
                                             class="total-review">({{ $product_detail['getReview']->count() }}) Review</a>
                                     </div>
 
-                                    <p class="price"><span
-                                            class="discount">{{ $product_detail->offer_price }}VND</span><s>{{ $product_detail->price }}
-                                            VND</s>
+                                    <p class="price">
+                                        <span class="discount">{{ $product_detail->offer_price ?? $product_detail->price }} VND</span>
+                                        <s>{{ $product_detail->price }} VND</s>
                                     </p>
+
 
                                     <p class="description">{!! $product_detail->product_description !!}</p>
                                 </div>

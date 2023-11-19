@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\SubCategoryController;
@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\PostTagController;
@@ -30,6 +31,13 @@ use App\Http\Controllers\Auth\RolePermissionController;
 use App\Http\Controllers\Auth\UserRoleController;
 use App\Http\Controllers\Client\ContactUsController;
 use App\Http\Controllers\Client\ProductReviewController;
+    // CACHE CLEAR ROUTE
+    Route::get('cache-clear', function () {
+        Artisan::call('optimize:clear');
+        return redirect()->back()->with ('success','Successfully cache cleared.');
+    })->name('cache.clear');
+    // STORAGE LINKED ROUTE
+    Route::get('storage-link',[DashboardController::class,'storageLink'])->name('storage.link');
 
 Route::middleware(['check_login'])->group(
     function () {
@@ -173,6 +181,14 @@ Route::middleware(['check_login'])->group(
                 Route::post('store', 'store')->name('store');
                 Route::post('update/{id}', 'update')->name('update');
                 Route::get('destroy/{id}', 'destroy')->name('destroy');
+            });
+            Route::prefix('order')->controller(OrderController::class)->name('order.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::get('show/{id}', 'show')->name('show');
+                Route::get('destroy/{id}', 'destroy')->name('destroy');
+                Route::post('update/{id}', 'update')->name('update');
+                Route::get('edit/{id}', 'edit')->name('edit');
+
             });
             Route::prefix('role_permission')->controller(RolePermissionController::class)->name('role_permission.')->group(function () {
                 Route::get('index', 'index')->name('index');
