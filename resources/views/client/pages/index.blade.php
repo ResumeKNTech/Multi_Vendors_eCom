@@ -139,15 +139,15 @@
                                                     <div class="product-action">
                                                         <a data-toggle="modal" data-target="#{{ $product->id }}"
                                                             title="Quick View" href="#"><i
-                                                                class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                                class=" ti-eye"></i><span>Mua Nhanh</span></a>
                                                         <a title="Wishlist"
                                                             href="{{ route('add-to-wishlist', $product->slug) }}"><i
-                                                                class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                                class=" ti-heart "></i><span>Thêm vào Yêu Thích</span></a>
                                                     </div>
                                                     <div class="product-action-2">
                                                         <a title="Add to cart"
-                                                            href="{{ route('add-to-cart', $product->slug) }}">Add to
-                                                            cart</a>
+                                                            href="{{ route('add-to-cart', $product->slug) }}">Thêm vào giỏ
+                                                            hàng</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,11 +158,17 @@
                                                 <div class="product-price">
 
                                                     @if ($product->offer_price)
-                                                        <span class="price-dec">{{ $product->offer_price }} VND</span>
+                                                        <span
+                                                            class="price-dec">{{ number_format($product->offer_price, 0, ',', '.') }}
+                                                            VND</span>
                                                     @else
-                                                        <span class="price-dec">{{ $product->price }} VND</span>
+                                                        <span
+                                                            class="price-dec">{{ number_format($product->price, 0, ',', '.') }}
+                                                            VND</span>
                                                     @endif
-                                                    <del style="padding-left:4%;">{{ $product->price }} VND</del>
+                                                    <del style="padding-left:4%;">{{ number_format($product->price, 0, ',', '.') }}
+                                                        VND</del>
+
 
                                                 </div>
                                             </div>
@@ -186,34 +192,36 @@
         <div class="container">
             <div class="row">
                 @if ($ok)
-                @foreach ($ok as $data)
-                    <!-- Single Banner  -->
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="single-banner">
-                            @php
-                                $photo = explode(',', $data->images);
-                            @endphp
-                            <img src="{{ asset($photo[0]) }}" alt="{{ $photo[0] }}">
-                            <div class="content">
-                                <p>{{ $data->cat_info['category_name'] ?? 'Danh mục không xác định' }}</p>
-                                <h3>{{ $data->product_title }} <br>Giảm tới<span>
+                    @foreach ($ok as $data)
+                        <!-- Single Banner  -->
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="single-banner">
+                                @php
+                                    $photo = explode(',', $data->images);
+                                @endphp
+                                <img src="{{ asset($photo[0]) }}" alt="{{ $photo[0] }}">
+                                <div class="content">
+                                    <p>{{ $data->cat_info['category_name'] ?? 'Danh mục không xác định' }}</p>
+                                    <h3>{{ $data->product_title }} <br>Giảm tới<span>
                                         @if ($data->offer_price)
-                                            @php
-                                                $discountAmount = $data->price - $data->offer_price;
-                                            @endphp
-                                            <span>{{ $discountAmount }} VND</span>
-                                        @else
-                                            <span>Không có giảm giá</span>
-                                        @endif
-                                    </span>
-                                </h3>
-                                <a href="{{ route('product-detail', $data->slug) }}">Shop Now</a>
+                                        @php
+                                            $discountAmount = $data->price - $data->offer_price;
+                                            $formattedDiscountAmount = number_format($discountAmount, 0, ',', '.');
+                                        @endphp
+                                        <span>{{ $formattedDiscountAmount }} VND</span>
+                                    @else
+                                        <span>Không có giảm giá</span>
+                                    @endif
+
+                                        </span>
+                                    </h3>
+                                    <a href="{{ route('product-detail', $data->slug) }}">Mua Ngay</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /End Single Banner  -->
-                @endforeach
-            @endif
+                        <!-- /End Single Banner  -->
+                    @endforeach
+                @endif
 
             </div>
         </div>
@@ -269,10 +277,12 @@
                                         </h3>
                                         <div class="product-price">
                                             @if ($product->offer_price)
-                                            <span class="price-dec">{{ $product->offer_price }} VND</span>
-                                        @else
-                                            <span class="price-dec">{{ $product->price }} VND</span>
-                                        @endif
+    <span class="price-dec">{{ number_format($product->offer_price, 0, ',', '.') }} VND</span>
+@else
+    <span class="price-dec">{{ number_format($product->price, 0, ',', '.') }} VND</span>
+@endif
+<del style="padding-left:4%;">{{ number_format($product->price, 0, ',', '.') }} VND</del>
+
                                         </div>
                                     </div>
                                 </div>
@@ -328,10 +338,12 @@
                                                 </h4>
 
                                                 @if ($product->offer_price)
-                                                <span class="price-dec">{{ $product->offer_price }} VND</span>
+                                                <span class="price-dec">{{ number_format($product->offer_price, 0, ',', '.') }} VND</span>
                                             @else
-                                                <span class="price-dec">{{ $product->price }} VND</span>
+                                                <span class="price-dec">{{ number_format($product->price, 0, ',', '.') }} VND</span>
                                             @endif
+                                            <del style="padding-left:4%;">{{ number_format($product->price, 0, ',', '.') }} VND</del>
+
                                             </div>
                                         </div>
                                     </div>
@@ -597,7 +609,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script>
         /*==================================================================
-                                                [ Isotope ]*/
+                                                    [ Isotope ]*/
         var $topeContainer = $('.isotope-grid');
         var $filter = $('.filter-tope-group');
 

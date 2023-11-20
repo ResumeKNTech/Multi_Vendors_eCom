@@ -3,6 +3,20 @@
 @section('title','E-SHOP || Blog Page')
 
 @section('main-content')
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="{{route('index')}}">Trang chủ<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="javascript:void(0);">Liên Lạc</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 	<!-- Start Contact -->
 	<section id="contact-us" class="contact-us section">
 		<div class="container">
@@ -23,31 +37,31 @@
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
 												<label>Tên<span>*</span></label>
-												<input name="name" id="name" type="text" placeholder="Enter your name">
+												<input name="name" id="name" type="text" placeholder="Điền tên..">
 											</div>
 										</div>
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
-												<label>CCCD<span>*</span></label>
-												<input name="subject" type="text" id="subject" placeholder="Enter Subject">
+												<label>Chủ Đề<span>*</span></label>
+												<input name="subject" type="text" id="subject" placeholder="Điền chủ đề..">
 											</div>
 										</div>
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
 												<label>Email<span>*</span></label>
-												<input name="email" type="email" id="email" placeholder="Enter email address">
-											</div>	
+												<input name="email" type="email" id="email" placeholder="Điền email ..">
+											</div>
 										</div>
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
 												<label>Số điện thoại<span>*</span></label>
-												<input id="phone" name="phone" type="number" placeholder="Enter your phone">
-											</div>	
+												<input id="phone" name="phone" type="number" placeholder="Điền điện thoại">
+											</div>
 										</div>
 										<div class="col-12">
 											<div class="form-group message">
 												<label>Lời nhắn<span>*</span></label>
-												<textarea name="message" id="message" cols="30" rows="9" placeholder="Enter Message"></textarea>
+												<textarea name="message" id="message" cols="30" rows="9" placeholder="Nhập tin nhắn.."></textarea>
 											</div>
 										</div>
 										<div class="col-12">
@@ -89,7 +103,7 @@
 			</div>
 	</section>
 	<!--/ End Contact -->
-	
+
 	<!-- Map Section -->
 	<div class="map-section">
 	<div id="myMap">
@@ -113,7 +127,7 @@
 		  </div>
 		</div>
 	</div>
-	
+
 	<!-- Modals error -->
 	<div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">

@@ -65,7 +65,7 @@
                 <!-- End::header-link|layout-setting -->
             </div>
             <!-- End::header-element -->
-
+            @if (Auth::user()->type_user === 'admin')
             <!-- Start::header-element -->
             <div class="header-element cart-dropdown">
                 <!-- Start::header-link|dropdown-toggle -->
@@ -233,70 +233,80 @@
                 </div>
                 <!-- End::main-header-dropdown -->
             </div>
+            @endif
             <!-- End::header-element -->
+            @if (Auth::user()->type_user === 'admin')
 
-            <!-- Start::header-element -->
-            <div class="header-element notifications-dropdown">
-                <!-- Start::header-link|dropdown-toggle -->
-                <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown"
-                    data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
-                    <i class="bx bx-bell header-link-icon"></i>
-                    <span class="badge bg-secondary rounded-pill header-icon-badge pulse pulse-secondary"
-                        id="notification-icon-badge">!</span>
-                </a>
-                <!-- End::header-link|dropdown-toggle -->
-                <!-- Start::main-header-dropdown -->
-                <div class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
-                    <div class="p-3">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <p class="mb-0 fs-17 fw-semibold">Thông Báo</p>
-                        </div>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <ul class="list-unstyled mb-0" id="header-notification-scroll">
 
-                        <li class="dropdown-item">
-                            <div class="d-flex align-items-start">
-                                <div class="pe-2">
-                                    <span class="avatar avatar-md bg-pink-transparent avatar-rounded"><i
-                                            class="ti ti-user-check fs-18"></i></span>
-                                </div>
-                                <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                    <div>
-                                        @if (auth()->check())
-                                            @foreach ($notifications as $notification)
-                                                <p class="mb-0 fw-semibold">
-                                                    <a class="@if ($notification->read_at) read @endif" href="#">
-                                                        {{ $notification->message }}
-                                                    </a><br>
-                                                    <span class="text-warning"> {{ $notification->read_at }}</span>
-                                                </p>
 
-                                                <!-- Đưa form vào đây -->
-                                                <span class="badge bg-secondary-transparent" id="notifiation-data-{{ $notification->id }}">
-                                                    <form method="POST" action="{{ route('admin.markAsRead', ['notificationId' => $notification->id]) }}">
-                                                        @method('PATCH')
-                                                        @csrf
-                                                        <button style="border: none" type="submit">Đánh dấu là đã đọc</button>
-                                                    </form>
-                                                </span>
-                                            @endforeach
-                                        @else
-                                            <h1>Không có thông báo</h1>
-                                        @endif
-                                    </div>
-                                </div>
-
+                <!-- Start::header-element -->
+                <div class="header-element notifications-dropdown">
+                    <!-- Start::header-link|dropdown-toggle -->
+                    <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown"
+                        data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
+                        <i class="bx bx-bell header-link-icon"></i>
+                        <span class="badge bg-secondary rounded-pill header-icon-badge pulse pulse-secondary"
+                            id="notification-icon-badge">!</span>
+                    </a>
+                    <!-- End::header-link|dropdown-toggle -->
+                    <!-- Start::main-header-dropdown -->
+                    <div class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
+                        <div class="p-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="mb-0 fs-17 fw-semibold">Thông Báo</p>
                             </div>
-                        </li>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <ul class="list-unstyled mb-0" id="header-notification-scroll">
 
-                    </ul>
+                            <li class="dropdown-item">
+                                <div class="d-flex align-items-start">
+                                    <div class="pe-2">
+                                        <span class="avatar avatar-md bg-pink-transparent avatar-rounded"><i
+                                                class="ti ti-user-check fs-18"></i></span>
+                                    </div>
+                                    <div class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                        <div>
+                                            @if (auth()->check())
+                                                @foreach ($notifications as $notification)
+                                                    <p class="mb-0 fw-semibold">
+                                                        <a class="@if ($notification->read_at) read @endif"
+                                                            href="#">
+                                                            {{ $notification->message }}
+                                                        </a><br>
+                                                        <span class="text-warning">
+                                                            {{ $notification->read_at }}</span>
+                                                    </p>
 
+                                                    <!-- Đưa form vào đây -->
+                                                    <span class="badge bg-secondary-transparent"
+                                                        id="notifiation-data-{{ $notification->id }}">
+                                                        <form method="POST"
+                                                            action="{{ route('admin.markAsRead', ['notificationId' => $notification->id]) }}">
+                                                            @method('PATCH')
+                                                            @csrf
+                                                            <button style="border: none" type="submit">Đánh dấu là đã
+                                                                đọc</button>
+                                                        </form>
+                                                    </span>
+                                                @endforeach
+                                            @else
+                                                <h1>Không có thông báo</h1>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <!-- End::main-header-dropdown -->
                 </div>
-                <!-- End::main-header-dropdown -->
-            </div>
-            <!-- End::header-element -->
+                <!-- End::header-element -->
 
+            @endif
 
 
             <!-- Start::header-element -->

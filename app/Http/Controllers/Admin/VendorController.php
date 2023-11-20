@@ -89,7 +89,8 @@ class VendorController extends Controller
                 'brands.created_at as brand_created_at',
                 'brands.logo_images as lg'
             )
-            ->where('users.type_user', '=', 'vendor') // Chỉ lấy người dùng có type_user là "vendor"
+            ->where('users.type_user', '=', 'vendor')
+            // Chỉ lấy người dùng có type_user là "vendor"
             ->get();
 
         $processedUserIds = []; // Mảng lưu trữ user_id đã được xử lý

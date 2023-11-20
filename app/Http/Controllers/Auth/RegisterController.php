@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Uuid;
 
 class RegisterController extends Controller
 {
@@ -52,7 +53,11 @@ class RegisterController extends Controller
         ];
         // Tạo một mảng dữ liệu cho thông báo
         $notificationData = [
+            'id' => Uuid::uuid4()->toString(),
             'user_id' => $user_id,
+            'type' => 'YourNotificationType', // Loại thông báo, ví dụ: 'App\Notifications\UserRegistered'
+            'notifiable_type' => 'App\Models\User', // Model mà thông báo này liên quan đến
+            'notifiable_id' => $user_id,
             'message' => 'Shop ' . $userData['name'] . ' vừa được tạo.',
         ];
 

@@ -19,12 +19,12 @@ class WishListController extends Controller
     public function wishlist(Request $request)
     {
         if (empty($request->slug)) {
-            return back()->with('error', 'Invalid Products');
+            return back()->with('error', 'Sản Phẩm không hợp lệ');
         }
 
         $product = Product::where('slug', $request->slug)->first();
         if (empty($product)) {
-            return back()->with('error', 'Invalid Products');
+            return back()->with('error', 'Sản Phẩm không hợp lệ');
         }
 
         $already_wishlist = Wishlist::where('user_id', auth()->user()->id)
@@ -32,7 +32,7 @@ class WishListController extends Controller
             ->where('product_id', $product->id)
             ->first();
         if ($already_wishlist) {
-            return back()->with('error', 'You already placed in wishlist');
+            return back()->with('error', 'Sản phẩm đã ở trong yêu thích');
         } else {
             $wishlist = new Wishlist;
             $wishlist->user_id = auth()->user()->id;
@@ -47,10 +47,10 @@ class WishListController extends Controller
             $wishlist->quantity = 1;
             $wishlist->amount = $wishlist->price * $wishlist->quantity;
             if ($wishlist->product->stock < $wishlist->quantity || $wishlist->product->stock <= 0) {
-                return back()->with('error', 'Stock not sufficient!.');
+                return back()->with('error', 'Giỏ hàng rỗng!.');
             }
             $wishlist->save();
-            return back()->with('success', 'Product successfully added to wishlist');
+            return back()->with('success', 'Sản phẩm đã được thêm vào yêu thích');
         }
     }
 
@@ -59,8 +59,8 @@ class WishListController extends Controller
         $wishlist = Wishlist::find($request->id);
         if ($wishlist) {
             $wishlist->delete();
-            return back()->with('success', 'Wishlist successfully removed');
+            return back()->with('success', 'Xóa khỏi yêu thích thành công');
         }
-        return back()->with('error', 'Error please try again');
+        return back()->with('error', 'Lỗi, vui lòng thử lại');
     }
 }

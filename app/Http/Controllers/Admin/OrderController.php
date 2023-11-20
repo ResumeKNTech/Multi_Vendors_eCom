@@ -103,7 +103,7 @@ class OrderController extends Controller
         }
         Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
 
-        return redirect()->route('index')->with('success', 'Your product successfully placed in order');
+        return redirect()->route('index')->with('success', 'Sản phẩm đã được đặt thành công');
 
     }
 
@@ -140,9 +140,9 @@ class OrderController extends Controller
         }
         $status=$order->fill($data)->save();
         if($status){
-            return redirect()->route('admin.order.index')->with('success', 'Successfully updated order');
+            return redirect()->route('admin.order.index')->with('success', 'Hoàn tất hóa đơn thành công');
         } else {
-            return redirect()->route('admin.order.index')->with('error', 'Error while updating order');
+            return redirect()->route('admin.order.index')->with('error', 'Có lỗi trong quá trình');
         }
 
     }
@@ -153,12 +153,12 @@ class OrderController extends Controller
         if ($order) {
             $status = $order->delete();
             if ($status) {
-                return redirect()->route('admin.order.index')->with('success', 'Order successfully deleted');
+                return redirect()->route('admin.order.index')->with('success', 'Hóa đơn đã được xóa');
             } else {
-                return redirect()->route('admin.index')->with('error', 'Order cannot be deleted');
+                return redirect()->route('admin.index')->with('error', 'Hóa đơn không thể xóa');
             }
         } else {
-            return redirect()->back()->with('error', 'Order not found');
+            return redirect()->back()->with('error', 'Không tìm thấy hóa đơn');
         }
     }
 
@@ -175,16 +175,16 @@ class OrderController extends Controller
 
         if ($order) {
             if ($order->status == "new") {
-                return redirect()->route('index')->with('success', 'Your order has been placed. Please wait.');
+                return redirect()->route('index')->with('success', 'Sản phẩm đã được đặt vui lòng chờ.');
             } elseif ($order->status == "process") {
-                return redirect()->route('index')->with('success', 'Your order is under processing. Please wait.');
+                return redirect()->route('index')->with('success', 'Sản phẩm đã không được trong tiến trình.');
             } elseif ($order->status == "delivered") {
-                return redirect()->route('index')->with('success', 'Your order has been successfully delivered.');
+                return redirect()->route('index')->with('success', 'Đơn hàng đang trong quá trình vận chuyển .');
             } else {
-                return redirect()->route('index')->with('error', 'Your order was canceled. Please try again.');
+                return redirect()->route('index')->with('error', 'Đơn hàng bị lỗi, hãy kiểm tra lại.');
             }
         } else {
-            return back()->with('error', 'Invalid order number. Please try again.');
+            return back()->with('error', 'Mã hóa đơn sai, vui lòng nhập lại.');
         }
     }
 

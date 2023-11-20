@@ -45,7 +45,7 @@ class SettingController extends Controller
 
         // Update settings
         $status = DB::table('settings')
-            ->insert($data);
+            ->update($data);
 
         if ($status) {
             return redirect()->back()->with('success', 'Setting successfully updated');

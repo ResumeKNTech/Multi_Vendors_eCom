@@ -20,7 +20,6 @@
                                 <th scope="col">Zalo</th>
                                 <th scope="col">Thương Hiệu</th>
                                 <th scope="col">Doanh Thu</th>
-                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,7 +51,7 @@
                                         </td>
 
                                         <td>{{ $item->email }}</td>
-                                        
+
                                         <td>{{ $item->link_zalo }}</td>
                                         <td>
                                             <div class="avatar-list-stacked">
@@ -63,16 +62,9 @@
                                                 @endforeach
                                             </div>
                                         </td>
-                                        <td>$10,984.29</td>
+                                        <td></td>
 
-                                        <td>
-                                            <div class="hstack gap-2 fs-15">
-                                                <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-success"><i
-                                                        class="ri-download-2-line"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-info"><i
-                                                        class="ri-edit-line"></i></a>
-                                            </div>
-                                        </td>
+                                      
                                     </tr>
                                     <?php $processedUserIds[] = $item->user_id; // Đánh dấu user_id đã được xử lý ?>
                                 @endif

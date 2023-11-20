@@ -25,8 +25,8 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{ route('index') }}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="">Shop Details</a></li>
+                            <li><a href="{{ route('index') }}">Trang Chủ<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="">Chi tiết</a></li>
                         </ul>
                     </div>
                 </div>
@@ -81,13 +81,18 @@
                                             @endfor
                                         </ul>
                                         <a href="#"
-                                            class="total-review">({{ $product_detail['getReview']->count() }}) Review</a>
+                                            class="total-review">({{ $product_detail['getReview']->count() }}) Đánh giá</a>
                                     </div>
 
                                     <p class="price">
-                                        <span class="discount">{{ $product_detail->offer_price ?? $product_detail->price }} VND</span>
-                                        <s>{{ $product_detail->price }} VND</s>
+                                        <span class="discount">
+                                            {{ number_format($product_detail->offer_price ?? $product_detail->price, 0, ',', '.') }} VND
+                                        </span>
+                                        <s>
+                                            {{ number_format($product_detail->price, 0, ',', '.') }} VND
+                                        </s>
                                     </p>
+
 
 
                                     <p class="description">{!! $product_detail->product_description !!}</p>
@@ -99,7 +104,7 @@
                                     <form action="{{ route('single-add-to-cart') }}" method="POST">
                                         @csrf
                                         <div class="quantity">
-                                            <h6>Quantity :</h6>
+                                            <h6>Số lượng :</h6>
                                             <!-- Input Order -->
                                             <div class="input-group">
                                                 <div class="button minus">
@@ -121,21 +126,21 @@
                                             <!--/ End Input Order -->
                                         </div>
                                         <div class="add-to-cart mt-4">
-                                            <button type="submit" class="btn">Add to cart</button>
+                                            <button type="submit" class="btn">Thêm vào giỏ hàng</button>
                                             <a href="{{ route('add-to-wishlist', $product_detail->slug) }}"
                                                 class="btn min"><i class="ti-heart"></i></a>
                                         </div>
                                     </form>
 
-                                    <p class="cat">Category :<a
+                                    <p class="cat">Danh mục :<a
                                             href="{{ route('product-cat', $product_detail->cat_info['slug']) }}">{{ $product_detail->cat_info['category_name'] }}</a>
                                     </p>
                                     @if ($product_detail->sub_cat_info)
-                                        <p class="cat mt-1">Sub Category :<a
+                                        <p class="cat mt-1">Thể loại :<a
                                                 href="{{ route('product-sub-cat', [$product_detail->cat_info['slug'], $product_detail->sub_cat_info['slug']]) }}">{{ $product_detail->sub_cat_info['sub_category_name'] }}</a>
                                         </p>
                                     @endif
-                                    <p class="availability">Stock : @if ($product_detail->stock > 0)
+                                    <p class="availability">Tồn kho : @if ($product_detail->stock > 0)
                                             <span class="badge badge-success">{{ $product_detail->stock }}</span>
                                         @else
                                             <span class="badge badge-danger">{{ $product_detail->stock }}</span>
@@ -153,9 +158,9 @@
                                     <!-- Tab Nav -->
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item"><a class="nav-link active" data-toggle="tab"
-                                                href="#description" role="tab">Description</a></li>
+                                                href="#description" role="tab">Mô Tả</a></li>
                                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#reviews"
-                                                role="tab">Reviews</a></li>
+                                                role="tab">Đánh Giá</a></li>
                                     </ul>
                                     <!--/ End Tab Nav -->
                                 </div>
@@ -182,11 +187,11 @@
                                                     <!-- Review -->
                                                     <div class="comment-review">
                                                         <div class="add-review">
-                                                            <h5>Add A Review</h5>
+                                                            <h5>Đánh Giá Sản Phẩm</h5>
                                                             <p>Your email address will not be published. Required fields are
                                                                 marked</p>
                                                         </div>
-                                                        <h4>Your Rating <span class="text-danger">*</span></h4>
+                                                        <h4>Đánh Giá <span class="text-danger">*</span></h4>
                                                         <div class="review-inner">
                                                             <!-- Form -->
                                                             @auth
@@ -244,7 +249,7 @@
                                                                         </div>
                                                                         <div class="col-lg-12 col-12">
                                                                             <div class="form-group">
-                                                                                <label>Write a review</label>
+                                                                                <label>Điền Đánh Giá</label>
                                                                                 <textarea name="review" rows="6" placeholder=""></textarea>
                                                                             </div>
                                                                         </div>
@@ -258,10 +263,10 @@
                                                                 </form>
                                                             @else
                                                                 <p class="text-center p-5">
-                                                                    You need to <a href="{{ route('auth.login') }}"
-                                                                        style="color:rgb(54, 54, 204)">Login</a> OR <a
+                                                                    You need to <a href="{{ route('client.login') }}"
+                                                                        style="color:rgb(54, 54, 204)">Đăng Ký</a> OR <a
                                                                         style="color:blue"
-                                                                        href="{{ route('auth.register') }}">Register</a>
+                                                                        href="{{ route('client.register') }}">Register</a>
 
                                                                 </p>
                                                                 <!--/ End Form -->
@@ -341,7 +346,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Related Products</h2>
+                        <h2>Sản Phẩm Liên Quan</h2>
                     </div>
                 </div>
             </div>

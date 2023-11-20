@@ -104,7 +104,7 @@
                             </select>
                             <form method="POST" action="{{ route('product.search') }}">
                                 @csrf
-                                <input name="search" placeholder="Search Products Here....." type="search">
+                                <input name="search" placeholder="Tìm kiếm sản phẩm ở đây....." type="search">
                                 <button class="btnn" type="submit"><i class="ti-search"></i></button>
                             </form>
                         </div>
@@ -132,8 +132,8 @@
                             @auth
                                 <div class="shopping-item">
                                     <div class="dropdown-cart-header">
-                                        <span>{{ count(Helper::getAllProductFromWishlist()) }} Items</span>
-                                        <a href="{{ route('wishlist') }}">View Wishlist</a>
+                                        <span>{{ count(Helper::getAllProductFromWishlist()) }} Sản Phẩm</span>
+                                        <a href="{{ route('wishlist') }}">Xem Danh Sách Yêu Thích</a>
                                     </div>
                                     <ul class="shopping-list">
                                         {{-- {{Helper::getAllProductFromCart()}} --}}
@@ -156,7 +156,7 @@
                                     </ul>
                                     <div class="bottom">
                                         <div class="total">
-                                            <span>Total</span>
+                                            <span> Tổng cộng</span>
                                             <span class="total-amount">{{ Helper::totalWishlistPrice() }} VND</span>
                                         </div>
                                         <a href="{{ route('cart') }}" class="btn animate">Cart</a>
@@ -175,8 +175,8 @@
                             @auth
                                 <div class="shopping-item">
                                     <div class="dropdown-cart-header">
-                                        <span>{{ count(Helper::getAllProductFromCart()) }} Items</span>
-                                        <a href="{{ route('cart') }}">View Cart</a>
+                                        <span>{{ count(Helper::getAllProductFromCart()) }} Sản phẩm</span>
+                                        <a href="{{ route('cart') }}">Xem giỏ hàng</a>
                                     </div>
                                     <ul class="shopping-list">
                                         {{-- {{Helper::getAllProductFromCart()}} --}}
@@ -199,10 +199,10 @@
                                     </ul>
                                     <div class="bottom">
                                         <div class="total">
-                                            <span>Total</span>
+                                            <span>Tổng</span>
                                             <span class="total-amount">{{ Helper::totalCartPrice() }} VND</span>
                                         </div>
-                                        <a href="{{ route('checkout') }}" class="btn animate">Checkout</a>
+                                        <a href="{{ route('checkout') }}" class="btn animate">Thanh Toán</a>
                                     </div>
                                 </div>
                             @endauth
@@ -226,18 +226,18 @@
                                     <div class="nav-inner">
                                         <ul class="nav main-menu menu navbar-nav">
                                             <li class="{{ Request::path() == 'home' ? 'active' : '' }}"><a
-                                                    href="{{ route('index') }}">Home</a></li>
+                                                    href="{{ route('index') }}">Trang Chủ</a></li>
                                             <li class="{{ Request::path() == 'about-us' ? 'active' : '' }}"><a
-                                                    href="{{ route('about-us') }}">About Us</a></li>
+                                                    href="{{ route('about-us') }}">Giới Thiệu</a></li>
                                             <li class="@if (Request::path() == 'product-grids' || Request::path() == 'product-lists') active @endif"><a
-                                                    href="{{ route('product-grids') }}">Products</a><span
+                                                    href="{{ route('product-grids') }}">Sản Phẩm</a><span
                                                     class="new">New</span></li>
                                             {{ Helper::getHeaderCategory() }}
                                             <li class="{{ Request::path() == 'blog' ? 'active' : '' }}"><a
-                                                    href="{{ route('blog') }}">Bài Báo</a></li>
+                                                    href="{{ route('blog') }}">Bài Blog</a></li>
 
                                             <li class="{{ Request::path() == 'contact' ? 'active' : '' }}"><a
-                                                    href="{{ route('contact-us') }}">Contact Us</a></li>
+                                                    href="{{ route('contact-us') }}">Liên Lạc</a></li>
                                         </ul>
                                     </div>
                                 </div>

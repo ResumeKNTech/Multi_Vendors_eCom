@@ -39,11 +39,9 @@
                     <div class="single-footer links">
                         <h4>Thông tin</h4>
                         <ul>
-                            <li><a href="">Về chúng tôi</a></li>
-                            <li><a href="#">FAQ</a></li>
+                            <li><a href="{{ route('about-us') }}">Về chúng tôi</a></li>
                             <li><a href="#">Điều khoản và điều kiện</a></li>
-                            <li><a href="">Liên hệ chúng tôi</a></li>
-                            <li><a href="#">Trợ giúp</a></li>
+                            <li><a href="{{ route('contact-us') }}">Liên hệ chúng tôi</a></li>
                         </ul>
                     </div>
                     <!-- End Single Widget -->

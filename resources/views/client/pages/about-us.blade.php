@@ -1,9 +1,23 @@
 @extends('client.layouts.app')
 
-@section('title','E-SHOP || Blog Page')
+@section('title','GreenEcom || Giới thiệu')
 
 @section('main-content')
 <!-- About Us -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="{{route('index')}}">Trang chủ<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="javascript:void(0);">GIới thiệu</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <section class="about-us section">
     <div class="container">
         <div class="row">
@@ -15,8 +29,8 @@
                     <h3>Welcome To <span>Eshop</span></h3>
                     <p>@foreach($settings as $data)   {!! strip_tags( $data->description ) !!} @endforeach</p>
                     <div class="button">
-                        <a href="{{route('blog')}}" class="btn">Our Blog</a>
-                        <a href="{{route('contact-us')}}" class="btn primary">Contact Us</a>
+                        <a href="{{route('blog')}}" class="btn">Tin Tức</a>
+                        <a href="{{route('contact-us')}}" class="btn primary">Liên Lạc</a>
                     </div>
                 </div>
             </div>

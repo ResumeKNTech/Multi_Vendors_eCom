@@ -1,7 +1,20 @@
 @extends('client.layouts.app')
-@section('title', 'GreenEcom || HOME PAGE')
+@section('title', 'GreenEcom || Sản Phẩm')
 @section('main-content')
-
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="{{route('index')}}">Trang chủ<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="javascript:void(0);">Sản Phẩm</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Product Style -->
     <form action="{{ route('shop.filter') }}" method="POST">
         @csrf
@@ -44,7 +57,7 @@
                             <!--/ End Single Widget -->
                             <!-- Shop By Price -->
                             <div class="single-widget range">
-                                <h3 class="title">Mua sắm theo giá</h3>
+                                <h3 class="title">Lọc theo giá</h3>
                                 <div class="price-filter">
                                     <div class="price-filter-inner">
                                         @php
@@ -53,7 +66,7 @@
                                         @endphp
                                         <div id="slider-range" data-min="0" data-max="{{ $max }}"></div>
                                         <div class="product_filter">
-                                            <button type="submit" class="filter_button">Filter</button>
+                                            <button type="submit" class="filter_button">Lọc</button>
                                             <div class="label-input">
                                                 <span>Khoảng giá:</span>
                                                 <input style="" type="text" id="amount" readonly />
@@ -80,14 +93,21 @@
                                             <img src="{{ asset($photo[0]) }}" alt="{{ $photo[0] }}">
                                         </div>
                                         <div class="content">
-                                            <h5><a href="">{{ $product->category_id }}</a>
-                                            </h5>
+                                            <h5><a href="{{route('product-detail',$product->slug)}}">{{$product->product_title}}</a></h5>
+                                        </h5>
                                             @php
                                                 $org = $product->offer_price;
                                             @endphp
-                                            <p class="price"><del
-                                                    class="text-muted">${{ number_format($product->price, 2) }}</del>
-                                                ${{ number_format($org, 2) }} </p>
+                                        <p class="price">
+                                            @if ($product->offer_price)
+                                                <del class="text-muted">${{ number_format($product->price, (int) $product->price == $product->price ? 0 : 2, '.', ',') }}</del>
+                                                {{ number_format($product->offer_price, (int) $product->offer_price == $product->offer_price ? 0 : 2, '.', ',') }} VND
+                                            @else
+                                                {{ number_format($product->price, (int) $product->price == $product->price ? 0 : 2, '.', ',') }} VND
+                                            @endif
+                                        </p>
+
+
 
                                         </div>
                                     </div>
@@ -137,15 +157,15 @@
                                         <div class="single-shorter">
                                             <label>Sắp xếp theo :</label>
                                             <select class='sortBy' name='sortBy' onchange="this.form.submit();">
-                                                <option value="">Mặc địnht</option>
+                                                <option value="">Mặc định</option>
                                                 <option value="product_title" @if (!empty($_GET['sortBy']) && $_GET['sortBy'] == 'product_title') selected @endif>
-                                                    Name</option>
+                                                    Tên </option>
                                                 <option value="price" @if (!empty($_GET['sortBy']) && $_GET['sortBy'] == 'price') selected @endif>
-                                                    Price</option>
+                                                    Giá</option>
                                                 <option value="category" @if (!empty($_GET['sortBy']) && $_GET['sortBy'] == 'category') selected @endif>
-                                                    Category</option>
+                                                    Danh Mục</option>
                                                 <option value="brand" @if (!empty($_GET['sortBy']) && $_GET['sortBy'] == 'brand') selected @endif>
-                                                    Brand</option>
+                                                    Thương Hiệu</option>
                                             </select>
                                         </div>
                                     </div>
@@ -189,7 +209,7 @@
                                                         <a title="Wishlist"
                                                             href="{{ route('add-to-wishlist', $product->slug) }}"
                                                             class="wishlist" data-id="{{ $product->id }}"><i
-                                                                class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                                class=" ti-heart "></i><span>Thêm vào yêu thích</span></a>
                                                     </div>
                                                     <div class="product-action-2">
                                                         <a title="Add to cart"
@@ -204,10 +224,16 @@
                                                 </h3>
 
 
-                                                <span>{{$product->offer_price }} VND</span>
+                                                @if ($product->offer_price)
+                                                <span>{{ number_format($product->offer_price, 0, ',', '.') }} VND</span>
+                                            @else
+                                                <span>{{ number_format($product->price, 0, ',', '.') }} VND</span>
+                                            @endif
 
-                                                <del
-                                                    style="padding:2% 2%; border-radius:40%; background:#F7941D">{{ $product->price }} VND </del>
+                                            <del style="padding:2% 2%; border-radius:40%; background:#F7941D">
+                                                {{ number_format($product->price, 0, ',', '.') }} VND
+                                            </del>
+
                                             </div>
                                         </div>
                                     </div>

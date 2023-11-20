@@ -1,6 +1,6 @@
 @extends('client.layouts.app')
 
-@section('title','E-SHOP || Blog Page')
+@section('title','GreenEcom || Trang Tin Tức')
 
 @section('main-content')
     <!-- Breadcrumbs -->
@@ -11,7 +11,7 @@
                     <div class="bread-inner">
                         <ul class="bread-list">
                             <li><a href="{{route('index')}}">Trang chủ<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="javascript:void(0);">Blog</a></li>
+                            <li class="active"><a href="javascript:void(0);">Tin Tức</a></li>
                         </ul>
                     </div>
                 </div>

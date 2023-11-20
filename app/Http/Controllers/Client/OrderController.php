@@ -103,7 +103,7 @@ class OrderController extends Controller
         }
         Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
 
-        return redirect()->route('index')->with('success', 'Your product successfully placed in order');
+        return redirect()->route('index')->with('success', 'Sản phẩm đã được đặt thành công');
 
     }
 
@@ -140,9 +140,9 @@ class OrderController extends Controller
 
         $status=$order->fill($data)->save();
         if($status){
-            return redirect()->route('order.index')->with('success', 'Successfully updated order');
+            return redirect()->route('order.index')->with('success', 'Cập nhập đơn hàng thành công');
         } else {
-            return redirect()->route('order.index')->with('error', 'Error while updating order');
+            return redirect()->route('order.index')->with('error', 'Có lỗi trong quá trình cập nhập');
         }
 
     }
@@ -153,12 +153,12 @@ class OrderController extends Controller
         if ($order) {
             $status = $order->delete();
             if ($status) {
-                return redirect()->route('order.index')->with('success', 'Order successfully deleted');
+                return redirect()->route('order.index')->with('success', 'Đơn hàng đã được xóa thành công');
             } else {
-                return redirect()->route('order.index')->with('error', 'Order cannot be deleted');
+                return redirect()->route('order.index')->with('error', 'Đơn hàng không thể xóa');
             }
         } else {
-            return redirect()->back()->with('error', 'Order not found');
+            return redirect()->back()->with('error', 'Không tìm thấy đơn hàng');
         }
     }
 
@@ -171,30 +171,31 @@ class OrderController extends Controller
     {
         // Check if the user is authenticated
         if (!auth()->check()) {
-            return back()->with('error', 'You must be logged in to track an order.');
+            return back()->with('error', 'Bạn nên đăng nhập trước khi tra cứu.');
         }
-    
+
         // Proceed with fetching the order using the authenticated user's ID
         $order = Order::where('user_id', auth()->user()->id)
                       ->where('order_number', $request->order_number)
                       ->first();
-    
-        if ($order) {
-            switch ($order->status) {
-                case "new":
-                    return redirect()->route('index')->with('success', 'Your order has been placed. Please wait.');
-                case "process":
-                    return redirect()->route('index')->with('success', 'Your order is under processing. Please wait.');
-                case "delivered":
-                    return redirect()->route('index')->with('success', 'Your order has been successfully delivered.');
-                default:
-                    return redirect()->route('index')->with('error', 'Your order was canceled. Please try again.');
-            }
-        }
-    
-        return back()->with('error', 'Invalid order number. Please try again.');
+
+                      if ($order) {
+                        switch ($order->status) {
+                            case "new":
+                                return redirect()->route('index')->with('success', 'Đơn hàng của bạn đã được đặt. Vui lòng chờ.');
+                            case "process":
+                                return redirect()->route('index')->with('success', 'Đơn hàng của bạn đang được xử lý. Vui lòng chờ.');
+                            case "delivered":
+                                return redirect()->route('index')->with('success', 'Đơn hàng của bạn đang được giao thành công.');
+                            default:
+                                return redirect()->route('index')->with('error', 'Đơn hàng của bạn đã bị hủy. Vui lòng thử lại.');
+                        }
+                    }
+
+                    return back()->with('error', 'Số đơn hàng không hợp lệ. Vui lòng thử lại.');
+
     }
-        
+
 
     // PDF generate
     public function pdf(Request $request){

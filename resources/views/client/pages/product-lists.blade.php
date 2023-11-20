@@ -55,7 +55,7 @@
                                 <!--/ End Single Widget -->
                                 <!-- Shop By Price -->
 								<div class="single-widget range">
-									<h3 class="title">Shop by Price</h3>
+									<h3 class="title">Lọc Theo Giá</h3>
                                     <div class="price-filter">
 										<div class="price-filter-inner">
 
@@ -65,7 +65,7 @@
 											@endphp
 											<div id="slider-range" data-min="0" data-max="{{$max}}"></div>
 											<div class="product_filter">
-											<button type="submit" class="filter_button">Filter</button>
+											<button type="submit" class="filter_button">Lọc</button>
 											<div class="label-input">
 												<span>Range:</span>
 												<input style="" type="text" id="amount" readonly/>
@@ -79,7 +79,7 @@
 								<!--/ End Shop By Price -->
                                 <!-- Single Widget -->
                                 <div class="single-widget recent-post">
-                                    <h3 class="title">Recent post</h3>
+                                    <h3 class="title">Bài Blog Gần Đây</h3>
                                     {{-- {{dd($recent_products)}} --}}
                                     @foreach($recent_products as $product)
                                         <!-- Single Post -->
@@ -92,10 +92,16 @@
                                             </div>
                                             <div class="content">
                                                 <h5><a href="{{route('product-detail',$product->slug)}}">{{$product->product_title}}</a></h5>
-                                                @php
-                                                    $org=($product->offer_price);
-                                                @endphp
-                                                <p class="price"><del class="text-muted">${{number_format($product->price,2)}}</del>   ${{number_format($org,2)}}  </p>
+                                                <p class="price">
+                                                    @if ($product->offer_price)
+                                                        <del class="text-muted">${{ number_format($product->price, (int) $product->price == $product->price ? 0 : 2, '.', ',') }}</del>
+                                                        {{ number_format($product->offer_price, (int) $product->offer_price == $product->offer_price ? 0 : 2, '.', ',') }} VND
+                                                    @else
+                                                        {{ number_format($product->price, (int) $product->price == $product->price ? 0 : 2, '.', ',') }} VND
+                                                    @endif
+                                                </p>
+
+
                                             </div>
                                         </div>
                                         <!-- End Single Post -->

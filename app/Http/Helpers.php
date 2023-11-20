@@ -28,19 +28,19 @@ class Helper
 
         if ($categories->isNotEmpty()) {
             echo '<li>';
-            echo '<a href="javascript:void(0);">Category<i class="ti-angle-down"></i></a>';
+            echo '<a href="javascript:void(0);">Danh Mục<i class="ti-angle-down"></i></a>';
             echo '<ul class="dropdown border-0 shadow">';
 
             foreach ($categories as $category) {
                 if ($category->subCategories->isNotEmpty()) {
-                    echo '<li><a href="' . route('index', $category->slug) . '">' . $category->category_name . '</a>';
+                    echo '<li><a href="' . route('product-cat', $category->slug) . '">' . $category->category_name . '</a>';
                     echo '<ul class="dropdown sub-dropdown border-0 shadow">';
                     foreach ($category->subCategories as $subCategory) {
-                        echo '<li><a href="' . route('index', [$category->slug, $subCategory->slug]) . '">' . $subCategory->sub_category_name . '</a></li>';
+                        echo '<li><a href="' . route('product-sub-cat', [$category->slug, $subCategory->slug]) . '">' . $subCategory->sub_category_name . '</a></li>';
                     }
                     echo '</ul></li>';
                 } else {
-                    echo '<li><a href="' . route('index', $category->slug) . '">' . $category->category_name . '</a></li>';
+                    echo '<li><a href="' . route('product-sub-cat', $category->slug) . '">' . $category->category_name . '</a></li>';
                 }
             }
 

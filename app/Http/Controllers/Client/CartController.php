@@ -57,7 +57,7 @@ class CartController extends Controller
             $cart->save();
             $wishlist = Wishlist::where('user_id', auth()->user()->id)->where('cart_id', null)->update(['cart_id' => $cart->id]);
         }
-        return back()->with('success', 'Product successfully added to cart.');
+        return back()->with('success', 'S.');
     }
 
     public function singleAddToCart(Request $request)
@@ -71,11 +71,11 @@ class CartController extends Controller
 
         $product = Product::where('slug', $request->slug)->first();
         if ($product->stock < $request->quant[1]) {
-            return back()->with('error', 'Out of stock, You can add other products.');
+            return back()->with('error', 'Hết hàng, xin lỗi bạn vì sự bất tiện.');
         }
         if (($request->quant[1] < 1) || empty($product)) {
             // Và cũng áp dụng cho các thông báo khác:
-            return back()->with('error', 'Stock not sufficient!.');
+            return back()->with('error', 'Hết hàng :(((!.');
         }
 
         $already_cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->where('product_id', $product->id)->first();
@@ -111,7 +111,7 @@ class CartController extends Controller
             // return $cart;
             $cart->save();
         }
-        return back()->with('success', 'Product successfully added to cart.');
+        return back()->with('success', 'Sản Phẩm Đã Được Thêm Vào Giỏ Hàng.');
     }
 
     public function cartDelete(Request $request)
@@ -119,9 +119,9 @@ class CartController extends Controller
         $cart = Cart::find($request->id);
         if ($cart) {
             $cart->delete();
-            return back()->with('success', 'Cart successfully removed');
+            return back()->with('success', 'Giỏ hàng đã được xóa thành công');
         }
-        return back()->with('error', 'Error please try again');
+        return back()->with('error', 'Lỗi, Vui lòng thử lại');
     }
 
     public function cartUpdate(Request $request)
@@ -141,7 +141,7 @@ class CartController extends Controller
                     // return $quant;
 
                     if ($cart->product->stock < $quant) {
-                        return back()->with('error', 'Invalid Products');
+                        return back()->with('error', 'Sản phẩm không hợp lệ');
                     }
                     $cart->quantity = ($cart->product->stock > $quant) ? $quant  : $cart->product->stock;
                     // return $cart;
@@ -151,14 +151,14 @@ class CartController extends Controller
                     $cart->amount = $after_price * $quant;
                     // return $cart->price;
                     $cart->save();
-                    $success = 'Cart successfully updated!';
+                    $success = 'Giỏ hàng cập nhập thành công!';
                 } else {
-                    $error[] = 'Cart Invalid!';
+                    $error[] = 'Giỏ hàng không tồn tại!';
                 }
             }
             return back()->with($error)->with('success', $success);
         } else {
-            return back()->with('Cart Invalid!');
+            return back()->with('Giỏ hàng không tồn tại!');
         }
     }
 
