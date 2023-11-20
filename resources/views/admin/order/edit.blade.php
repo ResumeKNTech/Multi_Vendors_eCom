@@ -1,8 +1,7 @@
-@extends('backend.layouts.master')
-
+@extends('layouts.app')
 @section('title','Order Detail')
 
-@section('main-content')
+@section('content')
 <div class="card">
   <h5 class="card-header">Order Edit</h5>
   <div class="card-body">

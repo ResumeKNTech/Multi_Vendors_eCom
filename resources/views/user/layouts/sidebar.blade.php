@@ -35,8 +35,8 @@
 
     <!-- Reviews -->
     <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fas fa-comments"></i>
+      <a class="nav-link" href="{{route('user.productreview.index')}}">
+        <i class="fas fa-comments"></i>
             <span>Reviews</span></a>
     </li>
 
@@ -50,8 +50,8 @@
     </div>
     <!-- Comments -->
     <li class="nav-item">
-      <a class="nav-link" href="">
-          <i class="fas fa-comments fa-chart-area"></i>
+      <a class="nav-link" href="{{route('user.post-comment.index')}}">
+        <i class="fas fa-comments fa-chart-area"></i>
           <span>Comments</span>
       </a>
     </li>

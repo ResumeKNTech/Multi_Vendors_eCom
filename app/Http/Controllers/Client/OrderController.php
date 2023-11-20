@@ -169,24 +169,32 @@ class OrderController extends Controller
 
     public function productTrackOrder(Request $request)
     {
+        // Check if the user is authenticated
+        if (!auth()->check()) {
+            return back()->with('error', 'You must be logged in to track an order.');
+        }
+    
+        // Proceed with fetching the order using the authenticated user's ID
         $order = Order::where('user_id', auth()->user()->id)
                       ->where('order_number', $request->order_number)
                       ->first();
-
+    
         if ($order) {
-            if ($order->status == "new") {
-                return redirect()->route('index')->with('success', 'Your order has been placed. Please wait.');
-            } elseif ($order->status == "process") {
-                return redirect()->route('index')->with('success', 'Your order is under processing. Please wait.');
-            } elseif ($order->status == "delivered") {
-                return redirect()->route('index')->with('success', 'Your order has been successfully delivered.');
-            } else {
-                return redirect()->route('index')->with('error', 'Your order was canceled. Please try again.');
+            switch ($order->status) {
+                case "new":
+                    return redirect()->route('index')->with('success', 'Your order has been placed. Please wait.');
+                case "process":
+                    return redirect()->route('index')->with('success', 'Your order is under processing. Please wait.');
+                case "delivered":
+                    return redirect()->route('index')->with('success', 'Your order has been successfully delivered.');
+                default:
+                    return redirect()->route('index')->with('error', 'Your order was canceled. Please try again.');
             }
-        } else {
-            return back()->with('error', 'Invalid order number. Please try again.');
         }
+    
+        return back()->with('error', 'Invalid order number. Please try again.');
     }
+        
 
     // PDF generate
     public function pdf(Request $request){

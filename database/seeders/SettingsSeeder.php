@@ -22,7 +22,7 @@ class SettingsSeeder extends Seeder
 
             ',
             'logo' => 'upload/logo.png', // Thay thế với đường dẫn thực tế của logo
-            'photo' => 'upload/logo.png', // Thay thế với đường dẫn thực tế của hình ảnh
+            'photo' => 'settings/logo.png', // Thay thế với đường dẫn thực tế của hình ảnh
             'address' => 'Địa chỉ của GreenEcom',
             'phone' => '0935769312',
             'email' => 'egreen.makemoney@ecommerce.com',

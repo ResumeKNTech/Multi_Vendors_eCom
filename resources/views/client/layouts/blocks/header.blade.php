@@ -29,29 +29,32 @@
                     <!-- Top Right -->
                     <div class="right-content">
                         <ul class="list-main">
-                            <li><i class="ti-location-pin"></i> <a href="">Track Order</a></li>
+                            <li><i class="ti-location-pin"></i> <a href="{{route('order.track')}}">Tra cứu hóa đơn</a></li>
                             {{-- <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li> --}}
                             @auth
-                            @if (Auth::user()->type_user == 'vendor' || Auth::user()->type_user == 'admin')
-                                {{-- Đường dẫn cho admin và vendor --}}
-                                <li><i class="ti-user"></i> <a href="{{ route('admin.dashboard') }}" target="_blank">Dashboard</a></li>
-                            @elseif (Auth::user()->type_user == 'customer')
-                                {{-- Đường dẫn cho customer --}}
-                                <li><i class="ti-user"></i> <a href="{{ route('user') }}" target="_blank">Dashboard</a></li>
-                            @endif
-                            <li>
-                                <i class="ti-power-off" style="float:left"> </i>
-                                <form method="POST" style="float:left" action="{{ route('client.logout') }}">
-                                  @csrf
-                                  <a href="javascript:void(0);" onclick="this.closest('form').submit();">
-                                    Log Out
-                                  </a>
-                                </form>
-                            </li>
-                        @else
-                            {{-- Đường dẫn cho người dùng chưa đăng nhập --}}
-                            <li><i class="ti-power-off"></i><a href="{{ route('client.login') }}">Login</a> / <a href="{{ route('auth.register') }}">Register</a></li>
-                        @endauth
+                                @if (Auth::user()->type_user == 'vendor' || Auth::user()->type_user == 'admin')
+                                    {{-- Đường dẫn cho admin và vendor --}}
+                                    <li><i class="ti-user"></i> <a href="{{ route('admin.dashboard') }}"
+                                            target="_blank">Quản Trị</a></li>
+                                @elseif (Auth::user()->type_user == 'customer')
+                                    {{-- Đường dẫn cho customer --}}
+                                    <li><i class="ti-user"></i> <a href="{{ route('user') }}" target="_blank">Quản Trị</a>
+                                    </li>
+                                @endif
+                                <li>
+                                    <i class="ti-power-off" style="float:left"> </i>
+                                    <form method="POST" style="float:left" action="{{ route('client.logout') }}">
+                                        @csrf
+                                        <a href="javascript:void(0);" onclick="this.closest('form').submit();">
+                                            Đăng Xuất
+                                        </a>
+                                    </form>
+                                </li>
+                            @else
+                                {{-- Đường dẫn cho người dùng chưa đăng nhập --}}
+                                <li><i class="ti-power-off"></i><a href="{{ route('client.login') }}">Đăng Nhập</a> / <a
+                                        href="{{ route('client.register') }}">Đăng Ký</a></li>
+                            @endauth
 
                         </ul>
                     </div>
@@ -71,7 +74,7 @@
                             $settings = DB::table('settings')->get();
                         @endphp
                         <a href="{{ route('index') }}"><img
-                                src="@foreach ($settings as $data) {{ asset($data->logo) }} @endforeach"
+                                src="@foreach ($settings as $data) {{ asset($data->photo) }} @endforeach"
                                 alt="logo"></a>
                     </div>
                     <!--/ End Logo -->
@@ -130,7 +133,7 @@
                                 <div class="shopping-item">
                                     <div class="dropdown-cart-header">
                                         <span>{{ count(Helper::getAllProductFromWishlist()) }} Items</span>
-                                        <a href="{{route('wishlist')}}">View Wishlist</a>
+                                        <a href="{{ route('wishlist') }}">View Wishlist</a>
                                     </div>
                                     <ul class="shopping-list">
                                         {{-- {{Helper::getAllProductFromCart()}} --}}
@@ -139,24 +142,24 @@
                                                 $photo = explode(',', $data->product['images']);
                                             @endphp
                                             <li>
-                                                <a href="{{route('wishlist-delete',$data->id)}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-                                                <a class="cart-img" href="#"><img src="{{asset($photo[0]) }}"
+                                                <a href="{{ route('wishlist-delete', $data->id) }}" class="remove"
+                                                    title="Remove this item"><i class="fa fa-remove"></i></a>
+                                                <a class="cart-img" href="#"><img src="{{ asset($photo[0]) }}"
                                                         alt="{{ $photo[0] }}"></a>
-                                                <h4><a href="{{route('product-detail',$data->product['slug'])}}"
+                                                <h4><a href="{{ route('product-detail', $data->product['slug']) }}"
                                                         target="_blank">{{ $data->product['product_title'] }}</a>
                                                 </h4>
-                                                <p class="quantity">{{ $data->quantity }} x  <span
-                                                        class="amount">{{$data->price }} VND</span></p>
+                                                <p class="quantity">{{ $data->quantity }} x <span
+                                                        class="amount">{{ $data->price }} VND</span></p>
                                             </li>
                                         @endforeach
                                     </ul>
                                     <div class="bottom">
                                         <div class="total">
                                             <span>Total</span>
-                                            <span
-                                                class="total-amount">{{ (Helper::totalWishlistPrice())  }} VND</span>
+                                            <span class="total-amount">{{ Helper::totalWishlistPrice() }} VND</span>
                                         </div>
-                                        <a href="{{route('cart')}}" class="btn animate">Cart</a>
+                                        <a href="{{ route('cart') }}" class="btn animate">Cart</a>
                                     </div>
                                 </div>
                             @endauth
@@ -182,11 +185,13 @@
                                                 $photo = explode(',', $data->product['images']);
                                             @endphp
                                             <li>
-                                                <a href="{{route('cart-delete',$data->id)}}" class="remove" title="Remove this item"><i
-                                                        class="fa fa-remove"></i></a>
-                                                <a class="cart-img" href="#"><img src="{{asset ($photo[0]) }}"
+                                                <a href="{{ route('cart-delete', $data->id) }}" class="remove"
+                                                    title="Remove this item"><i class="fa fa-remove"></i></a>
+                                                <a class="cart-img" href="#"><img src="{{ asset($photo[0]) }}"
                                                         alt="{{ $photo[0] }}"></a>
-                                                <h4><a href="{{route('product-detail',$data->product['slug'])}}">{{ $data->product['product_title'] }}</a></h4>
+                                                <h4><a
+                                                        href="{{ route('product-detail', $data->product['slug']) }}">{{ $data->product['product_title'] }}</a>
+                                                </h4>
                                                 <p class="quantity">{{ $data->quantity }} x - <span
                                                         class="amount">{{ $data->price }} VND</span></p>
                                             </li>
@@ -195,10 +200,9 @@
                                     <div class="bottom">
                                         <div class="total">
                                             <span>Total</span>
-                                            <span
-                                                class="total-amount">{{ (Helper::totalCartPrice()) }} VND</span>
+                                            <span class="total-amount">{{ Helper::totalCartPrice() }} VND</span>
                                         </div>
-                                        <a href="{{route('checkout')}}" class="btn animate">Checkout</a>
+                                        <a href="{{ route('checkout') }}" class="btn animate">Checkout</a>
                                     </div>
                                 </div>
                             @endauth
@@ -222,18 +226,18 @@
                                     <div class="nav-inner">
                                         <ul class="nav main-menu menu navbar-nav">
                                             <li class="{{ Request::path() == 'home' ? 'active' : '' }}"><a
-                                                    href="{{ route('index') }}">Home</a></li>
+                                                    href="{{ route('index') }}">Trang Chủ</a></li>
                                             <li class="{{ Request::path() == 'about-us' ? 'active' : '' }}"><a
-                                                    href="{{ route('about-us') }}">About Us</a></li>
+                                                    href="{{ route('about-us') }}">Giới Thiệu</a></li>
                                             <li class="@if (Request::path() == 'product-grids' || Request::path() == 'product-lists') active @endif"><a
-                                                    href="{{ route('product-grids') }}">Products</a><span
+                                                    href="{{ route('product-grids') }}">Sản Phấm</a><span
                                                     class="new">New</span></li>
                                             {{ Helper::getHeaderCategory() }}
                                             <li class="{{ Request::path() == 'blog' ? 'active' : '' }}"><a
-                                                    href="{{ route('blog') }}">Blog</a></li>
+                                                    href="{{ route('blog') }}">Bài Báo</a></li>
 
                                             <li class="{{ Request::path() == 'contact' ? 'active' : '' }}"><a
-                                                    href="{{ route('contact-us') }}">Contact Us</a></li>
+                                                    href="{{ route('contact-us') }}">Liên Lạc</a></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -1,5 +1,5 @@
 @extends('client.layouts.app')
-@section('title', 'E-SHOP || HOME PAGE')
+@section('title', 'GreenEcom || Trang Chủ')
 @section('main-content')
     <!-- Slider Area -->
     @if (count($banners) > 0)

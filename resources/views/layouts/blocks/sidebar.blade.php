@@ -531,32 +531,7 @@
 
                 {{-- ! End Shipping --}}
                 <!-- Start::slide__category -->
-                <li class="slide__category"><span class="category-name">Bài Viết</span></li>
-                <!-- End::slide__category -->
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        <i class="bx bx-grid-alt side-menu__icon"></i>
-                        <span class="side-menu__label">Bài Viết</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide side-menu__label1">
-                            <a href="javascript:void(0);">Bài Viết</a>
-                        </li>
-
-                        <li class="slide">
-                            <a href="{{ route('admin.post.index') }}" class="side-menu__item">Bài Viết</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ route('admin.post.create') }}" class="side-menu__item"> Tạo Bài Viết</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- Start::slide -->
-
-
-
+             
 
 
                 {{-- ! Order --}}
