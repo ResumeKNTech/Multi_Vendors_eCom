@@ -26,7 +26,7 @@
 
                             @endforeach
                         </p>
-                        <p class="call">Got Question? Call us 24/7<span><a href="tel:123456789">
+                        <p class="call">Có câu hỏi? Liên hệ chúng tôi 24/7<span><a href="tel:123456789">
                                     @foreach ($settings as $data)
                                         {{ $data->phone }}
                                     @endforeach
@@ -37,13 +37,13 @@
                 <div class="col-lg-2 col-md-6 col-12">
                     <!-- Single Widget -->
                     <div class="single-footer links">
-                        <h4>Information</h4>
+                        <h4>Thông tin</h4>
                         <ul>
-                            <li><a href="">About Us</a></li>
-                            <li><a href="#">Faq</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li><a href="">Contact Us</a></li>
-                            <li><a href="#">Help</a></li>
+                            <li><a href="">Về chúng tôi</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Điều khoản và điều kiện</a></li>
+                            <li><a href="">Liên hệ chúng tôi</a></li>
+                            <li><a href="#">Trợ giúp</a></li>
                         </ul>
                     </div>
                     <!-- End Single Widget -->
@@ -51,13 +51,13 @@
                 <div class="col-lg-2 col-md-6 col-12">
                     <!-- Single Widget -->
                     <div class="single-footer links">
-                        <h4>Customer Service</h4>
+                        <h4>Dịch vụ khách hàng</h4>
                         <ul>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Money-back</a></li>
-                            <li><a href="#">Returns</a></li>
-                            <li><a href="#">Shipping</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Phương thức thanh toán</a></li>
+                            <li><a href="#">Chính sách hoàn tiền</a></li>
+                            <li><a href="#">Trả hàng</a></li>
+                            <li><a href="#">Giao hàng</a></li>
+                            <li><a href="#">Chính sách bảo mật</a></li>
                         </ul>
                     </div>
                     <!-- End Single Widget -->
@@ -65,7 +65,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                     <!-- Single Widget -->
                     <div class="single-footer social">
-                        <h4>Get In Tuch</h4>
+                        <h4>Liên lạc</h4>
                         <!-- Single Widget -->
                         <div class="contact">
                             <ul>

@@ -19,7 +19,7 @@
                             <h1 class="wow fadeInDown">{{ $banner->title }}</h1>
                             <p>{!! html_entity_decode($banner->description) !!}</p>
                             <a class="btn btn-lg ws-btn wow fadeInUpBig" href="{{ route('product-grids') }}"
-                                role="button">Shop Now<i class="far fa-arrow-alt-circle-right"></i></i></a>
+                                role="button">Mua ngay<i class="far fa-arrow-alt-circle-right"></i></i></a>
                         </div>
                     </div>
                 @endforeach
@@ -56,7 +56,7 @@
                                 <img src="{{ asset($brand->logo_images) }}" alt="Category Image">
                                 <div class="content">
                                     <h3>{{ $brand->brand_name }}</h3>
-                                    <a href="{{ route('index', $brand->brand_name) }}">Discover Now</a>
+                                    <a href="{{ route('index', $brand->brand_name) }}">Khám phá</a>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Trending Item</h2>
+                        <h2>Sản phẩm nổi bật</h2>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                                 @endphp
                                 @if ($categories)
                                     <button class="btn" style="background:black"data-filter="*">
-                                        All Products
+                                        Tất cả sản phẩm
                                     </button>
                                     @foreach ($categories as $key => $cat)
                                         <button class="btn"
@@ -121,7 +121,7 @@
                                                     @if ($product->stock <= 0)
                                                         <span class="out-of-stock">Sale out</span>
                                                     @elseif($product->stock_status == 'in_stock')
-                                                        <span class="new">Hot</span>
+                                                        <span class="new">Hot<main></main></span>
                                                     @elseif($product->stock_status == 'out_of_stock')
                                                         <span class="hot">OFF</span>
                                                     @else
@@ -226,7 +226,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Hot Item</h2>
+                        <h2>Phụ kiện nổi bật</h2>
                     </div>
                 </div>
             </div>
@@ -294,7 +294,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="shop-section-title">
-                                <h1>Latest Items</h1>
+                                <h1>Sản phẩm cuối cùng</h1>
                             </div>
                         </div>
                     </div>
@@ -353,7 +353,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>From Our Blog</h2>
+                        <h2>Từ Blog của chúng tôi</h2>
                     </div>
                 </div>
             </div>
@@ -390,8 +390,8 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-rocket"></i>
-                        <h4>Free shiping</h4>
-                        <p>Orders over $100</p>
+                        <h4>Miễn phí giao hàng</h4>
+                        <p>Đơn hàng trên 500.000 VNĐ</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -399,8 +399,8 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-reload"></i>
-                        <h4>Free Return</h4>
-                        <p>Within 30 days returns</p>
+                        <h4>Hoàn trả miễn phí</h4>
+                        <p>Trong vòng 30 ngày</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -408,8 +408,8 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-lock"></i>
-                        <h4>Sucure Payment</h4>
-                        <p>100% secure payment</p>
+                        <h4>Thanh toán an toàn</h4>
+                        <p>100% hanh toán an toàn</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -417,8 +417,8 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-tag"></i>
-                        <h4>Best Peice</h4>
-                        <p>Guaranteed price</p>
+                        <h4>Giá tốt nhất</h4>
+                        <p>Giá đảm bảo</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
