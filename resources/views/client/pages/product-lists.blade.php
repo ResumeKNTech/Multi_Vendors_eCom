@@ -29,7 +29,7 @@
 							<div class="shop-sidebar">
                                 <!-- Single Widget -->
                                 <div class="single-widget category">
-                                    <h3 class="title">Categories</h3>
+                                    <h3 class="title">Loại sản phẩm</h3>
                                     <ul class="categor-list">
                                         @php
                                             $menu = App\Models\Category::getAllCategoriesWithSubCategories();
