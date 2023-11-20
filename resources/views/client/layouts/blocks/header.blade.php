@@ -94,7 +94,7 @@
                     <div class="search-bar-top">
                         <div class="search-bar">
                             <select>
-                                <option>All Category</option>
+                                <option>Loại sản phẩm</option>
                                 @foreach (Helper::getAllCategory() as $cat)
                                     <option>{{ $cat->category_name }}</option>
                                 @endforeach
@@ -222,18 +222,18 @@
                                     <div class="nav-inner">
                                         <ul class="nav main-menu menu navbar-nav">
                                             <li class="{{ Request::path() == 'home' ? 'active' : '' }}"><a
-                                                    href="{{ route('index') }}">Home</a></li>
+                                                    href="{{ route('index') }}">Trang chủ</a></li>
                                             <li class="{{ Request::path() == 'about-us' ? 'active' : '' }}"><a
-                                                    href="{{ route('about-us') }}">About Us</a></li>
+                                                    href="{{ route('about-us') }}">Về chúng tôi</a></li>
                                             <li class="@if (Request::path() == 'product-grids' || Request::path() == 'product-lists') active @endif"><a
-                                                    href="{{ route('product-grids') }}">Products</a><span
+                                                    href="{{ route('product-grids') }}">Sản phẩm</a><span
                                                     class="new">New</span></li>
                                             {{ Helper::getHeaderCategory() }}
                                             <li class="{{ Request::path() == 'blog' ? 'active' : '' }}"><a
                                                     href="{{ route('blog') }}">Blog</a></li>
 
                                             <li class="{{ Request::path() == 'contact' ? 'active' : '' }}"><a
-                                                    href="{{ route('contact-us') }}">Contact Us</a></li>
+                                                    href="{{ route('contact-us') }}">Liên hệ</a></li>
                                         </ul>
                                     </div>
                                 </div>

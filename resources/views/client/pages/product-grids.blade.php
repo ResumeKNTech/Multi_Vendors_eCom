@@ -12,7 +12,7 @@
                         <div class="shop-sidebar">
                             <!-- Single Widget -->
                             <div class="single-widget category">
-                                <h3 class="title">Categories</h3>
+                                <h3 class="title">Loại sản phẩm</h3>
                                 <ul class="categor-list">
                                     @php
                                         $menu = App\Models\Category::getAllCategoriesWithSubCategories();
@@ -44,7 +44,7 @@
                             <!--/ End Single Widget -->
                             <!-- Shop By Price -->
                             <div class="single-widget range">
-                                <h3 class="title">Shop by Price</h3>
+                                <h3 class="title">Mua sắm theo giá</h3>
                                 <div class="price-filter">
                                     <div class="price-filter-inner">
                                         @php
@@ -55,7 +55,7 @@
                                         <div class="product_filter">
                                             <button type="submit" class="filter_button">Filter</button>
                                             <div class="label-input">
-                                                <span>Range:</span>
+                                                <span>Khoảng giá:</span>
                                                 <input style="" type="text" id="amount" readonly />
                                                 <input type="hidden" name="price_range" id="price_range"
                                                     value="@if (!empty($_GET['price'])) {{ $_GET['price'] }} @endif" />
@@ -68,7 +68,7 @@
                             <!--/ End Shop By Price -->
                             <!-- Single Widget -->
                             <div class="single-widget recent-post">
-                                <h3 class="title">Recent post</h3>
+                                <h3 class="title">Bài đăng gần đây</h3>
                                 {{-- {{dd($recent_products)}} --}}
                                 @foreach ($recent_products as $product)
                                     <!-- Single Post -->
@@ -97,7 +97,7 @@
                             <!--/ End Single Widget -->
                             <!-- Single Widget -->
                             <div class="single-widget category">
-                                <h3 class="title">Brands</h3>
+                                <h3 class="title">Thương hiệu</h3>
                                 <ul class="categor-list">
                                     @php
                                         $brands = DB::table('brands')
@@ -121,9 +121,9 @@
                                 <div class="shop-top">
                                     <div class="shop-shorter">
                                         <div class="single-shorter">
-                                            <label>Show :</label>
+                                            <label>Sắp xếp theo :</label>
                                             <select class="show" name="show" onchange="this.form.submit();">
-                                                <option value="">Default</option>
+                                                <option value="">Mặc định</option>
                                                 <option value="9" @if (!empty($_GET['show']) && $_GET['show'] == '9') selected @endif>09
                                                 </option>
                                                 <option value="15" @if (!empty($_GET['show']) && $_GET['show'] == '15') selected @endif>15
@@ -135,9 +135,9 @@
                                             </select>
                                         </div>
                                         <div class="single-shorter">
-                                            <label>Sort By :</label>
+                                            <label>Sắp xếp theo :</label>
                                             <select class='sortBy' name='sortBy' onchange="this.form.submit();">
-                                                <option value="">Default</option>
+                                                <option value="">Mặc địnht</option>
                                                 <option value="product_title" @if (!empty($_GET['sortBy']) && $_GET['sortBy'] == 'product_title') selected @endif>
                                                     Name</option>
                                                 <option value="price" @if (!empty($_GET['sortBy']) && $_GET['sortBy'] == 'price') selected @endif>
@@ -213,7 +213,7 @@
                                     </div>
                                 @endforeach
                             @else
-                                <h4 class="text-warning" style="margin:100px auto;">There are no products.</h4>
+                                <h4 class="text-warning" style="margin:100px auto;">Chưa có sản phẩm nào.</h4>
                             @endif
 
 
